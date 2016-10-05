@@ -1,7 +1,8 @@
 namespace :calcular_indicador do
   desc "TODO"
   task consultar_task: :environment do
-  	#puts "Exito"
+  	time = Time.now
+  	puts "Exito... calculando a las #{time}"
 
 	#### Calculando indicadores ####
 	## aqui get fecha de lo que se desea actualizar en relacion a los indicadores
@@ -26,8 +27,9 @@ namespace :calcular_indicador do
 	 	'2016/12/01','2016/12/02','2016/12/03','2016/12/04']
 
 
-for dia in 0..30 #BORRAR
-	puts fecha = mes_completo[dia]
+#for dia in 0..30 #BORRAR
+	#puts fecha = mes_completo[dia]
+	fecha = Date.today.strftime("%Y/%m/%d");
 	for i in 1..4
 		if i > 1 then
 			id_segmento = i
@@ -431,7 +433,7 @@ for dia in 0..30 #BORRAR
 				)
 		end
 	#end #END IF INDICADORES ACUMULADOS GLOBAL (PONDERADO)
-end #BORRAR ESTE END
+#end #BORRAR ESTE END
   
 
 

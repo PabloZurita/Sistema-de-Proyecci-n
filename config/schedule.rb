@@ -7,8 +7,8 @@
 #env :GEM_PATH, ENV['GEM_PATH']
 #set :bundle_command, "/usr/local/bin/bundle"
 #ENV['RAILS_ENV'] = "development"
-job_type :rake,    "cd :path && :environment_variable=:environment exec rake :task --silent :output"
-#set :output, "log/cron.log"  #Step 1#
+#job_type :rake,    "cd :path && :environment_variable=:environment exec rake :task --silent :output"
+set :output, "log/cron.log"  #Step 1#
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
 #   runner "MyModel.some_method"
@@ -24,6 +24,7 @@ job_type :rake,    "cd :path && :environment_variable=:environment exec rake :ta
 #every :day, at: '17:21 pm' do
 every 1.minute do
   # specify the task name as a string
+  rake "actualizar_bd:consultar_ws"
   rake "calcular_indicador:consultar_task"
 end
 
