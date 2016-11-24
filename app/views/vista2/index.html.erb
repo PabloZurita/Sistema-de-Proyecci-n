@@ -1,0 +1,135 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<script type="text/javascript">
+	$(function () {
+    Highcharts.chart('grafico',{
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: 'Historic and Estimated Worldwide Population Distribution by Region'
+        },
+        subtitle: {
+            text: 'Source: Wikipedia.org'
+        },
+        xAxis: {
+            categories: ['1750', '1800', '1850', '1900', '1950', '1999', '2050'],
+            tickmarkPlacement: 'on',
+            title: {
+                enabled: false
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Percent'
+            }
+        },
+        tooltip: {
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} millions)<br/>',
+            split: true
+        },
+        plotOptions: {
+            area: {
+                stacking: 'percent',
+                lineColor: '#ffffff',
+                lineWidth: 1,
+                marker: {
+                    lineWidth: 1,
+                    lineColor: '#ffffff'
+                }
+            }
+        },
+        series: [{
+            name: 'Asia',
+            data: [502, 635, 809, 947, 1402, 3634, 5268]
+        }, {
+            name: 'Africa',
+            data: [106, 107, 111, 133, 221, 767, 1766]
+        }, {
+            name: 'Europe',
+            data: [163, 203, 276, 408, 547, 729, 628]
+        }, {
+            name: 'America',
+            data: [18, 31, 54, 156, 339, 818, 1201]
+        }, {
+            name: 'Oceania',
+            data: [2, 2, 2, 6, 13, 30, 46]
+        }]
+    });
+});
+</script>
+
+<%= render 'partials/menu' %>
+
+
+                        <!-- start: FEATURED BOX LINKS -->
+            <div class="container-fluid container-fullw bg-white">
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="panel panel-white no-radius text-center">
+                    <div class="panel-body">
+                      <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-smile-o fa-stack-1x fa-inverse"></i> </span>
+                      <h2 class="StepTitle">Manage Users</h2>
+                      <p class="text-small">
+                        To add users, you need to be signed in as the super user.
+                      </p>
+                      <p class="links cl-effect-1">
+                        <a href>
+                          view more
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="panel panel-white no-radius text-center">
+                    <div class="panel-body">
+                      <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-paperclip fa-stack-1x fa-inverse"></i> </span>
+                      <h2 class="StepTitle">Manage Orders</h2>
+                      <p class="text-small">
+                        The Manage Orders tool provides a view of all your orders.
+                      </p>
+                      <p class="cl-effect-1">
+                        <a href>
+                          view more
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="panel panel-white no-radius text-center">
+                    <div class="panel-body">
+                      <span class="fa-stack fa-2x"> <i class="fa fa-square fa-stack-2x text-primary"></i> <i class="fa fa-terminal fa-stack-1x fa-inverse"></i> </span>
+                      <h2 class="StepTitle">Manage Database</h2>
+                      <p class="text-small">
+                        Store, modify, and extract information from your database.
+                      </p>
+                      <p class="links cl-effect-1">
+                        <a href>
+                          view more
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end: FEATURED BOX LINKS -->
+
+<div class="container-fluid container-fullw bg-white">
+	<div class="row">
+		<div class="col-sm-8">
+		    <div class="panel panel-white no-radius text-center">
+	            <div class="panel-body">
+					<div id="grafico" style="min-width: 310px; height: 400px; max-width: 800px; margin: 0 auto"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+		123
+		</div>
+	</div>
+</div>
+
