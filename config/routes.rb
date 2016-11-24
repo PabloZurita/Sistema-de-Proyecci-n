@@ -1,5 +1,18 @@
 Rails.application.routes.draw do
 
+  resources :indicadoresacumulados
+  resources :indicadoresdiarios
+  resources :respuesta
+  resources :encuesta
+  resources :motivos
+  resources :pregunta
+  resources :pagos
+  resources :mdps
+  resources :lineas
+  resources :contratos
+  resources :fijomovils
+  resources :segmentos
+  resources :clientes
   devise_for :users
   resources :payments
   resources	:vista2
