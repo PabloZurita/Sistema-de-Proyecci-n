@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'conf/index'
+
+  get 'graficos/index'
+
+  get 'historico/index'
+
+  get '/historico/index' => 'historico#index', as: 'historico'
+  get '/graficos/index' => 'graficos#index', as: 'graficos'
+  get '/conf/index' => 'conf#index', as: 'conf'
   resources :indicadoresacumulados
   resources :indicadoresdiarios
   resources :respuesta
