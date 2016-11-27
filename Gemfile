@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'devise-i18n'
 gem 'spring'
 gem 'devise'
 gem 'whenever', require: false

@@ -11,6 +11,11 @@
 </p>
 
 <p>
+  <strong>Hora envio encuesta:</strong>
+  <%= @encuestum.hora_envio_encuesta %>
+</p>
+
+<p>
   <strong>Resuelto encuesta:</strong>
   <%= @encuestum.resuelto_encuesta %>
 </p>
@@ -18,6 +23,11 @@
 <p>
   <strong>Linea:</strong>
   <%= @encuestum.linea %>
+</p>
+
+<p>
+  <strong>Motivo:</strong>
+  <%= @encuestum.motivo %>
 </p>
 
 <%= link_to 'Edit', edit_encuestum_path(@encuestum) %> |

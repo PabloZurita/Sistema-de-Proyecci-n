@@ -22,6 +22,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :hora_envio_encuesta %>
+    <%= f.time_select :hora_envio_encuesta %>
+  </div>
+
+  <div class="field">
     <%= f.label :resuelto_encuesta %>
     <%= f.number_field :resuelto_encuesta %>
   </div>
@@ -29,6 +34,11 @@
   <div class="field">
     <%= f.label :linea_id %>
     <%= f.text_field :linea_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :motivo_id %>
+    <%= f.text_field :motivo_id %>
   </div>
 
   <div class="actions">
