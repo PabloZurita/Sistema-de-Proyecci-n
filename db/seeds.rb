@@ -22,11 +22,19 @@ end
 
 
 lista_pregunta= [
+<<<<<<< HEAD
   "Satisfación general sucursal virtual",
     "Facilidad acceso con rut y clave",
     "Rapidez despliegue de info",
     "Facilidad de encontrar info",
     "Utilidad de la info"]
+=======
+	"Satisfación general sucursal virtual",
+  	"Facilidad acceso con rut y clave",
+  	"Rapidez despliegue de info",
+  	"Facilidad de encontrar info",
+  	"Utilidad de la info"]
+>>>>>>> 875b137ec887cbfadad77510a35e48e28734bbd1
 
 
 lista_pregunta.each do |tipo_pregunta|
@@ -56,5 +64,8 @@ lista_fijomovil= ["FIJA","MOVIL"]
 lista_fijomovil.each do |tipo_fijomovil|
   Fijomovil.create( tipo_fijomovil: tipo_fijomovil)
 end
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 875b137ec887cbfadad77510a35e48e28734bbd1
