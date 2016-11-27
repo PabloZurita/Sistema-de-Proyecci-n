@@ -2,12 +2,16 @@
 
 one:
   id_encuesta: 1
-  fecha_creacion_encuesta: 2016-11-24
+  fecha_creacion_encuesta: 2016-11-26
+  hora_envio_encuesta: 2016-11-26 21:16:16
   resuelto_encuesta: 1
   linea: one
+  motivo: one
 
 two:
   id_encuesta: 1
-  fecha_creacion_encuesta: 2016-11-24
+  fecha_creacion_encuesta: 2016-11-26
+  hora_envio_encuesta: 2016-11-26 21:16:16
   resuelto_encuesta: 1
   linea: two
+  motivo: two

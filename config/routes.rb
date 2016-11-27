@@ -1,14 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'conf/index'
-
-  get 'graficos/index'
-
-  get 'historico/index'
-
-  get '/historico/index' => 'historico#index', as: 'historico'
-  get '/graficos/index' => 'graficos#index', as: 'graficos'
-  get '/conf/index' => 'conf#index', as: 'conf'
   resources :indicadoresacumulados
   resources :indicadoresdiarios
   resources :respuesta
@@ -22,6 +13,15 @@ Rails.application.routes.draw do
   resources :fijomovils
   resources :segmentos
   resources :clientes
+  get 'conf/index'
+
+  get 'graficos/index'
+
+  get 'historico/index'
+
+  get '/historico/index' => 'historico#index', as: 'historico'
+  get '/graficos/index' => 'graficos#index', as: 'graficos'
+  get '/conf/index' => 'conf#index', as: 'conf'
   devise_for :users
   resources :payments
   resources	:vista2
