@@ -1,2 +1,121 @@
-<h1>Historico#index</h1>
-<p>Find me in app/views/historico/index.html.erb</p>
+<%= render 'partials/menu' %>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript">
+	$(function () {
+
+    $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data) {//como obtener la información que mostraremos desde un JSON
+        // Create the chart
+        Highcharts.stockChart('grafico', {
+
+
+            rangeSelector: {
+                selected: 1
+            },
+
+            title: {
+                text: 'Evolución Historica ISN'
+            },
+
+            series: [{
+                name: 'ISN',
+                data: data,
+                tooltip: {
+                    valueDecimals: 2
+                }
+            }]
+        });
+    });
+
+});
+
+</script>
+
+
+  <script>
+  $( function() {
+    var dateFormat = "mm/dd/yy",
+      from = $( "#from" )
+        .datepicker({
+          defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 3
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#to" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
+    }
+  } );
+  </script>
+
+<div class="container-fluid container-fullw bg-white">
+	<div class="row">
+		<div class="col-sm-12">
+		    <div class="panel panel-white no-radius text-center">
+	            <div class="panel-body">
+					<div id="grafico" style="height: 400px; min-width: 310px"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+</script>
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-sm-2">
+            
+        </div>
+        <div class="col-sm-8">
+            <div class="panel panel-white no-radius text-center">
+                <div class="panel-body">
+                    <h2> Elegir Datos para Descargar</h2> 
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="from">Fecha Inicio</label>
+                            <input type="text" id="from" name="from">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="to">Fecha Final</label>
+                            <input type="text" id="to" name="to">
+                        </div>
+                    </div>                  
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            
+        </div>
+    </div>
+</div>
+
+
+ 
+
+ 
