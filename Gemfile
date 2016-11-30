@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
-
+#para Javascript
+gem 'npm-rails'
+#traducción de devise
+gem 'devise-i18n'
+gem 'spring'
+#Login
 gem 'devise'
 gem 'whenever', require: false
 

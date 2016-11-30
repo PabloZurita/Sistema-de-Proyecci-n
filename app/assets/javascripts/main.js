@@ -272,7 +272,7 @@ var Main = function() {
 		app.hasClass("app-sidebar-fixed") ? $('#fixed-sidebar').prop('checked', true) : $('#fixed-sidebar').prop('checked', false);
 		app.hasClass("app-sidebar-closed") ? $('#closed-sidebar').prop('checked', true) : $('#closed-sidebar').prop('checked', false);
 		app.hasClass("app-footer-fixed") ? $('#fixed-footer').prop('checked', true) : $('#fixed-footer').prop('checked', false);
-		$('#skin_color').attr("href", "assets/css/themes/" + appSetting.theme + ".css");
+		$('#skin_color').attr("href", "assets/" + appSetting.theme + ".css");
 		$('input[name="setting-theme"]').each(function() {
 			$(this).val() == appSetting.theme ? $(this).prop('checked', true) : $(this).prop('checked', false);
 		});
@@ -280,7 +280,7 @@ var Main = function() {
 
 		$('input[name="setting-theme"]').change(function() {
 			var selectedTheme = $(this).val();
-			$('#skin_color').attr("href", "assets/css/themes/" + selectedTheme + ".css");
+			$('#skin_color').attr("href", "assets/" + selectedTheme + ".css");
 			switchLogo(selectedTheme);
 			appSetting.theme = selectedTheme;
 			$.cookie("clip-setting", JSON.stringify(appSetting));
@@ -327,7 +327,7 @@ var Main = function() {
 			$('#fixed-sidebar').prop('checked', true);
 			$('#closed-sidebar').prop('checked', false);
 			$('#fixed-footer').prop('checked', false);
-			$('#skin_color').attr("href", "assets/css/themes/theme-1.css");
+			$('#skin_color').attr("href", "assets/theme-1.css");
 			$(".navbar-brand img").attr("src", "assets/images/logo.png");
 
 		}

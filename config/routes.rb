@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   resources :fijomovils
   resources :segmentos
   resources :clientes
+
+
+  get '/historico/index' => 'historico#index', as: 'historico'
+  get '/graficos/index' => 'graficos#index', as: 'graficos'
+  get '/conf/index' => 'conf#index', as: 'conf'
   devise_for :users
   resources :payments
   resources	:vista2

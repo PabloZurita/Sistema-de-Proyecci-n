@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124122542) do
+ActiveRecord::Schema.define(version: 20161127001621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,17 +35,15 @@ ActiveRecord::Schema.define(version: 20161124122542) do
   create_table "encuesta", force: :cascade do |t|
     t.integer  "id_encuesta"
     t.date     "fecha_creacion_encuesta"
+    t.time     "hora_envio_encuesta"
     t.integer  "resuelto_encuesta"
     t.integer  "linea_id"
+    t.integer  "motivo_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.index ["id_encuesta"], name: "index_encuesta_on_id_encuesta", unique: true, using: :btree
     t.index ["linea_id"], name: "index_encuesta_on_linea_id", using: :btree
-  end
-
-  create_table "encuesta_motivos", id: false, force: :cascade do |t|
-    t.integer "encuestum_id", null: false
-    t.integer "motivo_id",    null: false
+    t.index ["motivo_id"], name: "index_encuesta_on_motivo_id", using: :btree
   end
 
   create_table "fijomovils", force: :cascade do |t|
@@ -142,8 +140,10 @@ ActiveRecord::Schema.define(version: 20161124122542) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.string "canal"
-    t.string "pago"
+    t.string   "canal"
+    t.string   "pago"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pregunta", force: :cascade do |t|
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 20161124122542) do
   end
 
   add_foreign_key "encuesta", "lineas"
+  add_foreign_key "encuesta", "motivos"
   add_foreign_key "lineas", "clientes"
   add_foreign_key "lineas", "contratos"
   add_foreign_key "lineas", "fijomovils"
