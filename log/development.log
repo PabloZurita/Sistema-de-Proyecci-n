@@ -1,0 +1,292 @@
+  [1m[36mEncuestum Load (4.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (2.9ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (1.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (2.6ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (2.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (2.0ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (2.2ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.8ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (23.8ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 13], ["isn", 51.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 00:11:46 UTC], ["updated_at", 2016-11-26 00:11:46 UTC]]
+  [1m[35m (34.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (31.1ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."fecha_creacion_encuesta" = $1[0m  [["fecha_creacion_encuesta", "2016/10/11"]]
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[36mEncuestum Load (25.6ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."fecha_creacion_encuesta" = $1[0m  [["fecha_creacion_encuesta", 18]]
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.5ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[36mEncuestum Load (0.6ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.2ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.5ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[36mEncuestum Load (0.8ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[36mEncuestum Load (0.6ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.2ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.2ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 14], ["isn", 0.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 00:28:09 UTC], ["updated_at", 2016-11-26 00:28:09 UTC]]
+  [1m[35m (30.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.6ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 15], ["isn", 0.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 00:54:34 UTC], ["updated_at", 2016-11-26 00:54:34 UTC]]
+  [1m[35m (31.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.5ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 16], ["isn", 0.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 00:56:20 UTC], ["updated_at", 2016-11-26 00:56:20 UTC]]
+  [1m[35m (28.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 17], ["isn", 0.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:00:32 UTC], ["updated_at", 2016-11-26 01:00:32 UTC]]
+  [1m[35m (26.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.6ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.5ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 18], ["isn", 0.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:00:45 UTC], ["updated_at", 2016-11-26 01:00:45 UTC]]
+  [1m[35m (32.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 19], ["isn", 0.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:01:23 UTC], ["updated_at", 2016-11-26 01:01:23 UTC]]
+  [1m[35m (25.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.8ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.5ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.2ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 20], ["isn", 0.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:01:33 UTC], ["updated_at", 2016-11-26 01:01:33 UTC]]
+  [1m[35m (28.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.6ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.5ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 21], ["isn", 0.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:22:02 UTC], ["updated_at", 2016-11-26 01:22:02 UTC]]
+  [1m[35m (25.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.5ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 22], ["isn", 45.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:29:50 UTC], ["updated_at", 2016-11-26 01:29:50 UTC]]
+  [1m[35m (28.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.6ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.5ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 23], ["isn", 45.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:31:12 UTC], ["updated_at", 2016-11-26 01:31:12 UTC]]
+  [1m[35m (24.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.5ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 24], ["isn", 45.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:31:29 UTC], ["updated_at", 2016-11-26 01:31:29 UTC]]
+  [1m[35m (31.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.6ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.2ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 25], ["isn", 45.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:31:46 UTC], ["updated_at", 2016-11-26 01:31:46 UTC]]
+  [1m[35m (29.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 26], ["isn", 45.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:31:59 UTC], ["updated_at", 2016-11-26 01:31:59 UTC]]
+  [1m[35m (33.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.5ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 27], ["isn", 0.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:32:34 UTC], ["updated_at", 2016-11-26 01:32:34 UTC]]
+  [1m[35m (27.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.8ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 28], ["isn", 45.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:32:59 UTC], ["updated_at", 2016-11-26 01:32:59 UTC]]
+  [1m[35m (32.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 29], ["isn", 0.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:33:52 UTC], ["updated_at", 2016-11-26 01:33:52 UTC]]
+  [1m[35m (34.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.6ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 30], ["isn", 0.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:34:31 UTC], ["updated_at", 2016-11-26 01:34:31 UTC]]
+  [1m[35m (32.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 31], ["isn", 0.0], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:34:58 UTC], ["updated_at", 2016-11-26 01:34:58 UTC]]
+  [1m[35m (33.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 32], ["isn", 0.7758620689655172], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:36:58 UTC], ["updated_at", 2016-11-26 01:36:58 UTC]]
+  [1m[35m (33.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.7ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.5ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 33], ["isn", 77.58620689655173], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:37:34 UTC], ["updated_at", 2016-11-26 01:37:34 UTC]]
+  [1m[35m (27.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mEncuestum Load (0.6ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta"[0m
+  [1m[36mEncuestum Load (0.4ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 1]]
+  [1m[36mEncuestum Load (0.3ms)[0m  [1m[34mSELECT "encuesta".* FROM "encuesta" WHERE "encuesta"."resuelto_encuesta" = $1[0m  [["resuelto_encuesta", 0]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 1], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 2], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.3ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 4], ["preguntum_id", 1]]
+  [1m[36mRespuestum Load (0.4ms)[0m  [1m[34mSELECT "respuesta".* FROM "respuesta" WHERE "respuesta"."valor_pregunta" = $1 AND "respuesta"."preguntum_id" = $2[0m  [["valor_pregunta", 5], ["preguntum_id", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT MAX("indicadoresdiarios"."id_ind_diario") FROM "indicadoresdiarios"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "indicadoresdiarios" ("id_ind_diario", "isn", "resp_1_2", "resp_4_5", "resolutividad", "fecha", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["id_ind_diario", 34], ["isn", 77.586], ["resp_1_2", 5.0], ["resp_4_5", 50.0], ["resolutividad", 51.0], ["fecha", Tue, 11 Oct 2016], ["created_at", 2016-11-26 01:38:59 UTC], ["updated_at", 2016-11-26 01:38:59 UTC]]
+  [1m[35m (28.5ms)[0m  [1m[35mCOMMIT[0m
