@@ -92,7 +92,13 @@ class Conexion
 						nueva_linea.numero_cliente = response[i]['campo_libre_4'].to_i #numero
 						nueva_linea.cliente = Cliente.where(rut_cliente: response[i]['codigo_encuestado'].to_s).first
 						nueva_linea.segmento = Segmento.where(tipo_segmento: response[i]['campo_libre_2'].to_s).first
+						if Fijomovil.where(tipo_fijomovil: response[i]['campo_libre_1'].to_s).blank? then
+							Fijomovil.create(tipo_fijomovil: response[i]['campo_libre_1'].to_s)
+						end
 						nueva_linea.fijomovil = Fijomovil.where(tipo_fijomovil: response[i]['campo_libre_1'].to_s).first
+						if Contrato.where(tipo_contrato: response[i]['campo_libre_3'].to_s).blank? then
+							Contrato.create(tipo_contrato: response[i]['campo_libre_3'].to_s)
+						end
 						nueva_linea.contrato = Contrato.where(tipo_contrato: response[i]['campo_libre_3'].to_s).first
 						nueva_linea.save()
 						#if !nueva_linea.save() then
@@ -102,15 +108,18 @@ class Conexion
 
 					#ENCUESTA
 					#si ya hay una encuesta en una fecha por una linea, no se agrega nuevamente
-					if Encuestum.where(fecha_creacion_encuesta: Date.parse(response[i]['fecha_creacion']).strftime("%Y-%m-%d").to_s).
+					if Encuestum.where(fecha_creacion_encuesta: Date.parse(response[i]['fecha_creacion']).strftime("%d/%m/%Y").to_s).
 					where(linea: Linea.where(numero_cliente: response[i]['campo_libre_4'].to_i).ids.first.to_i).
 					where(hora_envio_encuesta: Time.parse(response[i]['fecha_creacion']).strftime("%H:%M:%S").to_s).blank? then
 						
 						nueva_encuesta = Encuestum.new();
-						nueva_encuesta.fecha_creacion_encuesta = Date.parse(response[i]['fecha_creacion']).strftime("%Y/%m/%d").to_s
+						nueva_encuesta.fecha_creacion_encuesta = Date.parse(response[i]['fecha_creacion']).strftime("%d/%m/%Y").to_s
 						#puts Time.parse(response[i]['fecha_creacion']).strftime("%H:%M:%S").to_s
 						nueva_encuesta.hora_envio_encuesta = Time.parse(response[i]['fecha_creacion']).strftime("%H:%M:%S").to_s
 						nueva_encuesta.linea = Linea.where(numero_cliente: response[i]['campo_libre_4'].to_i).first
+						if Motivo.where(tipo_motivo: response[i]['respuesta']['listbox_0']['respuesta_0'].to_s).blank? then
+							Motivo.create(tipo_motivo: response[i]['respuesta']['listbox_0']['respuesta_0'].to_s)
+						end
 						nueva_encuesta.motivo = Motivo.where(tipo_motivo: response[i]['respuesta']['listbox_0']['respuesta_0'].to_s).first
 						if response[i]['respuesta']['dropdownlist_0']['respuesta'].to_s.eql? 'Sí' then
 							nueva_encuesta.resuelto_encuesta = 1
@@ -125,7 +134,7 @@ class Conexion
 						
 						#RESPUESTAS
 						___linea_id = Linea.where(numero_cliente: response[i]['campo_libre_4'].to_i).ids.first
-						id_encuesta_actual = Encuestum.where(fecha_creacion_encuesta: Date.parse(response[i]['fecha_creacion']).strftime("%Y-%m-%d").to_s).
+						id_encuesta_actual = Encuestum.where(fecha_creacion_encuesta: Date.parse(response[i]['fecha_creacion']).strftime("%d/%m/%Y").to_s).
 						where(linea: ___linea_id.to_i).ids.first
 
 						nueva_resp1 = Respuestum.new();
@@ -177,21 +186,30 @@ class Conexion
 						nueva_linea.numero_cliente = response['campo_libre_4'].to_i #numero
 						nueva_linea.cliente = Cliente.where(rut_cliente: response['codigo_encuestado'].to_s).first
 						nueva_linea.segmento = Segmento.where(tipo_segmento: response['campo_libre_2'].to_s).first
+						if Fijomovil.where(tipo_fijomovil: response['campo_libre_1'].to_s).blank? then
+							Fijomovil.create(tipo_fijomovil: response['campo_libre_1'].to_s)
+						end
 						nueva_linea.fijomovil = Fijomovil.where(tipo_fijomovil: response['campo_libre_1'].to_s).first
+						if Contrato.where(tipo_contrato: response['campo_libre_3'].to_s).blank? then
+							Contrato.create(tipo_contrato: response['campo_libre_3'].to_s)
+						end
 						nueva_linea.contrato = Contrato.where(tipo_contrato: response['campo_libre_3'].to_s).first
 						nueva_linea.save()
 					end
 
 					#ENCUESTA
 					#si ya hay una encuesta en una fecha por una linea, no se agrega nuevamente
-					if Encuestum.where(fecha_creacion_encuesta: Date.parse(response['fecha_creacion']).strftime("%Y-%m-%d").to_s).
+					if Encuestum.where(fecha_creacion_encuesta: Date.parse(response['fecha_creacion']).strftime("%d/%m/%Y").to_s).
 					where(linea: Linea.where(numero_cliente: response['campo_libre_4'].to_i).ids.first.to_i).
 					where(hora_envio_encuesta: Time.parse(response['fecha_creacion']).strftime("%H:%M:%S").to_s).blank? then
 						
 						nueva_encuesta = Encuestum.new();
-						nueva_encuesta.fecha_creacion_encuesta = Date.parse(response['fecha_creacion']).strftime("%Y/%m/%d").to_s
+						nueva_encuesta.fecha_creacion_encuesta = Date.parse(response['fecha_creacion']).strftime("%d/%m/%Y").to_s
 						nueva_encuesta.hora_envio_encuesta = Time.parse(response['fecha_creacion']).strftime("%H:%M:%S").to_s
 						nueva_encuesta.linea = Linea.where(numero_cliente: response['campo_libre_4'].to_i).first
+						if Motivo.where(tipo_motivo: response['respuesta']['listbox_0']['respuesta_0'].to_s).blank? then
+							Motivo.create(tipo_motivo: response['respuesta']['listbox_0']['respuesta_0'].to_s)
+						end
 						nueva_encuesta.motivo = Motivo.where(tipo_motivo: response['respuesta']['listbox_0']['respuesta_0'].to_s).first
 						
 						if response['respuesta']['dropdownlist_0']['respuesta'].to_s.eql? 'Sí'
@@ -203,7 +221,7 @@ class Conexion
 						
 						#RESPUESTAS
 						___linea_id = Linea.where(numero_cliente: response['campo_libre_4'].to_i).ids.first
-						id_encuesta_actual = Encuestum.where(fecha_creacion_encuesta: Date.parse(response['fecha_creacion']).strftime("%Y-%m-%d").to_s).
+						id_encuesta_actual = Encuestum.where(fecha_creacion_encuesta: Date.parse(response['fecha_creacion']).strftime("%d/%m/%Y").to_s).
 						where(linea: ___linea_id.to_i).ids.first
 
 						nueva_resp1 = Respuestum.new();
