@@ -6,7 +6,7 @@ class GraficosController < ApplicationController
     @datos_diario_COL = obtener_datos(Atributosdiario.all, 3, id_segmento)
     @datos_acumulado_desktop = obtener_datos(Atributosacumulado.all, 1, id_segmento)
     @datos_acumulado_mobile = obtener_datos(Atributosacumulado.all, 2, id_segmento)
-    @datos_acumulado_COL = obtener_datos(Atributosacumulado.all, 3, id_segmento)
+    @datos_acumulado_COL = obtener_datos(Atributosacumulado.all, 1, id_segmento)
   end
 
 

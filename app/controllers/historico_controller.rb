@@ -2,7 +2,7 @@ class HistoricoController < ApplicationController
   helper_method :obtener_datos
   def index
   	#PARA DATA TABLES
-  	@indicadoresdiarios = Indicadoresdiario.where(segmento: 7).order(fecha: :asc)
+  	@indicadoresdiarios = Indicadoresdiario.order(fecha: :asc)
 
   	#PARA GRÁFICO
   		#primer argumento: tabla de la cual se quieren sacar los datos

@@ -33,8 +33,8 @@ namespace :calcular_indicador do
 	 	'2016/12/01','2016/12/02','2016/12/03','2016/12/04','2016/12/05','2016/12/06']
 
 
-for dia in 122..127 #BORRAR
-	puts fecha = mes_completo[dia]
+#for dia in 122..127 #BORRAR
+#	puts fecha = mes_completo[dia]
 	fecha = Date.today.strftime("%Y/%m/%d");
 for version in 1..2 #FOR DE VERSION --- 1: desktop   2: mobile
 	for i in 1..4
@@ -368,30 +368,30 @@ for version in 1..2 #FOR DE VERSION --- 1: desktop   2: mobile
 
 	indicadores_diarios_actuales = Indicadoresdiario.where(fecha: fecha).where(version: version)
 	#if !indicadores_diarios_actuales.blank? then
-		isn_diario_global = (ponderacion_contrato*indicadores_diarios_actuales.where(segmento: 1).take.isn+
-							ponderacion_hibrido*indicadores_diarios_actuales.where(segmento: 2).take.isn+
-							ponderacion_prepago*indicadores_diarios_actuales.where(segmento: 3).take.isn+
-							ponderacion_fijo*indicadores_diarios_actuales.where(segmento: 4).take.isn+
-							ponderacion_pyme_fijo*indicadores_diarios_actuales.where(segmento: 5).take.isn+
-							ponderacion_pyme_movil*indicadores_diarios_actuales.where(segmento: 6).take.isn).to_f.round(1);
-		resolutividad_diario_global = (ponderacion_contrato*indicadores_diarios_actuales.where(segmento: 1).take.resolutividad+
-							ponderacion_hibrido*indicadores_diarios_actuales.where(segmento: 2).take.resolutividad+
-							ponderacion_prepago*indicadores_diarios_actuales.where(segmento: 3).take.resolutividad+
-							ponderacion_fijo*indicadores_diarios_actuales.where(segmento: 4).take.resolutividad+
-							ponderacion_pyme_fijo*indicadores_diarios_actuales.where(segmento: 5).take.resolutividad+
-							ponderacion_pyme_movil*indicadores_diarios_actuales.where(segmento: 6).take.resolutividad).to_f.round(1);
-		insatisfechos_diario_global = (ponderacion_contrato*indicadores_diarios_actuales.where(segmento: 1).take.resp_1_2+
-							ponderacion_hibrido*indicadores_diarios_actuales.where(segmento: 2).take.resp_1_2+
-							ponderacion_prepago*indicadores_diarios_actuales.where(segmento: 3).take.resp_1_2+
-							ponderacion_fijo*indicadores_diarios_actuales.where(segmento: 4).take.resp_1_2+
-							ponderacion_pyme_fijo*indicadores_diarios_actuales.where(segmento: 5).take.resp_1_2+
-							ponderacion_pyme_movil*indicadores_diarios_actuales.where(segmento: 6).take.resp_1_2).to_f.round(1);
-		satisfechos_4_5_diario_global = (ponderacion_contrato*indicadores_diarios_actuales.where(segmento: 1).take.resp_4_5+
-							ponderacion_hibrido*indicadores_diarios_actuales.where(segmento: 2).take.resp_4_5+
-							ponderacion_prepago*indicadores_diarios_actuales.where(segmento: 3).take.resp_4_5+
-							ponderacion_fijo*indicadores_diarios_actuales.where(segmento: 4).take.resp_4_5+
-							ponderacion_pyme_fijo*indicadores_diarios_actuales.where(segmento: 5).take.resp_4_5+
-							ponderacion_pyme_movil*indicadores_diarios_actuales.where(segmento: 6).take.resp_4_5).to_f.round(1);
+		isn_diario_global = (ponderacion_contrato*(indicadores_diarios_actuales.where(segmento: 1).take.isn.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 1).take.isn)+
+							ponderacion_hibrido*(indicadores_diarios_actuales.where(segmento: 2).take.isn.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 2).take.isn)+
+							ponderacion_prepago*(indicadores_diarios_actuales.where(segmento: 3).take.isn.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 3).take.isn)+
+							ponderacion_fijo*(indicadores_diarios_actuales.where(segmento: 4).take.isn.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 4).take.isn)+
+							ponderacion_pyme_fijo*(indicadores_diarios_actuales.where(segmento: 5).take.isn.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 5).take.isn)+
+							ponderacion_pyme_movil*(indicadores_diarios_actuales.where(segmento: 6).take.isn? ? 0 : indicadores_diarios_actuales.where(segmento: 6).take.isn)).to_f.round(1);
+		resolutividad_diario_global = (ponderacion_contrato*(indicadores_diarios_actuales.where(segmento: 1).take.resolutividad.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 1).take.resolutividad)+
+							ponderacion_hibrido*(indicadores_diarios_actuales.where(segmento: 2).take.resolutividad.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 2).take.resolutividad)+
+							ponderacion_prepago*(indicadores_diarios_actuales.where(segmento: 3).take.resolutividad.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 3).take.resolutividad)+
+							ponderacion_fijo*(indicadores_diarios_actuales.where(segmento: 4).take.resolutividad.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 4).take.resolutividad)+
+							ponderacion_pyme_fijo*(indicadores_diarios_actuales.where(segmento: 5).take.resolutividad.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 5).take.resolutividad)+
+							ponderacion_pyme_movil*(indicadores_diarios_actuales.where(segmento: 6).take.resolutividad.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 6).take.resolutividad)).to_f.round(1);
+		insatisfechos_diario_global = (ponderacion_contrato*(indicadores_diarios_actuales.where(segmento: 1).take.resp_1_2.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 1).take.resp_1_2)+
+							ponderacion_hibrido*(indicadores_diarios_actuales.where(segmento: 2).take.resp_1_2.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 2).take.resp_1_2)+
+							ponderacion_prepago*(indicadores_diarios_actuales.where(segmento: 3).take.resp_1_2.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 3).take.resp_1_2)+
+							ponderacion_fijo*(indicadores_diarios_actuales.where(segmento: 4).take.resp_1_2.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 4).take.resp_1_2)+
+							ponderacion_pyme_fijo*(indicadores_diarios_actuales.where(segmento: 5).take.resp_1_2.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 5).take.resp_1_2)+
+							ponderacion_pyme_movil*(indicadores_diarios_actuales.where(segmento: 6).take.resp_1_2.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 6).take.resp_1_2)).to_f.round(1);
+		satisfechos_4_5_diario_global = (ponderacion_contrato*(indicadores_diarios_actuales.where(segmento: 1).take.resp_4_5.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 1).take.resp_4_5)+
+							ponderacion_hibrido*(indicadores_diarios_actuales.where(segmento: 2).take.resp_4_5.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 2).take.resp_4_5)+
+							ponderacion_prepago*(indicadores_diarios_actuales.where(segmento: 3).take.resp_4_5.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 3).take.resp_4_5)+
+							ponderacion_fijo*(indicadores_diarios_actuales.where(segmento: 4).take.resp_4_5.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 4).take.resp_4_5)+
+							ponderacion_pyme_fijo*(indicadores_diarios_actuales.where(segmento: 5).take.resp_4_5.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 5).take.resp_4_5)+
+							ponderacion_pyme_movil*(indicadores_diarios_actuales.where(segmento: 6).take.resp_4_5.nan? ? 0 : indicadores_diarios_actuales.where(segmento: 6).take.resp_4_5)).to_f.round(1);
 	
 		if Indicadoresdiario.where(fecha: fecha).where(segmento: 7).where(version: version).blank? then
 			Indicadoresdiario.create(
@@ -416,30 +416,30 @@ for version in 1..2 #FOR DE VERSION --- 1: desktop   2: mobile
 
 	indicadores_acumulados_actuales = Indicadoresacumulado.where(fecha: fecha).where(version: version)
 	#if !indicadores_acumulados_actuales.blank? then
-		isn_acumulado_global = (ponderacion_contrato*indicadores_acumulados_actuales.where(segmento: 1).take.isn+
-							ponderacion_hibrido*indicadores_acumulados_actuales.where(segmento: 2).take.isn+
-							ponderacion_prepago*indicadores_acumulados_actuales.where(segmento: 3).take.isn+
-							ponderacion_fijo*indicadores_acumulados_actuales.where(segmento: 4).take.isn+
-							ponderacion_pyme_fijo*indicadores_acumulados_actuales.where(segmento: 5).take.isn+
-							ponderacion_pyme_movil*indicadores_acumulados_actuales.where(segmento: 6).take.isn).to_f.round(1);
-		resolutividad_acumulado_global = (ponderacion_contrato*indicadores_acumulados_actuales.where(segmento: 1).take.resolutividad+
-							ponderacion_hibrido*indicadores_acumulados_actuales.where(segmento: 2).take.resolutividad+
-							ponderacion_prepago*indicadores_acumulados_actuales.where(segmento: 3).take.resolutividad+
-							ponderacion_fijo*indicadores_acumulados_actuales.where(segmento: 4).take.resolutividad+
-							ponderacion_pyme_fijo*indicadores_acumulados_actuales.where(segmento: 5).take.resolutividad+
-							ponderacion_pyme_movil*indicadores_acumulados_actuales.where(segmento: 6).take.resolutividad).to_f.round(1).round(1);
-		insatisfechos_acumulado_global = (ponderacion_contrato*indicadores_acumulados_actuales.where(segmento: 1).take.resp_1_2+
-							ponderacion_hibrido*indicadores_acumulados_actuales.where(segmento: 2).take.resp_1_2+
-							ponderacion_prepago*indicadores_acumulados_actuales.where(segmento: 3).take.resp_1_2+
-							ponderacion_fijo*indicadores_acumulados_actuales.where(segmento: 4).take.resp_1_2+
-							ponderacion_pyme_fijo*indicadores_acumulados_actuales.where(segmento: 5).take.resp_1_2+
-							ponderacion_pyme_movil*indicadores_acumulados_actuales.where(segmento: 6).take.resp_1_2).to_f.round(1);
-		satisfechos_4_5_acumulado_global = (ponderacion_contrato*indicadores_acumulados_actuales.where(segmento: 1).take.resp_4_5+
-							ponderacion_hibrido*indicadores_acumulados_actuales.where(segmento: 2).take.resp_4_5+
-							ponderacion_prepago*indicadores_acumulados_actuales.where(segmento: 3).take.resp_4_5+
-							ponderacion_fijo*indicadores_acumulados_actuales.where(segmento: 4).take.resp_4_5+
-							ponderacion_pyme_fijo*indicadores_acumulados_actuales.where(segmento: 5).take.resp_4_5+
-							ponderacion_pyme_movil*indicadores_acumulados_actuales.where(segmento: 6).take.resp_4_5).to_f.round(1);
+		isn_acumulado_global = (ponderacion_contrato*(indicadores_acumulados_actuales.where(segmento: 1).take.isn.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 1).take.isn)+
+							ponderacion_hibrido*(indicadores_acumulados_actuales.where(segmento: 2).take.isn.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 2).take.isn)+
+							ponderacion_prepago*(indicadores_acumulados_actuales.where(segmento: 3).take.isn.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 3).take.isn)+
+							ponderacion_fijo*(indicadores_acumulados_actuales.where(segmento: 4).take.isn.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 4).take.isn)+
+							ponderacion_pyme_fijo*(indicadores_acumulados_actuales.where(segmento: 5).take.isn.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 5).take.isn)+
+							ponderacion_pyme_movil*(indicadores_acumulados_actuales.where(segmento: 6).take.isn.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 6).take.isn)).to_f.round(1);
+		resolutividad_acumulado_global = (ponderacion_contrato*(indicadores_acumulados_actuales.where(segmento: 1).take.resolutividad.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 1).take.resolutividad)+
+							ponderacion_hibrido*(indicadores_acumulados_actuales.where(segmento: 2).take.resolutividad.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 2).take.resolutividad)+
+							ponderacion_prepago*(indicadores_acumulados_actuales.where(segmento: 3).take.resolutividad.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 3).take.resolutividad)+
+							ponderacion_fijo*(indicadores_acumulados_actuales.where(segmento: 4).take.resolutividad.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 4).take.resolutividad)+
+							ponderacion_pyme_fijo*(indicadores_acumulados_actuales.where(segmento: 5).take.resolutividad.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 5).take.resolutividad)+
+							ponderacion_pyme_movil*(indicadores_acumulados_actuales.where(segmento: 6).take.resolutividad.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 6).take.resolutividad)).to_f.round(1);
+		insatisfechos_acumulado_global = (ponderacion_contrato*(indicadores_acumulados_actuales.where(segmento: 1).take.resp_1_2.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 1).take.resp_1_2)+
+							ponderacion_hibrido*(indicadores_acumulados_actuales.where(segmento: 2).take.resp_1_2.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 2).take.resp_1_2)+
+							ponderacion_prepago*(indicadores_acumulados_actuales.where(segmento: 3).take.resp_1_2.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 3).take.resp_1_2)+
+							ponderacion_fijo*(indicadores_acumulados_actuales.where(segmento: 4).take.resp_1_2.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 4).take.resp_1_2)+
+							ponderacion_pyme_fijo*(indicadores_acumulados_actuales.where(segmento: 5).take.resp_1_2.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 5).take.resp_1_2)+
+							ponderacion_pyme_movil*(indicadores_acumulados_actuales.where(segmento: 6).take.resp_1_2.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 6).take.resp_1_2)).to_f.round(1);
+		satisfechos_4_5_acumulado_global = (ponderacion_contrato*(indicadores_acumulados_actuales.where(segmento: 1).take.resp_4_5.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 1).take.resp_4_5)+
+							ponderacion_hibrido*(indicadores_acumulados_actuales.where(segmento: 2).take.resp_4_5.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 2).take.resp_4_5)+
+							ponderacion_prepago*(indicadores_acumulados_actuales.where(segmento: 3).take.resp_4_5.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 3).take.resp_4_5)+
+							ponderacion_fijo*(indicadores_acumulados_actuales.where(segmento: 4).take.resp_4_5.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 4).take.resp_4_5)+
+							ponderacion_pyme_fijo*(indicadores_acumulados_actuales.where(segmento: 5).take.resp_4_5.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 5).take.resp_4_5)+
+							ponderacion_pyme_movil*(indicadores_acumulados_actuales.where(segmento: 6).take.resp_4_5.nan? ? 0 : indicadores_acumulados_actuales.where(segmento: 6).take.resp_4_5)).to_f.round(1);
 		
 		if Indicadoresacumulado.where(fecha: fecha).where(segmento: 7).where(version: version).blank? then
 			Indicadoresacumulado.create(
@@ -532,6 +532,6 @@ end #END FOR VERSION MOBILE - DESKTOP
 
 
 
-end #END DE FOR PARA ARREGLO DE FECHAS
+#end #END DE FOR PARA ARREGLO DE FECHAS
   end
 end
