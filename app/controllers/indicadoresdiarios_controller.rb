@@ -5,6 +5,7 @@ class IndicadoresdiariosController < ApplicationController
   # GET /indicadoresdiarios.json
   def index
     @indicadoresdiarios = Indicadoresdiario.all
+    
   end
 
   # GET /indicadoresdiarios/1
