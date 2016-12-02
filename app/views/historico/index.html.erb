@@ -8,24 +8,41 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
-	$(function () {
+  $(function () {
 
     $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data) {//como obtener la información que mostraremos desde un JSON
         // Create the chart
+        Highcharts.setOptions({
+          lang:{
+              months: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+              shortMonths: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+              weekdays: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+              shortWeekdays: ['Dom','Lun','Mar','Mie','Jue','Vie','Sáb'],
+              printChart: 'Imprimir gráfico',
+              downloadPNG: 'Descargar PNG',
+              downloadPDF: 'Descargar PDF',
+              downloadJPEG:'Descargar JPEG',
+              downloadSVG: 'Descargar SVG'
+            }
+        });
+        
+
+
         Highcharts.stockChart('grafico', {
 
+            
 
             rangeSelector: {
                 selected: 1
             },
 
             title: {
-                text: 'Evolución Historica ISN'
+                text: 'Evolución Histórica ISN'
             },
 
             series: [{
                 name: 'ISN',
-                data: data,
+                data: <%= @datos %>,
                 tooltip: {
                     valueDecimals: 2
                 }
@@ -73,15 +90,15 @@
   </script>
 
 <div class="container-fluid container-fullw bg-white">
-	<div class="row">
-		<div class="col-sm-12">
-		    <div class="panel panel-white no-radius text-center">
-	            <div class="panel-body">
-					<div id="grafico" style="height: 400px; min-width: 310px"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-white no-radius text-center">
+              <div class="panel-body">
+          <div id="grafico" style="height: 400px; min-width: 310px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
