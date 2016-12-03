@@ -1,0 +1,11 @@
+I"}(function() {
+  jQuery(function() {
+    return $('#tabla').dataTable;
+  });
+
+  ({
+    responsive: true
+  });
+
+}).call(this);
+:ET

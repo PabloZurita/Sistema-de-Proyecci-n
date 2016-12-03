@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+#datables
+gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 #para Javascript
 gem 'npm-rails'
 #traducción de devise

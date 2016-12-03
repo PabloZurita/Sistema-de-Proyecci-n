@@ -7,6 +7,13 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
+  
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+
+
+
 <script type="text/javascript">
   $(function () {
 
@@ -89,6 +96,17 @@
   } );
   </script>
 
+
+
+<script>
+    $(document).ready(function() {
+    $('#tabla').DataTable();
+    } );
+
+</script>
+
+
+
 <div class="container-fluid container-fullw bg-white">
   <div class="row">
     <div class="col-sm-12">
@@ -102,8 +120,6 @@
 </div>
 
 
-
-</script>
 <div class="container-fluid container-fullw bg-white">
     <div class="row">
         <div class="col-sm-2">
@@ -146,9 +162,9 @@
                 <div class="panel-body">
 
 
-                <table id="diarios" class="display" cellspacing="0" width="100%">
+                <table id="tabla" class="display responsive no-wrap">
                     <thead>
-                      <tr>
+                      <tr role ="row">
                         <th>Id ind diario</th>
                         <th>Segmento</th>
                         <th>Isn</th>

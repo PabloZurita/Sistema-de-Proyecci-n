@@ -1,0 +1,12 @@
+I"Ô(function() {
+  jQuery(function() {
+    return $('#tabla').dataTable({
+      sPaginationType: "full_numbers",
+      bJQueryUI: true,
+      bProcessing: true,
+      bServerSide: true
+    });
+  });
+
+}).call(this);
+:ET
