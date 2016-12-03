@@ -11,6 +11,7 @@ class Conexion
 	   if respuesta_contador['total_encuestas'].to_i > 0 then
 		   respuesta_consulta = consultar_ws(_username,_contrasenya,_nif, _campana, _oleada, _centro, _desde, _hasta, _estado)
 		   asignar_valores(respuesta_consulta, respuesta_contador['total_encuestas'].to_i)
+		   #puts respuesta_contador['total_encuestas']
 		   #self.encuesta = respuesta_consulta
 		   #puts self.encuesta
 	   end
@@ -73,44 +74,47 @@ class Conexion
 
 			if cantidad_encuestas > 1 then
 				for i in 0..cantidad_encuestas-1
-					#puts response['codigo_encuestado'].to_s
-					#CLIENTE
-					#Verificar si no existe cliente para agregarlo
-					if Cliente.where(rut_cliente: response[i]['codigo_encuestado'].to_s).blank? then
-						nuevo_cliente = Cliente.new();
-						nuevo_cliente.rut_cliente = response[i]['codigo_encuestado']#.to_s #rut
-						nuevo_cliente.mail_cliente = response[i]['mail']#.to_s #email
-						nuevo_cliente.save()
-						#if !nuevo_cliente.save() then
-						#	puts 'Revisar Clientes'
-						#end
-					end
-
-					#si la linea no existe se agrega relacionada al cliente
-					if Linea.where(numero_cliente: response[i]['campo_libre_4'].to_i).blank? then
-						nueva_linea = Linea.new();
-						nueva_linea.numero_cliente = response[i]['campo_libre_4'].to_i #numero
-						nueva_linea.cliente = Cliente.where(rut_cliente: response[i]['codigo_encuestado'].to_s).first
-						nueva_linea.segmento = Segmento.where(tipo_segmento: response[i]['campo_libre_2'].to_s).first
-						if Fijomovil.where(tipo_fijomovil: response[i]['campo_libre_1'].to_s).blank? then
-							Fijomovil.create(tipo_fijomovil: response[i]['campo_libre_1'].to_s)
-						end
-						nueva_linea.fijomovil = Fijomovil.where(tipo_fijomovil: response[i]['campo_libre_1'].to_s).first
-						if Contrato.where(tipo_contrato: response[i]['campo_libre_3'].to_s).blank? then
-							Contrato.create(tipo_contrato: response[i]['campo_libre_3'].to_s)
-						end
-						nueva_linea.contrato = Contrato.where(tipo_contrato: response[i]['campo_libre_3'].to_s).first
-						nueva_linea.save()
-						#if !nueva_linea.save() then
-						#	puts 'Revisar Lineas'
-						#end
-					end
-
+					
 					#ENCUESTA
 					#si ya hay una encuesta en una fecha por una linea, no se agrega nuevamente
 					if Encuestum.where(fecha_creacion_encuesta: Date.parse(response[i]['fecha_creacion']).strftime("%d/%m/%Y").to_s).
 					where(linea: Linea.where(numero_cliente: response[i]['campo_libre_4'].to_i).ids.first.to_i).
 					where(hora_envio_encuesta: Time.parse(response[i]['fecha_creacion']).strftime("%H:%M:%S").to_s).blank? then
+
+						#si la linea no existe se agrega relacionada al cliente
+						if Linea.where(numero_cliente: response[i]['campo_libre_4'].to_i).blank? then
+							#puts response['codigo_encuestado'].to_s
+							#CLIENTE
+							#Verificar si no existe cliente para agregarlo
+							if Cliente.where(rut_cliente: response[i]['codigo_encuestado'].to_s).blank? then
+								Cliente.create(
+									rut_cliente: response[i]['codigo_encuestado'],
+									mail_cliente: response[i]['mail']
+
+									);
+								#if !nuevo_cliente.save() then
+								#	puts 'Revisar Clientes'
+								#end
+							end
+
+							nueva_linea = Linea.new();
+							nueva_linea.numero_cliente = response[i]['campo_libre_4'].to_i #numero
+							nueva_linea.cliente = Cliente.where(rut_cliente: response[i]['codigo_encuestado'].to_s).first
+							nueva_linea.segmento = Segmento.where(tipo_segmento: response[i]['campo_libre_2'].to_s).first
+							if Fijomovil.where(tipo_fijomovil: response[i]['campo_libre_1'].to_s).blank? then
+								Fijomovil.create(tipo_fijomovil: response[i]['campo_libre_1'].to_s)
+							end
+							nueva_linea.fijomovil = Fijomovil.where(tipo_fijomovil: response[i]['campo_libre_1'].to_s).first
+							if Contrato.where(tipo_contrato: response[i]['campo_libre_3'].to_s).blank? then
+								Contrato.create(tipo_contrato: response[i]['campo_libre_3'].to_s)
+							end
+							nueva_linea.contrato = Contrato.where(tipo_contrato: response[i]['campo_libre_3'].to_s).first
+							nueva_linea.save()
+							#if !nueva_linea.save() then
+							#	puts 'Revisar Lineas'
+							#end
+						end
+
 						
 						nueva_encuesta = Encuestum.new();
 						nueva_encuesta.fecha_creacion_encuesta = Date.parse(response[i]['fecha_creacion']).strftime("%d/%m/%Y").to_s
@@ -173,15 +177,23 @@ class Conexion
 				end
 ##### SI SOLO HAY UNA ENCUESTA NUEVA
 			else
-				if Cliente.where(rut_cliente: response['codigo_encuestado'].to_s).blank? then
-						nuevo_cliente = Cliente.new();
-						nuevo_cliente.rut_cliente = response['codigo_encuestado']#.to_s #rut
-						nuevo_cliente.mail_cliente = response['mail']#.to_s #email
-						nuevo_cliente.save()
-					end
+				
+				#ENCUESTA
+				#si ya hay una encuesta en una fecha por una linea, no se agrega nuevamente
+				if Encuestum.where(fecha_creacion_encuesta: Date.parse(response['fecha_creacion']).strftime("%d/%m/%Y").to_s).
+				where(linea: Linea.where(numero_cliente: response['campo_libre_4'].to_i).ids.first.to_i).
+				where(hora_envio_encuesta: Time.parse(response['fecha_creacion']).strftime("%H:%M:%S").to_s).blank? then
+					
 
 					#si la linea no existe se agrega relacionada al cliente
 					if Linea.where(numero_cliente: response['campo_libre_4'].to_i).blank? then
+
+						if Cliente.where(rut_cliente: response['codigo_encuestado'].to_s).blank? then
+							Cliente.create(
+								rut_cliente: response['codigo_encuestado'],
+								mail_cliente: response['mail']
+								);
+						end
 						nueva_linea = Linea.new();
 						nueva_linea.numero_cliente = response['campo_libre_4'].to_i #numero
 						nueva_linea.cliente = Cliente.where(rut_cliente: response['codigo_encuestado'].to_s).first
@@ -197,63 +209,57 @@ class Conexion
 						nueva_linea.save()
 					end
 
-					#ENCUESTA
-					#si ya hay una encuesta en una fecha por una linea, no se agrega nuevamente
-					if Encuestum.where(fecha_creacion_encuesta: Date.parse(response['fecha_creacion']).strftime("%d/%m/%Y").to_s).
-					where(linea: Linea.where(numero_cliente: response['campo_libre_4'].to_i).ids.first.to_i).
-					where(hora_envio_encuesta: Time.parse(response['fecha_creacion']).strftime("%H:%M:%S").to_s).blank? then
-						
-						nueva_encuesta = Encuestum.new();
-						nueva_encuesta.fecha_creacion_encuesta = Date.parse(response['fecha_creacion']).strftime("%d/%m/%Y").to_s
-						nueva_encuesta.hora_envio_encuesta = Time.parse(response['fecha_creacion']).strftime("%H:%M:%S").to_s
-						nueva_encuesta.linea = Linea.where(numero_cliente: response['campo_libre_4'].to_i).first
-						if Motivo.where(tipo_motivo: response['respuesta']['listbox_0']['respuesta_0'].to_s).blank? then
-							Motivo.create(tipo_motivo: response['respuesta']['listbox_0']['respuesta_0'].to_s)
-						end
-						nueva_encuesta.motivo = Motivo.where(tipo_motivo: response['respuesta']['listbox_0']['respuesta_0'].to_s).first
-						
-						if response['respuesta']['dropdownlist_0']['respuesta'].to_s.eql? 'Sí'
-							nueva_encuesta.resuelto_encuesta = 1
-						else
-							nueva_encuesta.resuelto_encuesta = 0
-						end
-						nueva_encuesta.save()
-						
-						#RESPUESTAS
-						___linea_id = Linea.where(numero_cliente: response['campo_libre_4'].to_i).ids.first
-						id_encuesta_actual = Encuestum.where(fecha_creacion_encuesta: Date.parse(response['fecha_creacion']).strftime("%d/%m/%Y").to_s).
-						where(linea: ___linea_id.to_i).ids.first
-
-						nueva_resp1 = Respuestum.new();
-						nueva_resp1.valor_pregunta = response['respuesta']['ranking_0']['valoracion'].to_i #pregunta 1
-						nueva_resp1.preguntum = Preguntum.where(id: 1).first
-						nueva_resp1.encuestum = Encuestum.where(id: id_encuesta_actual.to_i).first
-						nueva_resp1.save()
-
-						nueva_resp2 = Respuestum.new();
-						nueva_resp2.valor_pregunta = response['respuesta']['ranking_1']['valoracion'].to_i #pregunta 2
-						nueva_resp2.preguntum = Preguntum.where(id: 2).first
-						nueva_resp2.encuestum = Encuestum.where(id: id_encuesta_actual.to_i).first
-						nueva_resp2.save()
-
-						nueva_resp3 = Respuestum.new();
-						nueva_resp3.valor_pregunta = response['respuesta']['ranking_2']['valoracion'].to_i #pregunta 3
-						nueva_resp3.preguntum = Preguntum.where(id: 3).first
-						nueva_resp3.encuestum = Encuestum.where(id: id_encuesta_actual.to_i).first
-						nueva_resp3.save()
-
-						nueva_resp4 = Respuestum.new();
-						nueva_resp4.valor_pregunta = response['respuesta']['ranking_3']['valoracion'].to_i #pregunta 4
-						nueva_resp4.preguntum = Preguntum.where(id: 4).first
-						nueva_resp4.encuestum = Encuestum.where(id: id_encuesta_actual.to_i).first
-						nueva_resp4.save()
-
-						nueva_resp5 = Respuestum.new();
-						nueva_resp5.valor_pregunta = response['respuesta']['ranking_4']['valoracion'].to_i #pregunta 5
-						nueva_resp5.preguntum = Preguntum.where(id: 5).first
-						nueva_resp5.encuestum = Encuestum.where(id: id_encuesta_actual.to_i).first
-						nueva_resp5.save()
+					nueva_encuesta = Encuestum.new();
+					nueva_encuesta.fecha_creacion_encuesta = Date.parse(response['fecha_creacion']).strftime("%d/%m/%Y").to_s
+					nueva_encuesta.hora_envio_encuesta = Time.parse(response['fecha_creacion']).strftime("%H:%M:%S").to_s
+					nueva_encuesta.linea = Linea.where(numero_cliente: response['campo_libre_4'].to_i).first
+					if Motivo.where(tipo_motivo: response['respuesta']['listbox_0']['respuesta_0'].to_s).blank? then
+						Motivo.create(tipo_motivo: response['respuesta']['listbox_0']['respuesta_0'].to_s)
 					end
+					nueva_encuesta.motivo = Motivo.where(tipo_motivo: response['respuesta']['listbox_0']['respuesta_0'].to_s).first
+					
+					if response['respuesta']['dropdownlist_0']['respuesta'].to_s.eql? 'Sí'
+						nueva_encuesta.resuelto_encuesta = 1
+					else
+						nueva_encuesta.resuelto_encuesta = 0
+					end
+					nueva_encuesta.save()
+					
+					#RESPUESTAS
+					___linea_id = Linea.where(numero_cliente: response['campo_libre_4'].to_i).ids.first
+					id_encuesta_actual = Encuestum.where(fecha_creacion_encuesta: Date.parse(response['fecha_creacion']).strftime("%d/%m/%Y").to_s).
+					where(linea: ___linea_id.to_i).ids.first
+
+					nueva_resp1 = Respuestum.new();
+					nueva_resp1.valor_pregunta = response['respuesta']['ranking_0']['valoracion'].to_i #pregunta 1
+					nueva_resp1.preguntum = Preguntum.where(id: 1).first
+					nueva_resp1.encuestum = Encuestum.where(id: id_encuesta_actual.to_i).first
+					nueva_resp1.save()
+
+					nueva_resp2 = Respuestum.new();
+					nueva_resp2.valor_pregunta = response['respuesta']['ranking_1']['valoracion'].to_i #pregunta 2
+					nueva_resp2.preguntum = Preguntum.where(id: 2).first
+					nueva_resp2.encuestum = Encuestum.where(id: id_encuesta_actual.to_i).first
+					nueva_resp2.save()
+
+					nueva_resp3 = Respuestum.new();
+					nueva_resp3.valor_pregunta = response['respuesta']['ranking_2']['valoracion'].to_i #pregunta 3
+					nueva_resp3.preguntum = Preguntum.where(id: 3).first
+					nueva_resp3.encuestum = Encuestum.where(id: id_encuesta_actual.to_i).first
+					nueva_resp3.save()
+
+					nueva_resp4 = Respuestum.new();
+					nueva_resp4.valor_pregunta = response['respuesta']['ranking_3']['valoracion'].to_i #pregunta 4
+					nueva_resp4.preguntum = Preguntum.where(id: 4).first
+					nueva_resp4.encuestum = Encuestum.where(id: id_encuesta_actual.to_i).first
+					nueva_resp4.save()
+
+					nueva_resp5 = Respuestum.new();
+					nueva_resp5.valor_pregunta = response['respuesta']['ranking_4']['valoracion'].to_i #pregunta 5
+					nueva_resp5.preguntum = Preguntum.where(id: 5).first
+					nueva_resp5.encuestum = Encuestum.where(id: id_encuesta_actual.to_i).first
+					nueva_resp5.save()
+				end
 			end	
 		end
 	end

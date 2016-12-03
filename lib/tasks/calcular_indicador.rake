@@ -12,14 +12,25 @@ namespace :calcular_indicador do
 		'2016/10/17','2016/10/18','2016/10/19','2016/10/20','2016/10/21','2016/10/22','2016/10/23','2016/10/24',
 		'2016/10/25','2016/10/26','2016/10/27','2016/10/28','2016/10/29','2016/10/30','2016/10/31'];
 
-for i in 0..30 #BORRAR
-	puts fecha = mes_completo[i]
-	for id_segmento in 1..4 
-		encuestados_a_la_fecha = Encuestum.where(fecha_creacion_encuesta: fecha).where(linea_id: Linea.where(contrato_id: id_segmento).where(segmento_id: 1));
+for j in 0..30 #BORRAR
+	puts fecha = mes_completo[j]
+	for i in 1..4
+		if i > 1 then
+			id_segmento = i
+		else
+			id_segmento = [i,5]
+		end
+
+		if i < 4 then
+			id_fijomovil = [2,3]
+		else
+			id_fijomovil = 1
+		end
+		encuestados_a_la_fecha = Encuestum.where(fecha_creacion_encuesta: fecha).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
 		
 		cantidad = encuestados_a_la_fecha.length()
-		resolucion_positiva = Encuestum.where(fecha_creacion_encuesta: fecha).where(resuelto_encuesta: 1).where(linea_id: Linea.where(contrato_id: id_segmento).where(segmento_id: 1));
-		resolucion_negativa = Encuestum.where(fecha_creacion_encuesta: fecha).where(resuelto_encuesta: 0).where(linea_id: Linea.where(contrato_id: id_segmento).where(segmento_id: 1));
+		resolucion_positiva = Encuestum.where(fecha_creacion_encuesta: fecha).where(resuelto_encuesta: 1).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
+		resolucion_negativa = Encuestum.where(fecha_creacion_encuesta: fecha).where(resuelto_encuesta: 0).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
 
 		## 		Calculando preguntas 1 y 2	para segmento	##
 		pre_1 = Respuestum.where(preguntum_id: 1).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
@@ -48,7 +59,7 @@ for i in 0..30 #BORRAR
 				resp_1_2: insatisfechos,
 				resp_4_5: satisfechos,
 				fecha: fecha,
-				segmento: id_segmento
+				segmento: i
 				)
 		else
 			Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento).update_all(
@@ -62,11 +73,11 @@ for i in 0..30 #BORRAR
 
 		################################# ACUMULADO
 
-		encuestados_a_la_fecha = Encuestum.where(fecha_creacion_encuesta: Time.parse(fecha).strftime("%Y-%m-01")..fecha).where(linea_id: Linea.where(contrato_id: id_segmento).where(segmento_id: 1));
+		encuestados_a_la_fecha = Encuestum.where(fecha_creacion_encuesta: Time.parse(fecha).strftime("%Y-%m-01")..fecha).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
 		
 		cantidad = encuestados_a_la_fecha.length()
-		resolucion_positiva = Encuestum.where(fecha_creacion_encuesta: Time.parse(fecha).strftime("%Y-%m-01")..fecha).where(resuelto_encuesta: 1).where(linea_id: Linea.where(contrato_id: id_segmento).where(segmento_id: 1));
-		resolucion_negativa = Encuestum.where(fecha_creacion_encuesta: Time.parse(fecha).strftime("%Y-%m-01")..fecha).where(resuelto_encuesta: 0).where(linea_id: Linea.where(contrato_id: id_segmento).where(segmento_id: 1));
+		resolucion_positiva = Encuestum.where(fecha_creacion_encuesta: Time.parse(fecha).strftime("%Y-%m-01")..fecha).where(resuelto_encuesta: 1).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
+		resolucion_negativa = Encuestum.where(fecha_creacion_encuesta: Time.parse(fecha).strftime("%Y-%m-01")..fecha).where(resuelto_encuesta: 0).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
 
 		## 		Calculando preguntas 1 y 2	para segmento	##
 		pre_1 = Respuestum.where(preguntum_id: 1).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
@@ -95,7 +106,7 @@ for i in 0..30 #BORRAR
 				resp_1_2: insatisfechos,
 				resp_4_5: satisfechos,
 				fecha: fecha,
-				segmento: id_segmento
+				segmento: i
 				)
 		else
 			Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento).update_all(
