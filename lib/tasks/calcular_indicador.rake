@@ -7,12 +7,13 @@ namespace :calcular_indicador do
 	## aqui get fecha de lo que se desea actualizar en relacion a los indicadores
 	#fecha = '2016/10/06';
 	fechas = ['2016/10/01','2016/10/02','2016/10/03','2016/10/04','2016/10/05','2016/10/06','2016/10/07','2016/10/08'];
-	mes_completo = ['2016/10/01','2016/10/02','2016/10/03','2016/10/04','2016/10/05','2016/10/06','2016/10/07','2016/10/08',
-		'2016/10/09','2016/10/10','2016/10/11','2016/10/12','2016/10/13','2016/10/14','2016/10/15','2016/10/16',
-		'2016/10/17','2016/10/18','2016/10/19','2016/10/20','2016/10/21','2016/10/22','2016/10/23','2016/10/24',
-		'2016/10/25','2016/10/26','2016/10/27','2016/10/28','2016/10/29','2016/10/30','2016/10/31'];
+	# mes_completo = ['2016/10/01','2016/10/02','2016/10/03','2016/10/04','2016/10/05','2016/10/06','2016/10/07','2016/10/08',
+	# 	'2016/10/09','2016/10/10','2016/10/11','2016/10/12','2016/10/13','2016/10/14','2016/10/15','2016/10/16',
+	# 	'2016/10/17','2016/10/18','2016/10/19','2016/10/20','2016/10/21','2016/10/22','2016/10/23','2016/10/24',
+	# 	'2016/10/25','2016/10/26','2016/10/27','2016/10/28','2016/10/29','2016/10/30','2016/10/31'];
+	mes_completo = ['2016/12/01','2016/12/02','2016/12/03']
 
-for j in 0..30 #BORRAR
+for j in 0..2 #BORRAR
 	puts fecha = mes_completo[j]
 	for i in 1..4
 		if i > 1 then
@@ -226,8 +227,8 @@ for j in 0..30 #BORRAR
 						ponderacion_pyme_fijo*indicadores_diarios_actuales.where(segmento: 5).take.resp_4_5+
 						ponderacion_pyme_movil*indicadores_diarios_actuales.where(segmento: 6).take.resp_4_5).to_f.round(3);
 	
-	if Indicadoresacumulado.where(fecha: fecha).where(segmento: 7).blank? then
-		Indicadoresacumulado.create(
+	if Indicadoresdiario.where(fecha: fecha).where(segmento: 7).blank? then
+		Indicadoresdiario.create(
 			isn: isn_diario_global,
 			resolutividad: resolutividad_diario_global,
 			resp_1_2: insatisfechos_diario_global,
@@ -236,7 +237,7 @@ for j in 0..30 #BORRAR
 			segmento: 7
 			)
 	else
-		Indicadoresacumulado.where(fecha: fecha).where(segmento: 7).update_all(
+		Indicadoresdiario.where(fecha: fecha).where(segmento: 7).update_all(
 			isn: isn_diario_global,
 			resolutividad: resolutividad_diario_global,
 			resp_1_2: insatisfechos_diario_global,
