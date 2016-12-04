@@ -7,11 +7,24 @@ namespace :calcular_indicador do
 	## aqui get fecha de lo que se desea actualizar en relacion a los indicadores
 	#fecha = '2016/10/06';
 	fechas = ['2016/10/01','2016/10/02','2016/10/03','2016/10/04','2016/10/05','2016/10/06','2016/10/07','2016/10/08'];
-	# mes_completo = ['2016/10/01','2016/10/02','2016/10/03','2016/10/04','2016/10/05','2016/10/06','2016/10/07','2016/10/08',
-	# 	'2016/10/09','2016/10/10','2016/10/11','2016/10/12','2016/10/13','2016/10/14','2016/10/15','2016/10/16',
-	# 	'2016/10/17','2016/10/18','2016/10/19','2016/10/20','2016/10/21','2016/10/22','2016/10/23','2016/10/24',
-	# 	'2016/10/25','2016/10/26','2016/10/27','2016/10/28','2016/10/29','2016/10/30','2016/10/31'];
-	mes_completo = ['2016/12/01','2016/12/02','2016/12/03']
+	mes_completo = ['2016/10/01','2016/10/02','2016/10/03','2016/10/04','2016/10/05','2016/10/06','2016/10/07','2016/10/08',
+	 	'2016/10/09','2016/10/10','2016/10/11','2016/10/12','2016/10/13','2016/10/14','2016/10/15','2016/10/16',
+	 	'2016/10/17','2016/10/18','2016/10/19','2016/10/20','2016/10/21','2016/10/22','2016/10/23','2016/10/24',
+	 	'2016/10/25','2016/10/26','2016/10/27','2016/10/28','2016/10/29','2016/10/30','2016/10/31',
+	 	'2016/11/01','2016/11/02','2016/11/03','2016/11/04','2016/11/05','2016/11/06','2016/11/07','2016/11/08',
+	 	'2016/11/09','2016/11/10','2016/11/11','2016/11/12','2016/11/13','2016/11/14','2016/11/15','2016/11/16',
+	 	'2016/11/17','2016/11/18','2016/11/19','2016/11/20','2016/11/21','2016/11/22','2016/11/23','2016/11/24',
+	 	'2016/11/25','2016/11/26','2016/11/27','2016/11/28','2016/11/29','2016/11/30',
+	 	'2016/08/01','2016/08/02','2016/08/03','2016/08/04','2016/08/05','2016/08/06','2016/08/07','2016/08/08',
+	 	'2016/08/09','2016/08/10','2016/08/11','2016/08/12','2016/08/13','2016/08/14','2016/08/15','2016/08/16',
+	 	'2016/08/17','2016/08/18','2016/08/19','2016/08/20','2016/08/21','2016/08/22','2016/08/23','2016/08/24',
+	 	'2016/08/25','2016/08/26','2016/08/27','2016/08/28','2016/08/29','2016/08/30','2016/08/31',
+	 	'2016/09/01','2016/09/02','2016/09/03','2016/09/04','2016/09/05','2016/09/06','2016/09/07','2016/09/08',
+	 	'2016/09/09','2016/09/10','2016/09/11','2016/09/12','2016/09/13','2016/09/14','2016/09/15','2016/09/16',
+	 	'2016/09/17','2016/09/18','2016/09/19','2016/09/20','2016/09/21','2016/09/22','2016/09/23','2016/09/24',
+	 	'2016/09/25','2016/09/26','2016/09/27','2016/09/28','2016/09/29','2016/09/30', 
+	 	'2016/12/01','2016/12/02','2016/12/03','2016/12/04']
+
 
 for j in 0..2 #BORRAR
 	puts fecha = mes_completo[j]
@@ -38,6 +51,9 @@ for j in 0..2 #BORRAR
 		pre_2 = Respuestum.where(preguntum_id: 1).where(valor_pregunta: 2).where(encuestum_id: encuestados_a_la_fecha)
 		pre_4 = Respuestum.where(preguntum_id: 1).where(valor_pregunta: 4).where(encuestum_id: encuestados_a_la_fecha)
 		pre_5 = Respuestum.where(preguntum_id: 1).where(valor_pregunta: 5).where(encuestum_id: encuestados_a_la_fecha)
+
+
+
 
 		cantidad_pos = resolucion_positiva.length()
 		cantidad_neg = resolucion_negativa.length()
@@ -71,7 +87,35 @@ for j in 0..2 #BORRAR
 				)
 		end
 
+		##    Calculando para atributos para segmentos distintos a pyme
 
+		##  Acceso 2 ;;; rapidez 3 ;;; 4 accesibilidad info ;;; 5 utilidad
+		pre_1_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
+		pre_2_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 2).where(encuestum_id: encuestados_a_la_fecha)
+		pre_4_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 4).where(encuestum_id: encuestados_a_la_fecha)
+		pre_5_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 5).where(encuestum_id: encuestados_a_la_fecha)
+
+		cant_pre1_atri  = pre_1_atri.length()
+		cant_pre2_atri  = pre_2_atri.length()
+		cant_pre4_atri  = pre_4_atri.length()
+		cant_pre5_atri  = pre_5_atri.length()
+
+		satis_atri = cant_pre4_atri + cant_pre5_atri
+		insatis_atri = cant_pre1_atri + cant_pre2_atri
+
+		valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(3)
+
+		if atributosdiario.where(fecha: fecha).where(segmento: id_segmento).blank? then
+			atributosdiario.create(
+				valor: valor_atri,,
+				fecha: fecha,
+				segmento: i
+				)
+		else
+			atributosdiario.where(fecha: fecha).where(segmento: id_segmento).update_all(
+				valor: valor_atri
+				)
+		end
 		################################# ACUMULADO
 
 		encuestados_a_la_fecha = Encuestum.where(fecha_creacion_encuesta: Time.parse(fecha).strftime("%Y-%m-01")..fecha).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
@@ -187,6 +231,96 @@ for j in 0..2 #BORRAR
 				resp_1_2: insatisfechos,
 				resp_4_5: satisfechos
 				)
+		end
+
+
+		##    Calculando para atributos para segmentos distintos a pyme
+
+		##  Acceso 2 ;;; 4 accesibilidad info 
+		pre_1_atri = Respuestum.where(preguntum_id: 2*i).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
+		pre_2_atri = Respuestum.where(preguntum_id: 2*i).where(valor_pregunta: 2).where(encuestum_id: encuestados_a_la_fecha)
+		pre_4_atri = Respuestum.where(preguntum_id: 2*i).where(valor_pregunta: 4).where(encuestum_id: encuestados_a_la_fecha)
+		pre_5_atri = Respuestum.where(preguntum_id: 2*i).where(valor_pregunta: 5).where(encuestum_id: encuestados_a_la_fecha)
+
+		cant_pre1_atri  = pre_1_atri.length()
+		cant_pre2_atri  = pre_2_atri.length()
+		cant_pre4_atri  = pre_4_atri.length()
+		cant_pre5_atri  = pre_5_atri.length()
+
+		satis_atri = cant_pre4_atri + cant_pre5_atri
+		insatis_atri = cant_pre1_atri + cant_pre2_atri
+
+		valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(3)
+
+		if atributosdiario.where(fecha: fecha).where(segmento: id_segmento).blank? then
+			atributosdiario.create(
+				valor: valor_atri,,
+				fecha: fecha,
+				segmento: i
+				)
+		else
+			atributosdiario.where(fecha: fecha).where(segmento: id_segmento).update_all(
+				valor: valor_atri
+				)
+		end
+
+		##    Calculando para atributos para segmentos distintos a pyme
+
+		##  Acceso 2 ;;; rapidez 3 ;;; 4 accesibilidad info ;;; 5 utilidad
+		pre_1_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
+		pre_2_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 2).where(encuestum_id: encuestados_a_la_fecha)
+		pre_4_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 4).where(encuestum_id: encuestados_a_la_fecha)
+		pre_5_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 5).where(encuestum_id: encuestados_a_la_fecha)
+
+		cant_pre1_atri  = pre_1_atri.length()
+		cant_pre2_atri  = pre_2_atri.length()
+		cant_pre4_atri  = pre_4_atri.length()
+		cant_pre5_atri  = pre_5_atri.length()
+
+		satis_atri = cant_pre4_atri + cant_pre5_atri
+		insatis_atri = cant_pre1_atri + cant_pre2_atri
+
+		valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(3)
+
+		if atributosdiario.where(fecha: fecha).where(segmento: id_segmento).blank? then
+			atributosdiario.create(
+				valor: valor_atri,,
+				fecha: fecha,
+				segmento: i
+				)
+		else
+			atributosdiario.where(fecha: fecha).where(segmento: id_segmento).update_all(
+				valor: valor_atri
+				)
+		end
+
+
+		##  rapidez 3  ;;; 5 utilidad
+		pre_1_atri = Respuestum.where(preguntum_id: 2*i+1).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
+		pre_2_atri = Respuestum.where(preguntum_id: 2*i+1).where(valor_pregunta: 2).where(encuestum_id: encuestados_a_la_fecha)
+		pre_4_atri = Respuestum.where(preguntum_id: 2*i+1).where(valor_pregunta: 4).where(encuestum_id: encuestados_a_la_fecha)
+		pre_5_atri = Respuestum.where(preguntum_id: 2*i+1).where(valor_pregunta: 5).where(encuestum_id: encuestados_a_la_fecha)
+
+		cant_pre1_atri  = pre_1_atri.length()
+		cant_pre2_atri  = pre_2_atri.length()
+		cant_pre4_atri  = pre_4_atri.length()
+		cant_pre5_atri  = pre_5_atri.length()
+
+		satis_atri = cant_pre4_atri + cant_pre5_atri
+		insatis_atri = cant_pre1_atri + cant_pre2_atri
+
+		valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(3)
+
+		if atributosdiario.where(fecha: fecha).where(segmento: id_segmento).blank? then
+			atributosdiario.create(
+				valor: valor_atri,,
+				fecha: fecha,
+				segmento: i
+				)
+		else
+			atributosdiario.where(fecha: fecha).where(segmento: id_segmento).update_all(
+				valor: valor_atri
+				)
 		end		
 	end
 	# FIN FOR PYMES
@@ -290,6 +424,10 @@ for j in 0..2 #BORRAR
 			)
 	end
 end #BORRAR ESTE END
+  
+
+
   end
+
 
 end

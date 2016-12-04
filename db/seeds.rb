@@ -67,6 +67,15 @@ end
 
 
 
+
+lista_ponderacion= [[1,0.402], [2,0.183], [3,0.092], [4,0.205], [5,0.091], [6,0.027], [ 7, 0.56 ],[ 8, 0.44]]
+
+
+lista_ponderacion.each do |segmento, valor|
+  Ponderacion.create( segmento: segmento, valor: valor)
+end
+
+
 lista_fijomovil= ["FIJA","MOVIL","BAM"]
 
 
