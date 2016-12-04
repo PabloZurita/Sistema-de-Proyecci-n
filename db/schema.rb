@@ -10,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161127001621) do
+ActiveRecord::Schema.define(version: 20161204051805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "atributosacumulados", force: :cascade do |t|
+    t.integer  "id_atr_acum"
+    t.integer  "segmento"
+    t.float    "valor"
+    t.date     "fecha"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["id_atr_acum"], name: "index_atributosacumulados_on_id_atr_acum", unique: true, using: :btree
+  end
+
+  create_table "atributosdiarios", force: :cascade do |t|
+    t.integer  "id_atr_diario"
+    t.integer  "segmento"
+    t.float    "valor"
+    t.date     "fecha"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["id_atr_diario"], name: "index_atributosdiarios_on_id_atr_diario", unique: true, using: :btree
+  end
 
   create_table "clientes", force: :cascade do |t|
     t.integer  "id_cliente"
@@ -144,6 +164,16 @@ ActiveRecord::Schema.define(version: 20161127001621) do
     t.string   "pago"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "ponderacions", force: :cascade do |t|
+    t.integer  "id_ponderacion"
+    t.integer  "segmento"
+    t.float    "valor"
+    t.date     "fecha"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["id_ponderacion"], name: "index_ponderacions_on_id_ponderacion", unique: true, using: :btree
   end
 
   create_table "pregunta", force: :cascade do |t|

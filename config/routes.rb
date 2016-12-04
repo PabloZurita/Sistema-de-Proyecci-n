@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+
+
+  resources :ponderacions
+  resources :atributosacumulados
+  resources :atributosdiarios
   resources :indicadoresacumulados
   resources :indicadoresdiarios
   resources :respuesta
@@ -13,8 +18,6 @@ Rails.application.routes.draw do
   resources :fijomovils
   resources :segmentos
   resources :clientes
-
-
   get '/historico/index' => 'historico#index', as: 'historico'
   get '/graficos/index' => 'graficos#index', as: 'graficos'
   get '/configuraciones/index' => 'configuraciones#index', as: 'configuraciones'

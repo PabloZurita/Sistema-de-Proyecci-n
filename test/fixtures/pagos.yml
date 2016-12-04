@@ -4,13 +4,13 @@ one:
   id_pago: 1
   canal: MyText
   orden_compra: MyText
-  fecha_transaccion: 2016-11-26
-  hora: 2016-11-26 21:16:13
+  fecha_transaccion: 2016-12-04
+  hora: 2016-12-04 02:17:54
   cod_retorno: 1
   cod_autorizacion: 1
   monto: 1
-  fecha_pago: 2016-11-26
-  fecha_ident_transaccion: 2016-11-26
+  fecha_pago: 2016-12-04
+  fecha_ident_transaccion: 2016-12-04
   tel_movil: 1
   tel_fijo: 1
   cod_cliente: 1
@@ -21,13 +21,13 @@ two:
   id_pago: 1
   canal: MyText
   orden_compra: MyText
-  fecha_transaccion: 2016-11-26
-  hora: 2016-11-26 21:16:13
+  fecha_transaccion: 2016-12-04
+  hora: 2016-12-04 02:17:54
   cod_retorno: 1
   cod_autorizacion: 1
   monto: 1
-  fecha_pago: 2016-11-26
-  fecha_ident_transaccion: 2016-11-26
+  fecha_pago: 2016-12-04
+  fecha_ident_transaccion: 2016-12-04
   tel_movil: 1
   tel_fijo: 1
   cod_cliente: 1

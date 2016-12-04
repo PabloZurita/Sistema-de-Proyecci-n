@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_atr_acum: 1
+  segmento: 1
+  valor: 1.5
+  fecha: 2016-12-04
+
+two:
+  id_atr_acum: 1
+  segmento: 1
+  valor: 1.5
+  fecha: 2016-12-04

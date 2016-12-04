@@ -37,10 +37,3 @@
 <br>
 
 <%= link_to 'New Indicadoresdiario', new_indicadoresdiario_path %>
-
-
-<%=@indicadoresdiarios.where("fecha >= ? AND fecha <= ?","01/"+Time.now.month.to_s+"/"+Time.now.year.to_s, "30/"+Time.now.month.to_s+"/"+Time.now.year.to_s).pluck(:isn) %>
-
-<%=@indicadoresdiarios.find_by_sql("select isn from indicadoresdiarios")%>
-asdsadsadasd
-<%=@indicadoresdiarios.pluck(:isn)%>

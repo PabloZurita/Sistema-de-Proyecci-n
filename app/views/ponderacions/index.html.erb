@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Ponderacions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id ponderacion</th>
+      <th>Segmento</th>
+      <th>Valor</th>
+      <th>Fecha</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ponderacions.each do |ponderacion| %>
+      <tr>
+        <td><%= ponderacion.id_ponderacion %></td>
+        <td><%= ponderacion.segmento %></td>
+        <td><%= ponderacion.valor %></td>
+        <td><%= ponderacion.fecha %></td>
+        <td><%= link_to 'Show', ponderacion %></td>
+        <td><%= link_to 'Edit', edit_ponderacion_path(ponderacion) %></td>
+        <td><%= link_to 'Destroy', ponderacion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ponderacion', new_ponderacion_path %>

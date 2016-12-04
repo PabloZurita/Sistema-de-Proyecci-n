@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id ponderacion:</strong>
+  <%= @ponderacion.id_ponderacion %>
+</p>
+
+<p>
+  <strong>Segmento:</strong>
+  <%= @ponderacion.segmento %>
+</p>
+
+<p>
+  <strong>Valor:</strong>
+  <%= @ponderacion.valor %>
+</p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @ponderacion.fecha %>
+</p>
+
+<%= link_to 'Edit', edit_ponderacion_path(@ponderacion) %> |
+<%= link_to 'Back', ponderacions_path %>
