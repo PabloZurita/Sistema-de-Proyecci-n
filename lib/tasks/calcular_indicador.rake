@@ -26,7 +26,7 @@ namespace :calcular_indicador do
 	 	'2016/12/01','2016/12/02','2016/12/03','2016/12/04']
 
 
-for dia in 0..2 #BORRAR
+for dia in 0..30 #BORRAR
 	puts fecha = mes_completo[dia]
 	for i in 1..4
 		if i > 1 then
@@ -69,23 +69,25 @@ for dia in 0..2 #BORRAR
 		isn = (100*((satisfechos.to_f - insatisfechos.to_f)/cantidad.to_f)).round(3)
 		resolutividad = (100 * cantidad_pos.to_f/(cantidad_pos.to_f+cantidad_neg.to_f)).round(3)
 
-		if Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento).blank? then
-			Indicadoresdiario.create(
-				isn: isn,
-				resolutividad: resolutividad,
-				resp_1_2: insatisfechos,
-				resp_4_5: satisfechos,
-				fecha: fecha,
-				segmento: i
-				)
-		else
-			Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento).update_all(
-				isn: isn,
-				resolutividad: resolutividad,
-				resp_1_2: insatisfechos,
-				resp_4_5: satisfechos
-				)
-		end
+		#if !isn.nan? then
+			if Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento).blank? then
+				Indicadoresdiario.create(
+					isn: isn,
+					resolutividad: resolutividad,
+					resp_1_2: insatisfechos,
+					resp_4_5: satisfechos,
+					fecha: fecha,
+					segmento: i
+					)
+			else
+				Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento).update_all(
+					isn: isn,
+					resolutividad: resolutividad,
+					resp_1_2: insatisfechos,
+					resp_4_5: satisfechos
+					)
+			end
+		#end #FIN IF NAN
 
 		##    Calculando para atributos para segmentos distintos a pyme
 
@@ -105,19 +107,20 @@ for dia in 0..2 #BORRAR
 			insatis_atri = cant_pre1_atri + cant_pre2_atri
 
 			valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(3)
-
-			if Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).blank? then
-				Atributosdiario.create(
-					valor: valor_atri,
-					fecha: fecha,
-					segmento: i,
-					pregunta: nro_pregunta
-					)
-			else
-				Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).update_all(
-					valor: valor_atri
-					)
-			end
+			#if !valor_atri.nan? then
+				if Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).blank? then
+					Atributosdiario.create(
+						valor: valor_atri,
+						fecha: fecha,
+						segmento: i,
+						pregunta: nro_pregunta
+						)
+				else
+					Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).update_all(
+						valor: valor_atri
+						)
+				end
+			#end #FIN IF NAN
 		end
 		################################# ACUMULADO
 
@@ -146,24 +149,25 @@ for dia in 0..2 #BORRAR
 		isn = (100*((satisfechos.to_f - insatisfechos.to_f)/cantidad.to_f)).round(3)
 		resolutividad = (100 * cantidad_pos.to_f/(cantidad_pos.to_f+cantidad_neg.to_f)).round(3)
 
-
-		if Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento).blank? then
-			Indicadoresacumulado.create(
-				isn: isn,
-				resolutividad: resolutividad,
-				resp_1_2: insatisfechos,
-				resp_4_5: satisfechos,
-				fecha: fecha,
-				segmento: i
-				)
-		else
-			Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento).update_all(
-				isn: isn,
-				resolutividad: resolutividad,
-				resp_1_2: insatisfechos,
-				resp_4_5: satisfechos
-				)
-		end
+		#if !isn.nan? then
+			if Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento).blank? then
+				Indicadoresacumulado.create(
+					isn: isn,
+					resolutividad: resolutividad,
+					resp_1_2: insatisfechos,
+					resp_4_5: satisfechos,
+					fecha: fecha,
+					segmento: i
+					)
+			else
+				Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento).update_all(
+					isn: isn,
+					resolutividad: resolutividad,
+					resp_1_2: insatisfechos,
+					resp_4_5: satisfechos
+					)
+			end
+		#end #FIN IF NAN
 
 		##    Calculando para atributos para segmentos distintos a pyme
 
@@ -184,18 +188,20 @@ for dia in 0..2 #BORRAR
 
 			valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(3)
 
-			if Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).blank? then
-				Atributosacumulado.create(
-					valor: valor_atri,
-					fecha: fecha,
-					segmento: i,
-					pregunta: nro_pregunta
-					)
-			else
-				Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).update_all(
-					valor: valor_atri
-					)
-			end
+			#if !valor_atri.nan? then
+				if Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).blank? then
+					Atributosacumulado.create(
+						valor: valor_atri,
+						fecha: fecha,
+						segmento: i,
+						pregunta: nro_pregunta
+						)
+				else
+					Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).update_all(
+						valor: valor_atri
+						)
+				end
+			#end #FIN IF NAN
 		end
 	end
 
@@ -232,42 +238,45 @@ for dia in 0..2 #BORRAR
 		isn = (100*((satisfechos.to_f - insatisfechos.to_f)/cantidad.to_f)).round(3)
 		resolutividad = (100 * cantidad_pos.to_f/(cantidad_pos.to_f+cantidad_neg.to_f)).round(3)
 
-		if Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento+4).blank? then
-			Indicadoresdiario.create(
-				isn: isn,
-				resolutividad: resolutividad,
-				resp_1_2: insatisfechos,
-				resp_4_5: satisfechos,
-				fecha: fecha,
-				segmento: id_segmento+4
-				)
-		else
-			Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento+4).update_all(
-				isn: isn,
-				resolutividad: resolutividad,
-				resp_1_2: insatisfechos,
-				resp_4_5: satisfechos
-				)
-		end
+		#if !isn.nan? then
+			if Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento+4).blank? then
+				Indicadoresdiario.create(
+					isn: isn,
+					resolutividad: resolutividad,
+					resp_1_2: insatisfechos,
+					resp_4_5: satisfechos,
+					fecha: fecha,
+					segmento: id_segmento+4
+					)
+			else
+				Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento+4).update_all(
+					isn: isn,
+					resolutividad: resolutividad,
+					resp_1_2: insatisfechos,
+					resp_4_5: satisfechos
+					)
+			end
 
 
-		if Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento+4).blank? then
-			Indicadoresacumulado.create(
-				isn: isn,
-				resolutividad: resolutividad,
-				resp_1_2: insatisfechos,
-				resp_4_5: satisfechos,
-				fecha: fecha,
-				segmento: id_segmento+4
-				)
-		else
-			Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento+4).update_all(
-				isn: isn,
-				resolutividad: resolutividad,
-				resp_1_2: insatisfechos,
-				resp_4_5: satisfechos
-				)
-		end
+
+			if Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento+4).blank? then
+				Indicadoresacumulado.create(
+					isn: isn,
+					resolutividad: resolutividad,
+					resp_1_2: insatisfechos,
+					resp_4_5: satisfechos,
+					fecha: fecha,
+					segmento: id_segmento+4
+					)
+			else
+				Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento+4).update_all(
+					isn: isn,
+					resolutividad: resolutividad,
+					resp_1_2: insatisfechos,
+					resp_4_5: satisfechos
+					)
+			end
+		#end #FIN IF NAN
 
 
 		##    Calculando para atributos para segmentos distintos a pyme
@@ -289,133 +298,139 @@ for dia in 0..2 #BORRAR
 
 			valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(3)
 
-			if Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).blank? then
-				Atributosdiario.create(
-					valor: valor_atri,
-					fecha: fecha,
-					segmento: id_segmento+4,
-					pregunta: nro_pregunta
-					)
-			else
-				Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).update_all(
-					valor: valor_atri
-					)
-			end
+			#if !valor_atri.nan? then
+				if Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).blank? then
+					Atributosdiario.create(
+						valor: valor_atri,
+						fecha: fecha,
+						segmento: id_segmento+4,
+						pregunta: nro_pregunta
+						)
+				else
+					Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).update_all(
+						valor: valor_atri
+						)
+				end
 
-			if Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento+4).where(pregunta: nro_pregunta).blank? then
-				Atributosacumulado.create(
-					valor: valor_atri,
-					fecha: fecha,
-					segmento: id_segmento+4,
-					pregunta: nro_pregunta
-					)
-			else
-				Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento+4).where(pregunta: nro_pregunta).update_all(
-					valor: valor_atri
-					)
-			end
+				if Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento+4).where(pregunta: nro_pregunta).blank? then
+					Atributosacumulado.create(
+						valor: valor_atri,
+						fecha: fecha,
+						segmento: id_segmento+4,
+						pregunta: nro_pregunta
+						)
+				else
+					Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento+4).where(pregunta: nro_pregunta).update_all(
+						valor: valor_atri
+						)
+				end
+			#end #FIN IF NAN
 		end
 	end
 	# FIN FOR PYMES
 
 
 	#ISN TOTAL
-	ponderacion_contrato = 0.402
-	ponderacion_hibrido = 0.183
-	ponderacion_prepago = 0.092
-	ponderacion_fijo = 0.205
-	ponderacion_pyme_movil = 0.091
-	ponderacion_pyme_fijo = 0.027 
+	ponderacion_contrato = Ponderacion.where(segmento: 1).take.valor#0.402
+	ponderacion_hibrido = Ponderacion.where(segmento: 2).take.valor#0.183
+	ponderacion_prepago = Ponderacion.where(segmento: 3).take.valor#0.092
+	ponderacion_fijo = Ponderacion.where(segmento: 4).take.valor#0.205
+	ponderacion_pyme_fijo = Ponderacion.where(segmento: 5).take.valor#0.027 
+	ponderacion_pyme_movil = Ponderacion.where(segmento: 6).take.valor#0.091
 
 
 	indicadores_diarios_actuales = Indicadoresdiario.where(fecha: fecha)
-	isn_diario_global = (ponderacion_contrato*indicadores_diarios_actuales.where(segmento: 1).take.isn+
-						ponderacion_hibrido*indicadores_diarios_actuales.where(segmento: 2).take.isn+
-						ponderacion_prepago*indicadores_diarios_actuales.where(segmento: 3).take.isn+
-						ponderacion_fijo*indicadores_diarios_actuales.where(segmento: 4).take.isn+
-						ponderacion_pyme_fijo*indicadores_diarios_actuales.where(segmento: 5).take.isn+
-						ponderacion_pyme_movil*indicadores_diarios_actuales.where(segmento: 6).take.isn).to_f.round(3);
-	resolutividad_diario_global = (ponderacion_contrato*indicadores_diarios_actuales.where(segmento: 1).take.resolutividad+
-						ponderacion_hibrido*indicadores_diarios_actuales.where(segmento: 2).take.resolutividad+
-						ponderacion_prepago*indicadores_diarios_actuales.where(segmento: 3).take.resolutividad+
-						ponderacion_fijo*indicadores_diarios_actuales.where(segmento: 4).take.resolutividad+
-						ponderacion_pyme_fijo*indicadores_diarios_actuales.where(segmento: 5).take.resolutividad+
-						ponderacion_pyme_movil*indicadores_diarios_actuales.where(segmento: 6).take.resolutividad).to_f.round(3);
-	insatisfechos_diario_global = (ponderacion_contrato*indicadores_diarios_actuales.where(segmento: 1).take.resp_1_2+
-						ponderacion_hibrido*indicadores_diarios_actuales.where(segmento: 2).take.resp_1_2+
-						ponderacion_prepago*indicadores_diarios_actuales.where(segmento: 3).take.resp_1_2+
-						ponderacion_fijo*indicadores_diarios_actuales.where(segmento: 4).take.resp_1_2+
-						ponderacion_pyme_fijo*indicadores_diarios_actuales.where(segmento: 5).take.resp_1_2+
-						ponderacion_pyme_movil*indicadores_diarios_actuales.where(segmento: 6).take.resp_1_2).to_f.round(3);
-	satisfechos_4_5_diario_global = (ponderacion_contrato*indicadores_diarios_actuales.where(segmento: 1).take.resp_4_5+
-						ponderacion_hibrido*indicadores_diarios_actuales.where(segmento: 2).take.resp_4_5+
-						ponderacion_prepago*indicadores_diarios_actuales.where(segmento: 3).take.resp_4_5+
-						ponderacion_fijo*indicadores_diarios_actuales.where(segmento: 4).take.resp_4_5+
-						ponderacion_pyme_fijo*indicadores_diarios_actuales.where(segmento: 5).take.resp_4_5+
-						ponderacion_pyme_movil*indicadores_diarios_actuales.where(segmento: 6).take.resp_4_5).to_f.round(3);
+	#if !indicadores_diarios_actuales.blank? then
+		isn_diario_global = (ponderacion_contrato*indicadores_diarios_actuales.where(segmento: 1).take.isn+
+							ponderacion_hibrido*indicadores_diarios_actuales.where(segmento: 2).take.isn+
+							ponderacion_prepago*indicadores_diarios_actuales.where(segmento: 3).take.isn+
+							ponderacion_fijo*indicadores_diarios_actuales.where(segmento: 4).take.isn+
+							ponderacion_pyme_fijo*indicadores_diarios_actuales.where(segmento: 5).take.isn+
+							ponderacion_pyme_movil*indicadores_diarios_actuales.where(segmento: 6).take.isn).to_f.round(3);
+		resolutividad_diario_global = (ponderacion_contrato*indicadores_diarios_actuales.where(segmento: 1).take.resolutividad+
+							ponderacion_hibrido*indicadores_diarios_actuales.where(segmento: 2).take.resolutividad+
+							ponderacion_prepago*indicadores_diarios_actuales.where(segmento: 3).take.resolutividad+
+							ponderacion_fijo*indicadores_diarios_actuales.where(segmento: 4).take.resolutividad+
+							ponderacion_pyme_fijo*indicadores_diarios_actuales.where(segmento: 5).take.resolutividad+
+							ponderacion_pyme_movil*indicadores_diarios_actuales.where(segmento: 6).take.resolutividad).to_f.round(3);
+		insatisfechos_diario_global = (ponderacion_contrato*indicadores_diarios_actuales.where(segmento: 1).take.resp_1_2+
+							ponderacion_hibrido*indicadores_diarios_actuales.where(segmento: 2).take.resp_1_2+
+							ponderacion_prepago*indicadores_diarios_actuales.where(segmento: 3).take.resp_1_2+
+							ponderacion_fijo*indicadores_diarios_actuales.where(segmento: 4).take.resp_1_2+
+							ponderacion_pyme_fijo*indicadores_diarios_actuales.where(segmento: 5).take.resp_1_2+
+							ponderacion_pyme_movil*indicadores_diarios_actuales.where(segmento: 6).take.resp_1_2).to_f.round(3);
+		satisfechos_4_5_diario_global = (ponderacion_contrato*indicadores_diarios_actuales.where(segmento: 1).take.resp_4_5+
+							ponderacion_hibrido*indicadores_diarios_actuales.where(segmento: 2).take.resp_4_5+
+							ponderacion_prepago*indicadores_diarios_actuales.where(segmento: 3).take.resp_4_5+
+							ponderacion_fijo*indicadores_diarios_actuales.where(segmento: 4).take.resp_4_5+
+							ponderacion_pyme_fijo*indicadores_diarios_actuales.where(segmento: 5).take.resp_4_5+
+							ponderacion_pyme_movil*indicadores_diarios_actuales.where(segmento: 6).take.resp_4_5).to_f.round(3);
 	
-	if Indicadoresdiario.where(fecha: fecha).where(segmento: 7).blank? then
-		Indicadoresdiario.create(
-			isn: isn_diario_global,
-			resolutividad: resolutividad_diario_global,
-			resp_1_2: insatisfechos_diario_global,
-			resp_4_5: satisfechos_4_5_diario_global,
-			fecha: fecha,
-			segmento: 7
-			)
-	else
-		Indicadoresdiario.where(fecha: fecha).where(segmento: 7).update_all(
-			isn: isn_diario_global,
-			resolutividad: resolutividad_diario_global,
-			resp_1_2: insatisfechos_diario_global,
-			resp_4_5: satisfechos_4_5_diario_global
-			)
-	end
+		if Indicadoresdiario.where(fecha: fecha).where(segmento: 7).blank? then
+			Indicadoresdiario.create(
+				isn: isn_diario_global,
+				resolutividad: resolutividad_diario_global,
+				resp_1_2: insatisfechos_diario_global,
+				resp_4_5: satisfechos_4_5_diario_global,
+				fecha: fecha,
+				segmento: 7
+				)
+		else
+			Indicadoresdiario.where(fecha: fecha).where(segmento: 7).update_all(
+				isn: isn_diario_global,
+				resolutividad: resolutividad_diario_global,
+				resp_1_2: insatisfechos_diario_global,
+				resp_4_5: satisfechos_4_5_diario_global
+				)
+		end
+	#end #END IF INDICADORES DIARIO GLOBAL (PONDERADO)
 
 
 	indicadores_acumulados_actuales = Indicadoresacumulado.where(fecha: fecha)
-	isn_acumulado_global = (ponderacion_contrato*indicadores_acumulados_actuales.where(segmento: 1).take.isn+
-						ponderacion_hibrido*indicadores_acumulados_actuales.where(segmento: 2).take.isn+
-						ponderacion_prepago*indicadores_acumulados_actuales.where(segmento: 3).take.isn+
-						ponderacion_fijo*indicadores_acumulados_actuales.where(segmento: 4).take.isn+
-						ponderacion_pyme_fijo*indicadores_acumulados_actuales.where(segmento: 5).take.isn+
-						ponderacion_pyme_movil*indicadores_acumulados_actuales.where(segmento: 6).take.isn).to_f.round(3);
-	resolutividad_acumulado_global = (ponderacion_contrato*indicadores_acumulados_actuales.where(segmento: 1).take.resolutividad+
-						ponderacion_hibrido*indicadores_acumulados_actuales.where(segmento: 2).take.resolutividad+
-						ponderacion_prepago*indicadores_acumulados_actuales.where(segmento: 3).take.resolutividad+
-						ponderacion_fijo*indicadores_acumulados_actuales.where(segmento: 4).take.resolutividad+
-						ponderacion_pyme_fijo*indicadores_acumulados_actuales.where(segmento: 5).take.resolutividad+
-						ponderacion_pyme_movil*indicadores_acumulados_actuales.where(segmento: 6).take.resolutividad).to_f.round(3).round(3);
-	insatisfechos_acumulado_global = (ponderacion_contrato*indicadores_acumulados_actuales.where(segmento: 1).take.resp_1_2+
-						ponderacion_hibrido*indicadores_acumulados_actuales.where(segmento: 2).take.resp_1_2+
-						ponderacion_prepago*indicadores_acumulados_actuales.where(segmento: 3).take.resp_1_2+
-						ponderacion_fijo*indicadores_acumulados_actuales.where(segmento: 4).take.resp_1_2+
-						ponderacion_pyme_fijo*indicadores_acumulados_actuales.where(segmento: 5).take.resp_1_2+
-						ponderacion_pyme_movil*indicadores_acumulados_actuales.where(segmento: 6).take.resp_1_2).to_f.round(3);
-	satisfechos_4_5_acumulado_global = (ponderacion_contrato*indicadores_acumulados_actuales.where(segmento: 1).take.resp_4_5+
-						ponderacion_hibrido*indicadores_acumulados_actuales.where(segmento: 2).take.resp_4_5+
-						ponderacion_prepago*indicadores_acumulados_actuales.where(segmento: 3).take.resp_4_5+
-						ponderacion_fijo*indicadores_acumulados_actuales.where(segmento: 4).take.resp_4_5+
-						ponderacion_pyme_fijo*indicadores_acumulados_actuales.where(segmento: 5).take.resp_4_5+
-						ponderacion_pyme_movil*indicadores_acumulados_actuales.where(segmento: 6).take.resp_4_5).to_f.round(3);
-	
-	if Indicadoresacumulado.where(fecha: fecha).where(segmento: 7).blank? then
-		Indicadoresacumulado.create(
-			isn: isn_acumulado_global,
-			resolutividad: resolutividad_acumulado_global,
-			resp_1_2: insatisfechos_acumulado_global,
-			resp_4_5: satisfechos_4_5_acumulado_global,
-			fecha: fecha,
-			segmento: 7
-			)
-	else
-		Indicadoresacumulado.where(fecha: fecha).where(segmento: 7).update_all(
-			isn: isn_acumulado_global,
-			resolutividad: resolutividad_acumulado_global,
-			resp_1_2: insatisfechos_acumulado_global,
-			resp_4_5: satisfechos_4_5_acumulado_global
-			)
-	end
+	#if !indicadores_acumulados_actuales.blank? then
+		isn_acumulado_global = (ponderacion_contrato*indicadores_acumulados_actuales.where(segmento: 1).take.isn+
+							ponderacion_hibrido*indicadores_acumulados_actuales.where(segmento: 2).take.isn+
+							ponderacion_prepago*indicadores_acumulados_actuales.where(segmento: 3).take.isn+
+							ponderacion_fijo*indicadores_acumulados_actuales.where(segmento: 4).take.isn+
+							ponderacion_pyme_fijo*indicadores_acumulados_actuales.where(segmento: 5).take.isn+
+							ponderacion_pyme_movil*indicadores_acumulados_actuales.where(segmento: 6).take.isn).to_f.round(3);
+		resolutividad_acumulado_global = (ponderacion_contrato*indicadores_acumulados_actuales.where(segmento: 1).take.resolutividad+
+							ponderacion_hibrido*indicadores_acumulados_actuales.where(segmento: 2).take.resolutividad+
+							ponderacion_prepago*indicadores_acumulados_actuales.where(segmento: 3).take.resolutividad+
+							ponderacion_fijo*indicadores_acumulados_actuales.where(segmento: 4).take.resolutividad+
+							ponderacion_pyme_fijo*indicadores_acumulados_actuales.where(segmento: 5).take.resolutividad+
+							ponderacion_pyme_movil*indicadores_acumulados_actuales.where(segmento: 6).take.resolutividad).to_f.round(3).round(3);
+		insatisfechos_acumulado_global = (ponderacion_contrato*indicadores_acumulados_actuales.where(segmento: 1).take.resp_1_2+
+							ponderacion_hibrido*indicadores_acumulados_actuales.where(segmento: 2).take.resp_1_2+
+							ponderacion_prepago*indicadores_acumulados_actuales.where(segmento: 3).take.resp_1_2+
+							ponderacion_fijo*indicadores_acumulados_actuales.where(segmento: 4).take.resp_1_2+
+							ponderacion_pyme_fijo*indicadores_acumulados_actuales.where(segmento: 5).take.resp_1_2+
+							ponderacion_pyme_movil*indicadores_acumulados_actuales.where(segmento: 6).take.resp_1_2).to_f.round(3);
+		satisfechos_4_5_acumulado_global = (ponderacion_contrato*indicadores_acumulados_actuales.where(segmento: 1).take.resp_4_5+
+							ponderacion_hibrido*indicadores_acumulados_actuales.where(segmento: 2).take.resp_4_5+
+							ponderacion_prepago*indicadores_acumulados_actuales.where(segmento: 3).take.resp_4_5+
+							ponderacion_fijo*indicadores_acumulados_actuales.where(segmento: 4).take.resp_4_5+
+							ponderacion_pyme_fijo*indicadores_acumulados_actuales.where(segmento: 5).take.resp_4_5+
+							ponderacion_pyme_movil*indicadores_acumulados_actuales.where(segmento: 6).take.resp_4_5).to_f.round(3);
+		
+		if Indicadoresacumulado.where(fecha: fecha).where(segmento: 7).blank? then
+			Indicadoresacumulado.create(
+				isn: isn_acumulado_global,
+				resolutividad: resolutividad_acumulado_global,
+				resp_1_2: insatisfechos_acumulado_global,
+				resp_4_5: satisfechos_4_5_acumulado_global,
+				fecha: fecha,
+				segmento: 7
+				)
+		else
+			Indicadoresacumulado.where(fecha: fecha).where(segmento: 7).update_all(
+				isn: isn_acumulado_global,
+				resolutividad: resolutividad_acumulado_global,
+				resp_1_2: insatisfechos_acumulado_global,
+				resp_4_5: satisfechos_4_5_acumulado_global
+				)
+		end
+	#end #END IF INDICADORES ACUMULADOS GLOBAL (PONDERADO)
 end #BORRAR ESTE END
   
 
