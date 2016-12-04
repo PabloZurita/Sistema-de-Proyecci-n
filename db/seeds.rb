@@ -68,11 +68,11 @@ end
 
 
 
-lista_ponderacion= [[1,0.402], [2,0.183], [3,0.092], [4,0.205], [5,0.091], [6,0.027], [ 7, 0.56 ],[ 8, 0.44]]
+lista_ponderacion= [[1,0.402,"2016/12/04" ], [2,0.183, "2016/12/04"], [3,0.092, "2016/12/04"], [4,0.205, "2016/12/04"], [5,0.091, "2016/12/04"], [6,0.027, "2016/12/04"], [ 7, 0.56 , "2016/12/04"],[ 8, 0.44, "2016/12/04"]]
 
 
-lista_ponderacion.each do |segmento, valor|
-  Ponderacion.create( segmento: segmento, valor: valor)
+lista_ponderacion.each do |segmento, valor, fecha|
+  Ponderacion.create( segmento: segmento, valor: valor, fecha: fecha)
 end
 
 
