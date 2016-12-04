@@ -107,7 +107,7 @@ for j in 0..2 #BORRAR
 
 		if atributosdiario.where(fecha: fecha).where(segmento: id_segmento).blank? then
 			atributosdiario.create(
-				valor: valor_atri,,
+				valor: valor_atri,
 				fecha: fecha,
 				segmento: i
 				)
