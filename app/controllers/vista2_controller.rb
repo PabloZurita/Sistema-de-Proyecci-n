@@ -29,13 +29,13 @@ class Vista2Controller < ApplicationController
       @isn_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.isn
       @resp_1_2_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.resp_1_2
       @resp_4_5_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.resp_4_5
-      @resolu_acumulad = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.resolutividad
+      @resolu_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.resolutividad
     end
     #@indicadoresacumulados = Indicadoresacumulado.find(Indicadoresacumulado.where(fecha: Time.parse(Time.now.to_s).strftime("%Y-%m-01")..Time.now).where(segmento: id_segmento).ids)
     
     #se supone que esta y la de más arriba da los ids del mes actual, pero no sé como acceder al isn
 
-    @isn_mes = @indicadoresdiarios.where("fecha >= ? AND fecha <= ?","01/"+Time.now.month.to_s+"/"+Time.now.year.to_s, Time.now.day.to_s+"/"+Time.now.month.to_s+"/"+Time.now.year.to_s).pluck(:isn)
-    @resolu_mes = @indicadoresdiarios.where("fecha >= ? AND fecha <= ?","01/"+Time.now.month.to_s+"/"+Time.now.year.to_s, Time.now.day.to_s+"/"+Time.now.month.to_s+"/"+Time.now.year.to_s).pluck(:resolutividad) 
+    @isn_mes = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ?","01/"+Time.now.month.to_s+"/"+Time.now.year.to_s, Time.now.day.to_s+"/"+Time.now.month.to_s+"/"+Time.now.year.to_s, id_segmento).pluck(:isn)
+    @resolu_mes = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ?","01/"+Time.now.month.to_s+"/"+Time.now.year.to_s, Time.now.day.to_s+"/"+Time.now.month.to_s+"/"+Time.now.year.to_s, id_segmento).pluck(:resolutividad) 
   end
 end

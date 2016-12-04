@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   get '/historico/index' => 'historico#index', as: 'historico'
   get '/graficos/index' => 'graficos#index', as: 'graficos'
-  get '/conf/index' => 'conf#index', as: 'conf'
+  get '/configuraciones/index' => 'configuraciones#index', as: 'configuraciones'
   devise_for :users
   resources :payments
   resources	:vista2
