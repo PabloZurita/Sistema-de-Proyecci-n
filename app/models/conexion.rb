@@ -77,7 +77,7 @@ class Conexion
 					
 					#ENCUESTA
 					#si ya hay una encuesta en una fecha por una linea, no se agrega nuevamente
-					if Encuestum.where(fecha_creacion_encuesta: Date.parse(response[i]['fecha_creacion']).strftime("%d/%m/%Y").to_s).
+					if Encuestum.where(fecha_creacion_encuesta: Date.parse(response[i]['fecha_creacion']).strftime("%Y/%m/%d").to_s).
 					where(linea: Linea.where(numero_cliente: response[i]['campo_libre_4'].to_i).ids.first.to_i).
 					where(hora_envio_encuesta: Time.parse(response[i]['fecha_creacion']).strftime("%H:%M:%S").to_s).blank? then
 
@@ -117,7 +117,7 @@ class Conexion
 
 						
 						nueva_encuesta = Encuestum.new();
-						nueva_encuesta.fecha_creacion_encuesta = Date.parse(response[i]['fecha_creacion']).strftime("%d/%m/%Y").to_s
+						nueva_encuesta.fecha_creacion_encuesta = Date.parse(response[i]['fecha_creacion']).strftime("%Y/%m/%d").to_s
 						#puts Time.parse(response[i]['fecha_creacion']).strftime("%H:%M:%S").to_s
 						nueva_encuesta.hora_envio_encuesta = Time.parse(response[i]['fecha_creacion']).strftime("%H:%M:%S").to_s
 						nueva_encuesta.linea = Linea.where(numero_cliente: response[i]['campo_libre_4'].to_i).first
@@ -138,7 +138,7 @@ class Conexion
 						
 						#RESPUESTAS
 						___linea_id = Linea.where(numero_cliente: response[i]['campo_libre_4'].to_i).ids.first
-						id_encuesta_actual = Encuestum.where(fecha_creacion_encuesta: Date.parse(response[i]['fecha_creacion']).strftime("%d/%m/%Y").to_s).
+						id_encuesta_actual = Encuestum.where(fecha_creacion_encuesta: Date.parse(response[i]['fecha_creacion']).strftime("%Y/%m/%d").to_s).
 						where(linea: ___linea_id.to_i).ids.first
 
 						nueva_resp1 = Respuestum.new();
@@ -180,7 +180,7 @@ class Conexion
 				
 				#ENCUESTA
 				#si ya hay una encuesta en una fecha por una linea, no se agrega nuevamente
-				if Encuestum.where(fecha_creacion_encuesta: Date.parse(response['fecha_creacion']).strftime("%d/%m/%Y").to_s).
+				if Encuestum.where(fecha_creacion_encuesta: Date.parse(response['fecha_creacion']).strftime("%Y/%m/%d").to_s).
 				where(linea: Linea.where(numero_cliente: response['campo_libre_4'].to_i).ids.first.to_i).
 				where(hora_envio_encuesta: Time.parse(response['fecha_creacion']).strftime("%H:%M:%S").to_s).blank? then
 					
@@ -210,7 +210,7 @@ class Conexion
 					end
 
 					nueva_encuesta = Encuestum.new();
-					nueva_encuesta.fecha_creacion_encuesta = Date.parse(response['fecha_creacion']).strftime("%d/%m/%Y").to_s
+					nueva_encuesta.fecha_creacion_encuesta = Date.parse(response['fecha_creacion']).strftime("%Y/%m/%d").to_s
 					nueva_encuesta.hora_envio_encuesta = Time.parse(response['fecha_creacion']).strftime("%H:%M:%S").to_s
 					nueva_encuesta.linea = Linea.where(numero_cliente: response['campo_libre_4'].to_i).first
 					if Motivo.where(tipo_motivo: response['respuesta']['listbox_0']['respuesta_0'].to_s).blank? then
@@ -227,7 +227,7 @@ class Conexion
 					
 					#RESPUESTAS
 					___linea_id = Linea.where(numero_cliente: response['campo_libre_4'].to_i).ids.first
-					id_encuesta_actual = Encuestum.where(fecha_creacion_encuesta: Date.parse(response['fecha_creacion']).strftime("%d/%m/%Y").to_s).
+					id_encuesta_actual = Encuestum.where(fecha_creacion_encuesta: Date.parse(response['fecha_creacion']).strftime("%Y/%m/%d").to_s).
 					where(linea: ___linea_id.to_i).ids.first
 
 					nueva_resp1 = Respuestum.new();

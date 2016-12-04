@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20161204051805) do
   create_table "atributosacumulados", force: :cascade do |t|
     t.integer  "id_atr_acum"
     t.integer  "segmento"
+    t.integer  "pregunta"
     t.float    "valor"
     t.date     "fecha"
     t.datetime "created_at",  null: false
@@ -28,6 +29,7 @@ ActiveRecord::Schema.define(version: 20161204051805) do
   create_table "atributosdiarios", force: :cascade do |t|
     t.integer  "id_atr_diario"
     t.integer  "segmento"
+    t.integer  "pregunta"
     t.float    "valor"
     t.date     "fecha"
     t.datetime "created_at",    null: false

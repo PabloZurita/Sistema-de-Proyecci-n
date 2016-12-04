@@ -3,6 +3,7 @@ class CreateAtributosdiarios < ActiveRecord::Migration[5.0]
     create_table :atributosdiarios do |t|
       t.integer :id_atr_diario
       t.integer :segmento
+      t.integer :pregunta
       t.float :valor
       t.date :fecha
 

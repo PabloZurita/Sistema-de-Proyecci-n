@@ -26,8 +26,8 @@ namespace :calcular_indicador do
 	 	'2016/12/01','2016/12/02','2016/12/03','2016/12/04']
 
 
-for j in 0..2 #BORRAR
-	puts fecha = mes_completo[j]
+for dia in 0..2 #BORRAR
+	puts fecha = mes_completo[dia]
 	for i in 1..4
 		if i > 1 then
 			id_segmento = i
@@ -90,31 +90,34 @@ for j in 0..2 #BORRAR
 		##    Calculando para atributos para segmentos distintos a pyme
 
 		##  Acceso 2 ;;; rapidez 3 ;;; 4 accesibilidad info ;;; 5 utilidad
-		pre_1_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
-		pre_2_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 2).where(encuestum_id: encuestados_a_la_fecha)
-		pre_4_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 4).where(encuestum_id: encuestados_a_la_fecha)
-		pre_5_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 5).where(encuestum_id: encuestados_a_la_fecha)
+		for nro_pregunta in 2..5
+			pre_1_atri = Respuestum.where(preguntum_id: nro_pregunta).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
+			pre_2_atri = Respuestum.where(preguntum_id: nro_pregunta).where(valor_pregunta: 2).where(encuestum_id: encuestados_a_la_fecha)
+			pre_4_atri = Respuestum.where(preguntum_id: nro_pregunta).where(valor_pregunta: 4).where(encuestum_id: encuestados_a_la_fecha)
+			pre_5_atri = Respuestum.where(preguntum_id: nro_pregunta).where(valor_pregunta: 5).where(encuestum_id: encuestados_a_la_fecha)
 
-		cant_pre1_atri  = pre_1_atri.length()
-		cant_pre2_atri  = pre_2_atri.length()
-		cant_pre4_atri  = pre_4_atri.length()
-		cant_pre5_atri  = pre_5_atri.length()
+			cant_pre1_atri  = pre_1_atri.length()
+			cant_pre2_atri  = pre_2_atri.length()
+			cant_pre4_atri  = pre_4_atri.length()
+			cant_pre5_atri  = pre_5_atri.length()
 
-		satis_atri = cant_pre4_atri + cant_pre5_atri
-		insatis_atri = cant_pre1_atri + cant_pre2_atri
+			satis_atri = cant_pre4_atri + cant_pre5_atri
+			insatis_atri = cant_pre1_atri + cant_pre2_atri
 
-		valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(3)
+			valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(3)
 
-		if atributosdiario.where(fecha: fecha).where(segmento: id_segmento).blank? then
-			atributosdiario.create(
-				valor: valor_atri,
-				fecha: fecha,
-				segmento: i
-				)
-		else
-			atributosdiario.where(fecha: fecha).where(segmento: id_segmento).update_all(
-				valor: valor_atri
-				)
+			if Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).blank? then
+				Atributosdiario.create(
+					valor: valor_atri,
+					fecha: fecha,
+					segmento: i,
+					pregunta: nro_pregunta
+					)
+			else
+				Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).update_all(
+					valor: valor_atri
+					)
+			end
 		end
 		################################# ACUMULADO
 
@@ -160,6 +163,39 @@ for j in 0..2 #BORRAR
 				resp_1_2: insatisfechos,
 				resp_4_5: satisfechos
 				)
+		end
+
+		##    Calculando para atributos para segmentos distintos a pyme
+
+		##  Acceso 2 ;;; rapidez 3 ;;; 4 accesibilidad info ;;; 5 utilidad
+		for nro_pregunta in 2..5
+			pre_1_atri = Respuestum.where(preguntum_id: nro_pregunta).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
+			pre_2_atri = Respuestum.where(preguntum_id: nro_pregunta).where(valor_pregunta: 2).where(encuestum_id: encuestados_a_la_fecha)
+			pre_4_atri = Respuestum.where(preguntum_id: nro_pregunta).where(valor_pregunta: 4).where(encuestum_id: encuestados_a_la_fecha)
+			pre_5_atri = Respuestum.where(preguntum_id: nro_pregunta).where(valor_pregunta: 5).where(encuestum_id: encuestados_a_la_fecha)
+
+			cant_pre1_atri  = pre_1_atri.length()
+			cant_pre2_atri  = pre_2_atri.length()
+			cant_pre4_atri  = pre_4_atri.length()
+			cant_pre5_atri  = pre_5_atri.length()
+
+			satis_atri = cant_pre4_atri + cant_pre5_atri
+			insatis_atri = cant_pre1_atri + cant_pre2_atri
+
+			valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(3)
+
+			if Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).blank? then
+				Atributosacumulado.create(
+					valor: valor_atri,
+					fecha: fecha,
+					segmento: i,
+					pregunta: nro_pregunta
+					)
+			else
+				Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).update_all(
+					valor: valor_atri
+					)
+			end
 		end
 	end
 
@@ -236,92 +272,49 @@ for j in 0..2 #BORRAR
 
 		##    Calculando para atributos para segmentos distintos a pyme
 
-		##  Acceso 2 ;;; 4 accesibilidad info 
-		pre_1_atri = Respuestum.where(preguntum_id: 2*i).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
-		pre_2_atri = Respuestum.where(preguntum_id: 2*i).where(valor_pregunta: 2).where(encuestum_id: encuestados_a_la_fecha)
-		pre_4_atri = Respuestum.where(preguntum_id: 2*i).where(valor_pregunta: 4).where(encuestum_id: encuestados_a_la_fecha)
-		pre_5_atri = Respuestum.where(preguntum_id: 2*i).where(valor_pregunta: 5).where(encuestum_id: encuestados_a_la_fecha)
-
-		cant_pre1_atri  = pre_1_atri.length()
-		cant_pre2_atri  = pre_2_atri.length()
-		cant_pre4_atri  = pre_4_atri.length()
-		cant_pre5_atri  = pre_5_atri.length()
-
-		satis_atri = cant_pre4_atri + cant_pre5_atri
-		insatis_atri = cant_pre1_atri + cant_pre2_atri
-
-		valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(3)
-
-		if atributosdiario.where(fecha: fecha).where(segmento: id_segmento).blank? then
-			atributosdiario.create(
-				valor: valor_atri,
-				fecha: fecha,
-				segmento: i
-				)
-		else
-			atributosdiario.where(fecha: fecha).where(segmento: id_segmento).update_all(
-				valor: valor_atri
-				)
-		end
-
-		##    Calculando para atributos para segmentos distintos a pyme
-
 		##  Acceso 2 ;;; rapidez 3 ;;; 4 accesibilidad info ;;; 5 utilidad
-		pre_1_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
-		pre_2_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 2).where(encuestum_id: encuestados_a_la_fecha)
-		pre_4_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 4).where(encuestum_id: encuestados_a_la_fecha)
-		pre_5_atri = Respuestum.where(preguntum_id: i+1).where(valor_pregunta: 5).where(encuestum_id: encuestados_a_la_fecha)
+		for nro_pregunta in 2..5
+			pre_1_atri = Respuestum.where(preguntum_id: nro_pregunta).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
+			pre_2_atri = Respuestum.where(preguntum_id: nro_pregunta).where(valor_pregunta: 2).where(encuestum_id: encuestados_a_la_fecha)
+			pre_4_atri = Respuestum.where(preguntum_id: nro_pregunta).where(valor_pregunta: 4).where(encuestum_id: encuestados_a_la_fecha)
+			pre_5_atri = Respuestum.where(preguntum_id: nro_pregunta).where(valor_pregunta: 5).where(encuestum_id: encuestados_a_la_fecha)
 
-		cant_pre1_atri  = pre_1_atri.length()
-		cant_pre2_atri  = pre_2_atri.length()
-		cant_pre4_atri  = pre_4_atri.length()
-		cant_pre5_atri  = pre_5_atri.length()
+			cant_pre1_atri  = pre_1_atri.length()
+			cant_pre2_atri  = pre_2_atri.length()
+			cant_pre4_atri  = pre_4_atri.length()
+			cant_pre5_atri  = pre_5_atri.length()
 
-		satis_atri = cant_pre4_atri + cant_pre5_atri
-		insatis_atri = cant_pre1_atri + cant_pre2_atri
+			satis_atri = cant_pre4_atri + cant_pre5_atri
+			insatis_atri = cant_pre1_atri + cant_pre2_atri
 
-		valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(3)
+			valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(3)
 
-		if atributosdiario.where(fecha: fecha).where(segmento: id_segmento).blank? then
-			atributosdiario.create(
-				valor: valor_atri,
-				fecha: fecha,
-				segmento: i
-				)
-		else
-			atributosdiario.where(fecha: fecha).where(segmento: id_segmento).update_all(
-				valor: valor_atri
-				)
+			if Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).blank? then
+				Atributosdiario.create(
+					valor: valor_atri,
+					fecha: fecha,
+					segmento: id_segmento+4,
+					pregunta: nro_pregunta
+					)
+			else
+				Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).update_all(
+					valor: valor_atri
+					)
+			end
+
+			if Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento+4).where(pregunta: nro_pregunta).blank? then
+				Atributosacumulado.create(
+					valor: valor_atri,
+					fecha: fecha,
+					segmento: id_segmento+4,
+					pregunta: nro_pregunta
+					)
+			else
+				Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento+4).where(pregunta: nro_pregunta).update_all(
+					valor: valor_atri
+					)
+			end
 		end
-
-
-		##  rapidez 3  ;;; 5 utilidad
-		pre_1_atri = Respuestum.where(preguntum_id: 2*i+1).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
-		pre_2_atri = Respuestum.where(preguntum_id: 2*i+1).where(valor_pregunta: 2).where(encuestum_id: encuestados_a_la_fecha)
-		pre_4_atri = Respuestum.where(preguntum_id: 2*i+1).where(valor_pregunta: 4).where(encuestum_id: encuestados_a_la_fecha)
-		pre_5_atri = Respuestum.where(preguntum_id: 2*i+1).where(valor_pregunta: 5).where(encuestum_id: encuestados_a_la_fecha)
-
-		cant_pre1_atri  = pre_1_atri.length()
-		cant_pre2_atri  = pre_2_atri.length()
-		cant_pre4_atri  = pre_4_atri.length()
-		cant_pre5_atri  = pre_5_atri.length()
-
-		satis_atri = cant_pre4_atri + cant_pre5_atri
-		insatis_atri = cant_pre1_atri + cant_pre2_atri
-
-		valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(3)
-
-		if atributosdiario.where(fecha: fecha).where(segmento: id_segmento).blank? then
-			atributosdiario.create(
-				valor: valor_atri,
-				fecha: fecha,
-				segmento: i
-				)
-		else
-			atributosdiario.where(fecha: fecha).where(segmento: id_segmento).update_all(
-				valor: valor_atri
-				)
-		end		
 	end
 	# FIN FOR PYMES
 

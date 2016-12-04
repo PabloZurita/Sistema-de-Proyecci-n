@@ -3,6 +3,7 @@ class CreateAtributosacumulados < ActiveRecord::Migration[5.0]
     create_table :atributosacumulados do |t|
       t.integer :id_atr_acum
       t.integer :segmento
+      t.integer :pregunta
       t.float :valor
       t.date :fecha
 
