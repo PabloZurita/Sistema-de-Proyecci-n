@@ -17,6 +17,13 @@ class Vista2Controller < ApplicationController
       @resp_4_5_diario = @indicadoresdiarios.where(fecha: Time.now).where(segmento: id_segmento).take.resp_4_5
       @resolu_diario = @indicadoresdiarios.where(fecha: Time.now).where(segmento: id_segmento).take.resolutividad
     end
+
+    if @isn_diario >= 60 then
+      @color_barra_diario = 'progress-bar progress-bar-success'
+    else
+      @color_barra_diario = 'progress-bar progress-bar-danger'
+    end
+
     #@indicadoresdiarios = Indicadoresdiario.find(Indicadoresdiario.where(fecha: Time.parse(Time.now.to_s).strftime("%Y-%m-01")..Time.now).where(segmento: id_segmento).ids).isn
 
     #Indicadores Acumulados
@@ -24,12 +31,18 @@ class Vista2Controller < ApplicationController
       @isn_acumulado = 0
       @resp_1_2_acumulado = 0
       @resp_4_5_acumulado = 0
-      @resolu_acumulado = 0
+      @resolu_acumulado = 0 
     else
       @isn_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.isn
       @resp_1_2_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.resp_1_2
       @resp_4_5_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.resp_4_5
       @resolu_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.resolutividad
+    end
+
+    if @isn_acumulado.to_f >= 60 then
+      @color_barra_acumulado = 'progress-bar progress-bar-success'
+    else
+      @color_barra_acumulado = 'progress-bar progress-bar-danger'
     end
     #@indicadoresacumulados = Indicadoresacumulado.find(Indicadoresacumulado.where(fecha: Time.parse(Time.now.to_s).strftime("%Y-%m-01")..Time.now).where(segmento: id_segmento).ids)
     

@@ -217,8 +217,8 @@
                     </div>
 
                               <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                  60%
+                                <div class= "<%= @color_barra_acumulado%>" role="progressbar" aria-valuenow="<%=@isn_acumulado%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@isn_acumulado%>%;">
+                                  <%=@isn_acumulado%>%
                                 </div>
                               </div>
                   </div>
@@ -266,8 +266,8 @@
                     </div>
 
                               <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                  60%
+                                <div class= "<%= @color_barra_diario%>" role="progressbar" aria-valuenow="<%=@isn_diario%>" aria-valuemin="0" aria-valuemax="100" style="width: <%=@isn_diario%>%;">
+                                  <%=@isn_diario%>%
                                 </div>
                               </div>
                   </div>
