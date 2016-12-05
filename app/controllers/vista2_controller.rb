@@ -34,8 +34,15 @@ class Vista2Controller < ApplicationController
     #@indicadoresacumulados = Indicadoresacumulado.find(Indicadoresacumulado.where(fecha: Time.parse(Time.now.to_s).strftime("%Y-%m-01")..Time.now).where(segmento: id_segmento).ids)
     
     #se supone que esta y la de más arriba da los ids del mes actual, pero no sé como acceder al isn
-
-    @isn_mes = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ?","01/"+Time.now.month.to_s+"/"+Time.now.year.to_s, Time.now.day.to_s+"/"+Time.now.month.to_s+"/"+Time.now.year.to_s, id_segmento).pluck(:isn)
-    @resolu_mes = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ?","01/"+Time.now.month.to_s+"/"+Time.now.year.to_s, Time.now.day.to_s+"/"+Time.now.month.to_s+"/"+Time.now.year.to_s, id_segmento).pluck(:resolutividad) 
+    isn_diario_mes = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento).order(fecha: :asc).pluck(:isn)
+    fechas_isn_diario = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento).order(fecha: :asc).pluck(:fecha)
+    resolu_diario_mes = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento).order(fecha: :asc).pluck(:resolutividad) 
+    fechas_resolu_diario = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento).order(fecha: :asc).pluck(:fecha) 
+    @isn_mes = Array.new(isn_diario_mes.length) { Array.new(2,0.0) }
+    @resolu_mes = Array.new(resolu_diario_mes.length) { Array.new(2,0.0) }
+    for i in 0..isn_diario_mes.length-1
+      @isn_mes[i] = [(Time.zone.parse(fechas_isn_diario[i].to_s).utc.to_f*1000).to_f,isn_diario_mes[i]]
+      @resolu_mes[i] = [(Time.zone.parse(fechas_resolu_diario[i].to_s).utc.to_f*1000).to_f,resolu_diario_mes[i]]
+    end
   end
 end
