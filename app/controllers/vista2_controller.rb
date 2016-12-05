@@ -12,13 +12,20 @@ class Vista2Controller < ApplicationController
       @resp_4_5_diario = 0
       @resolu_diario = 0
     else
-      @isn_diario = @indicadoresdiarios.where(fecha: Time.now).where(segmento: id_segmento).take.isn
-      @resp_1_2_diario = @indicadoresdiarios.where(fecha: Time.now).where(segmento: id_segmento).take.resp_1_2
-      @resp_4_5_diario = @indicadoresdiarios.where(fecha: Time.now).where(segmento: id_segmento).take.resp_4_5
-      @resolu_diario = @indicadoresdiarios.where(fecha: Time.now).where(segmento: id_segmento).take.resolutividad
+      if @indicadoresdiarios.where(fecha: Time.now).where(segmento: id_segmento).take.isn.nan? then
+        @isn_diario = '-'
+        @resp_1_2_diario = '-'
+        @resp_4_5_diario = '-'
+        @resolu_diario = '-'
+      else
+        @isn_diario = @indicadoresdiarios.where(fecha: Time.now).where(segmento: id_segmento).take.isn
+        @resp_1_2_diario = @indicadoresdiarios.where(fecha: Time.now).where(segmento: id_segmento).take.resp_1_2
+        @resp_4_5_diario = @indicadoresdiarios.where(fecha: Time.now).where(segmento: id_segmento).take.resp_4_5
+        @resolu_diario = @indicadoresdiarios.where(fecha: Time.now).where(segmento: id_segmento).take.resolutividad
+      end
     end
 
-    if @isn_diario >= 60 then
+    if @isn_diario.to_f >= 60 then
       @color_barra_diario = 'progress-bar progress-bar-success'
     else
       @color_barra_diario = 'progress-bar progress-bar-danger'
@@ -33,10 +40,17 @@ class Vista2Controller < ApplicationController
       @resp_4_5_acumulado = 0
       @resolu_acumulado = 0 
     else
-      @isn_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.isn
-      @resp_1_2_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.resp_1_2
-      @resp_4_5_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.resp_4_5
-      @resolu_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.resolutividad
+      if @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.isn.nan? then
+        @isn_acumulado = '-'
+        @resp_1_2_acumulado = '-'
+        @resp_4_5_acumulado = '-'
+        @resolu_acumulado = '-'
+      else
+        @isn_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.isn
+        @resp_1_2_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.resp_1_2
+        @resp_4_5_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.resp_4_5
+        @resolu_acumulado = @indicadoresacumulados.where(fecha: Time.now).where(segmento: id_segmento).take.resolutividad
+      end
     end
 
     if @isn_acumulado.to_f >= 60 then
