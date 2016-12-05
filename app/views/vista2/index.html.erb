@@ -40,74 +40,128 @@
             },
         }],
         yAxis: [{ // Primary yAxis
+            endOnTick:false ,
+            alignTicks:false,
 
-            plotBands: [{
-                    from: 60,
-                    to: 100,
-                    color: 'rgba(0, 250, 0, 0.1)'
-                },
-                {
-                    from: 60,
-                    to: 0,
-                    color: 'rgba(250, 0, 0, 0.1)'
-                }
+            // plotBands: [{
+            //         from: 60,
+            //         to: 100,
+            //         color: 'rgba(0, 250, 0, 0.1)'
+            //     },
+            //     {
+            //         from: 60,
+            //         to:-100,
+            //         color: 'rgba(250, 0, 0, 0.1)'
+            //     }
 
-                ],
+            //     ],
 
             plotLines: [{
                     value: 60,
                     color: 'green',
+                    label: {
+                        text: 'ISN mínimo',
+                        align: 'right'
+                    },
                     dashStyle: 'shortdash',
                     width: 1.5,
-                }],
+                },
+                {
+                    value: 0,
+                    color: 'black',
+                    //yAxis: 1,
+                    //dashStyle: 'shortdash',
+                    width: 2.5,
+                }
+                ],
             labels: {
-                format: '{value} ISN',
+                format: '{value}',
                 style: {
                     color: Highcharts.getOptions().colors[1]
                 }
             },
             title: {
-                text: 'Indice Satisfacción Neta',
+                text: 'Valor en %',
                 style: {
                     color: Highcharts.getOptions().colors[1]
                 }
             }
-        }, { // Secondary yAxis
-            title: {
-                text: 'Solución',
-                style: {
-                    color: Highcharts.getOptions().colors[0]
-                }
-            },
-            labels: {
-                format: '{value} %',
-                style: {
-                    color: Highcharts.getOptions().colors[0]
-                }
-            },
-            opposite: true
+        // }, { // Secondary yAxis
+        //     title: {
+        //         text: 'Respuestas',
+        //         style: {
+        //             color: Highcharts.getOptions().colors[0]
+        //         }
+        //     },
+        //     labels: {
+        //         format: '{value} %',
+        //         style: {
+        //             color: Highcharts.getOptions().colors[0]
+        //         }
+        //     },
+        //     opposite: true
         }],
 
         tooltip: {
             shared: true
+
+        },
+
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                dataLabels: {
+                    enabled: true,
+                    color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                    //colorByPoint: true
+                }
+            }
         },
 
         series: [{
-            name: 'Solución',
+            name: 'Resp 1+2',
             type: 'column',
-            yAxis: 1,
-            data: <%=@isn_mes%>,
-            tooltip: {
-                pointFormat: '<span style="font-weight: bold; color: {series.color}"> {series.name}</span>: <b>{point.y:.1f}</b> '
-            }
+            //yAxis: 1,
+            color: '#FFC000',
+            verticalAlign:'top',
+            data: <%=@resp12_dia_mes%>
+            
+        },
+        {
+            name: 'Resp 4+5',
+            type: 'column',
+            //yAxis: 1,
+            color: '#073046',
+            data: <%=@resp45_dia_mes%>           
+           
+        },
+        {
+            name: 'Solución',
+            type: 'spline',
+            color: '#0095A7',
+            data: <%=@resolu_dia_mes%>,
+            dataLabels: {
+                    enabled: true,
+                    borderColor: 'black',
+                    color: '#0095A7'//|| 'black'
+
+                    //colorByPoint: true
+                }
+           
         },
         {
             name: 'ISN',
             type: 'spline',
-            data: <%=@resolu_mes%>,
-            tooltip: {
-                pointFormat: '<span style="font-weight: bold; color: {series.color}"> {series.name}</span>: <b>{point.y:.1f}</b> '
-            }
+            color: '#92D050',
+            data: <%=@isn_dia_mes%>,
+            dataLabels: {
+                    enabled: true,
+                    borderColor: 'black',
+                    color: '#92D050'//|| 'black'
+
+                    //colorByPoint: true
+                }
+           
         }]
     });
 });
