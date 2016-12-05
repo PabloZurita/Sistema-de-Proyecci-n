@@ -1,37 +1,44 @@
-<%= form_for(ponderacion) do |f| %>
-  <% if ponderacion.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(ponderacion.errors.count, "error") %> prohibited this ponderacion from being saved:</h2>
+<div class="container-fluid container-fullw bg-white">
+    <div class="row">
+        <div class="col-sm-2">
+            
+        </div>
+        <div class="col-sm-8">
+            <div class="panel panel-white no-radius text-center">
+                <div class="panel-body">
 
-      <ul>
-      <% ponderacion.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+
+                  <%= form_for(ponderacion) do |f| %>
+                    <% if ponderacion.errors.any? %>
+                      <div id="error_explanation">
+                        <h2><%= pluralize(ponderacion.errors.count, "error") %> prohibited this ponderacion from being saved:</h2>
+
+                        <ul>
+                        <% ponderacion.errors.full_messages.each do |message| %>
+                          <li><%= message %></li>
+                        <% end %>
+                        </ul>
+                      </div>
+                    <% end %>
+
+
+                    <div class="field">
+                      <%= f.label :valor %>
+                      <%= f.text_field :valor %>
+                    </div>
+
+                    <div class="actions">
+                      <%= f.submit %>
+                    </div>
+                    
+                  <% end %>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+        </div>
     </div>
-  <% end %>
+</div>
 
-  <div class="field">
-    <%= f.label :id_ponderacion %>
-    <%= f.number_field :id_ponderacion %>
-  </div>
-
-  <div class="field">
-    <%= f.label :segmento %>
-    <%= f.number_field :segmento %>
-  </div>
-
-  <div class="field">
-    <%= f.label :valor %>
-    <%= f.text_field :valor %>
-  </div>
-
-  <div class="field">
-    <%= f.label :fecha %>
-    <%= f.date_select :fecha %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+ 
