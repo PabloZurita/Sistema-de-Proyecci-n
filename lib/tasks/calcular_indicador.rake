@@ -36,7 +36,7 @@ namespace :calcular_indicador do
 #for dia in 122..127 #BORRAR
 #	puts fecha = mes_completo[dia]
 	fecha = Date.today.strftime("%Y/%m/%d");
-for version in 1..1 #FOR DE VERSION --- 1: desktop   2: mobile
+for version in 1..2 #FOR DE VERSION --- 1: desktop   2: mobile
 	for i in 1..4
 		if i > 1 then
 			id_segmento = i
@@ -50,7 +50,7 @@ for version in 1..1 #FOR DE VERSION --- 1: desktop   2: mobile
 			id_fijomovil = 1
 		end
 		encuestados_a_la_fecha = Encuestum.where(fecha_creacion_encuesta: fecha).where(version: version).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
-		 
+		
 		cantidad = encuestados_a_la_fecha.length()
 		resolucion_positiva = Encuestum.where(fecha_creacion_encuesta: fecha).where(version: version).where(resuelto_encuesta: 1).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
 		resolucion_negativa = Encuestum.where(fecha_creacion_encuesta: fecha).where(version: version).where(resuelto_encuesta: 0).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
@@ -475,23 +475,23 @@ end #END FOR VERSION MOBILE - DESKTOP
 	indicador_desktop_acumulado_ponderado_por_segmento = Indicadoresacumulado.where(fecha: fecha).where(version: 1).where(segmento: 7)
 	indicador_mobile_acumulado_ponderado_por_segmento = Indicadoresacumulado.where(fecha: fecha).where(version: 2).where(segmento: 7)
 
-	puts isn_COL_diario = (indicador_desktop_diario_ponderado_por_segmento.take.isn*ponderacion_desktop+
-							indicador_mobile_diario_ponderado_por_segmento.take.isn*ponderacion_mobile).to_f.round(1);
-	resolutividad_COL_diario = (indicador_desktop_diario_ponderado_por_segmento.take.resolutividad*ponderacion_desktop+
-							indicador_mobile_diario_ponderado_por_segmento.take.resolutividad*ponderacion_mobile).to_f.round(1);
-	satisfechos_COL_diario = (indicador_desktop_diario_ponderado_por_segmento.take.resp_4_5*ponderacion_desktop+
-							indicador_mobile_diario_ponderado_por_segmento.take.resp_4_5*ponderacion_mobile).to_f.round(1);
-	insatisfechos_COL_diario = (indicador_desktop_diario_ponderado_por_segmento.take.resp_1_2*ponderacion_desktop+
-							indicador_mobile_diario_ponderado_por_segmento.take.resp_1_2*ponderacion_mobile).to_f.round(1);
+	isn_COL_diario = (ponderacion_desktop*(indicador_desktop_diario_ponderado_por_segmento.take.isn.nan? ? 0 : indicador_desktop_diario_ponderado_por_segmento.take.isn)+
+							ponderacion_mobile*(indicador_mobile_diario_ponderado_por_segmento.take.isn.nan? ? 0 : indicador_mobile_diario_ponderado_por_segmento.take.isn)).to_f.round(1);
+	resolutividad_COL_diario = (ponderacion_desktop*(indicador_desktop_diario_ponderado_por_segmento.take.resolutividad.nan? ? 0 : indicador_desktop_diario_ponderado_por_segmento.take.resolutividad)+
+							ponderacion_mobile*(indicador_mobile_diario_ponderado_por_segmento.take.resolutividad.nan? ? 0 : indicador_mobile_diario_ponderado_por_segmento.take.resolutividad)).to_f.round(1);
+	satisfechos_COL_diario = (ponderacion_desktop*(indicador_desktop_diario_ponderado_por_segmento.take.resp_4_5.nan? ? 0 : indicador_desktop_diario_ponderado_por_segmento.take.resp_4_5)+
+							ponderacion_mobile*(indicador_mobile_diario_ponderado_por_segmento.take.resp_4_5.nan? ? 0 : indicador_mobile_diario_ponderado_por_segmento.take.resp_4_5)).to_f.round(1);
+	insatisfechos_COL_diario = (ponderacion_desktop*(indicador_desktop_diario_ponderado_por_segmento.take.resp_1_2.nan? ? 0 : indicador_desktop_diario_ponderado_por_segmento.take.resp_1_2)+
+							ponderacion_mobile*(indicador_mobile_diario_ponderado_por_segmento.take.resp_1_2.nan? ? 0 : indicador_mobile_diario_ponderado_por_segmento.take.resp_1_2)).to_f.round(1);
 
-	isn_COL_acumulado = (indicador_desktop_acumulado_ponderado_por_segmento.take.isn*ponderacion_desktop+
-							indicador_mobile_acumulado_ponderado_por_segmento.take.isn*ponderacion_mobile).to_f.round(1);
+	isn_COL_acumulado = (ponderacion_desktop*(indicador_desktop_acumulado_ponderado_por_segmento.take.isn.nan? ? 0 : indicador_desktop_acumulado_ponderado_por_segmento.take.isn)+
+							ponderacion_mobile*(indicador_mobile_acumulado_ponderado_por_segmento.take.isn.nan? ? 0 : indicador_mobile_acumulado_ponderado_por_segmento.take.isn)).to_f.round(1);
 	resolutividad_COL_acumulado = (indicador_desktop_acumulado_ponderado_por_segmento.take.resolutividad*ponderacion_desktop+
-							indicador_mobile_acumulado_ponderado_por_segmento.take.resolutividad*ponderacion_mobile).to_f.round(1);
-	satisfechos_COL_acumulado = (indicador_desktop_acumulado_ponderado_por_segmento.take.resp_4_5*ponderacion_desktop+
-							indicador_mobile_acumulado_ponderado_por_segmento.take.resp_4_5*ponderacion_mobile).to_f.round(1);
-	insatisfechos_COL_acumulado = (indicador_desktop_acumulado_ponderado_por_segmento.take.resp_1_2*ponderacion_desktop+
-							indicador_mobile_acumulado_ponderado_por_segmento.take.resp_1_2*ponderacion_mobile).to_f.round(1);
+							ponderacion_mobile*(indicador_mobile_acumulado_ponderado_por_segmento.take.resolutividad.nan? ? 0 : indicador_mobile_acumulado_ponderado_por_segmento.take.resolutividad)).to_f.round(1);
+	satisfechos_COL_acumulado = (ponderacion_desktop*(indicador_desktop_acumulado_ponderado_por_segmento.take.resp_4_5.nan? ? 0 : indicador_desktop_acumulado_ponderado_por_segmento.take.resp_4_5)+
+							ponderacion_mobile*(indicador_mobile_acumulado_ponderado_por_segmento.take.resp_4_5.nan? ? 0 : indicador_mobile_acumulado_ponderado_por_segmento.take.resp_4_5)).to_f.round(1);
+	insatisfechos_COL_acumulado = (ponderacion_desktop*(indicador_desktop_acumulado_ponderado_por_segmento.take.resp_1_2.nan? ? 0 : indicador_desktop_acumulado_ponderado_por_segmento.take.resp_1_2)+
+							ponderacion_mobile*(indicador_mobile_acumulado_ponderado_por_segmento.take.resp_1_2.nan? ? 0 : indicador_mobile_acumulado_ponderado_por_segmento.take.resp_1_2)).to_f.round(1);
 	if Indicadoresdiario.where(fecha: fecha).where(segmento: 7).where(version: 3).blank? then
 		Indicadoresdiario.create(
 			isn: isn_COL_diario,

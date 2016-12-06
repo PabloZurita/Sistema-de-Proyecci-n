@@ -31,8 +31,8 @@
                         <td><%= @nombres_ponderaciones[ponderacion.id_ponderacion - 1]%></td>
                         <td><%= (ponderacion.valor * 100).round(1) %> %</td>
                         <td><%= ponderacion.fecha %></td>
-                        <td><%= link_to 'Detalle', ponderacion %></td>
-                        <td><%= link_to 'Editar', edit_ponderacion_path(ponderacion) %></td>
+                        <td><%= link_to 'Detalle', ponderacion, :class =>"btn btn-default"  %></td>
+                        <td><%= link_to 'Editar', edit_ponderacion_path(ponderacion), :class =>"btn btn-default"  %></td>
                       </tr>
                     <% end %>
                   </tbody>

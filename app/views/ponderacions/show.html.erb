@@ -23,8 +23,8 @@
 								<h3>La ponderación del segmento <%= @nombres_ponderaciones[@ponderacion.id_ponderacion-1] %> es de <%= @ponderacion.valor * 100%> % con fecha <%= @ponderacion.fecha %></h3>
 							</p>
 
-							<%= link_to 'Editar', edit_ponderacion_path(@ponderacion) %> |
-							<%= link_to 'Volver', ponderacions_path %>
+							<%= link_to 'Editar', edit_ponderacion_path(@ponderacion), :class =>"btn btn-default"  %> |
+							<%= link_to 'Volver', ponderacions_path, :class =>"btn btn-default"  %>
 						</div>
 
 					</div>
