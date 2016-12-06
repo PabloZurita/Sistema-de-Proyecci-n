@@ -1,182 +1,76 @@
 class HistoricoController < ApplicationController
   helper_method :obtener_datos
   def index
-
-
-  	#ID VERSIONES -- desktop:1    mobile:2     canalOnline:3
-
-  	#PARA DATATABLES
+  	#PARA DATA TABLES
   	@indicadoresdiarios = Indicadoresdiario.where(segmento: 7).order(fecha: :asc)
 
-
-
-
-  	#PARA GRAFICO HISTORICO
-
-  	#DATOS DESKTOP --> version 1
-  	version = 1;
-  	@nombres_segmentos = ['Global','Contrato','Hibrido','Prepago','Fijo','Pyme Fijo','Pyme Movil'];
-  	@datos_desktop_global_acumulado
-  	@desktop_global_acumulado = Indicadoresacumulado.where(segmento: 7).where(version: version).order(fecha: :asc)
-  	
-  	@datos_desktop_contrato_acumulado
-  	@desktop_contrato_acumulado = Indicadoresacumulado.where(segmento: 1).where(version: version).order(fecha: :asc)
-  	
-  	@datos_desktop_hibrido_acumulado
-  	@desktop_hibrido_acumulado= Indicadoresacumulado.where(segmento: 2).where(version: version).order(fecha: :asc)
-  	
-  	@datos_desktop_prepago_acumulado
-  	@desktop_prepago_acumulado = Indicadoresacumulado.where(segmento: 3).where(version: version).order(fecha: :asc)
-  	
-  	@datos_desktop_fijo_acumulado
-  	@desktop_fijo_acumulado = Indicadoresacumulado.where(segmento: 4).where(version: version).order(fecha: :asc)
-
-  	@datos_desktop_pyme_fijo_acumulado
-	@desktop_pyme_fijo_acumulado = Indicadoresacumulado.where(segmento: 5).where(version: version).order(fecha: :asc)	
-
-  	@datos_desktop_pyme_movil_acumulado
-  	@desktop_pyme_movil_acumulado = Indicadoresacumulado.where(segmento: 6).where(version: version).order(fecha: :asc)
-
-  	if @desktop_global_acumulado.length > 0 then
-  		@datos_desktop_global_acumulado = Array.new(@desktop_global_acumulado.length) { Array.new(2,0.0) }
-  		@datos_desktop_contrato_acumulado = Array.new(@desktop_contrato_acumulado.length) { Array.new(2,0.0) }
-  		@datos_desktop_hibrido_acumulado = Array.new(@desktop_hibrido_acumulado.length) { Array.new(2,0.0) }
-  		@datos_desktop_prepago_acumulado = Array.new(@desktop_prepago_acumulado.length) { Array.new(2,0.0) }
-  		@datos_desktop_fijo_acumulado = Array.new(@desktop_fijo_acumulado.length) { Array.new(2,0.0) }
-  		@datos_desktop_pyme_fijo_acumulado = Array.new(@desktop_pyme_fijo_acumulado.length) { Array.new(2,0.0) }
-  		@datos_desktop_pyme_movil_acumulado = Array.new(@desktop_pyme_movil_acumulado.length) { Array.new(2,0.0) }
-	 	for i in 0..@desktop_global_acumulado.length-1
-	 		@datos_desktop_global_acumulado[i][0] = (Time.zone.parse(@desktop_global_acumulado[i].fecha.to_s).utc.to_f*1000).to_f
-	 		@datos_desktop_global_acumulado[i][1] = @desktop_global_acumulado[i].isn.to_f
-
-	 		@datos_desktop_contrato_acumulado[i][0] = (Time.zone.parse(@desktop_contrato_acumulado[i].fecha.to_s).utc.to_f*1000).to_f
-	 		@datos_desktop_contrato_acumulado[i][1] = @desktop_contrato_acumulado[i].isn.to_f
-
-	 		@datos_desktop_hibrido_acumulado[i][0] = (Time.zone.parse(@desktop_hibrido_acumulado[i].fecha.to_s).utc.to_f*1000).to_f
-	 		@datos_desktop_hibrido_acumulado[i][1] = @desktop_hibrido_acumulado[i].isn.to_f
-
-	 		@datos_desktop_prepago_acumulado[i][0] = (Time.zone.parse(@desktop_prepago_acumulado[i].fecha.to_s).utc.to_f*1000).to_f
-	 		@datos_desktop_prepago_acumulado[i][1] = @desktop_prepago_acumulado[i].isn.to_f
-
-	 		@datos_desktop_fijo_acumulado[i][0] = (Time.zone.parse(@desktop_fijo_acumulado[i].fecha.to_s).utc.to_f*1000).to_f
-	 		@datos_desktop_fijo_acumulado[i][1] = @desktop_fijo_acumulado[i].isn.to_f
-
-	 		@datos_desktop_pyme_fijo_acumulado[i][0] = (Time.zone.parse(@desktop_pyme_fijo_acumulado[i].fecha.to_s).utc.to_f*1000).to_f
-	 		@datos_desktop_pyme_fijo_acumulado[i][1] = @desktop_pyme_fijo_acumulado[i].isn.to_f
-
-	 		@datos_desktop_pyme_movil_acumulado[i][0] = (Time.zone.parse(@desktop_pyme_movil_acumulado[i].fecha.to_s).utc.to_f*1000).to_f
-	 		@datos_desktop_pyme_movil_acumulado[i][1] = @desktop_pyme_movil_acumulado[i].isn.to_f
-
-
-	  	end
-	  	@datos_acumulado_desktop = [@datos_desktop_global_acumulado,
-	  		@datos_desktop_contrato_acumulado,
-	  		@datos_desktop_hibrido_acumulado,
-	  		@datos_desktop_prepago_acumulado,
-	  		@datos_desktop_fijo_acumulado,
-	  		@datos_desktop_pyme_fijo_acumulado,
-	  		@datos_desktop_pyme_movil_acumulado
-	  	]
-	else
-		@datos_desktop_global_acumulado = [0,0]
-		@datos_desktop_contrato_acumulado = [0,0]
-		@datos_desktop_hibrido_acumulado = [0,0]
-		@datos_desktop_prepago_acumulado = [0,0]
-		@datos_desktop_fijo_acumulado = [0,0]
-		@datos_desktop_pyme_fijo_acumulado = [0,0]
-		@datos_desktop_pyme_movil_acumulado = [0,0]
-	end #FIN IF
-
-
-
-
-	#AQUI COMIENZAN LAS MISMAS CONSULTAS ANTERIORES PERO PARA LA VERSION MOBILE  ---- version: 2
-	version = 2;
-	@datos_mobile_global_acumulado
-  	@mobile_global_acumulado = Indicadoresacumulado.where(segmento: 7).where(version: version).order(fecha: :asc)
-  	
-  	@datos_mobile_contrato_acumulado
-  	@mobile_contrato_acumulado = Indicadoresacumulado.where(segmento: 1).where(version: version).order(fecha: :asc)
-  	
-  	@datos_mobile_hibrido_acumulado
-  	@mobile_hibrido_acumulado= Indicadoresacumulado.where(segmento: 2).where(version: version).order(fecha: :asc)
-  	
-  	@datos_mobile_prepago_acumulado
-  	@mobile_prepago_acumulado = Indicadoresacumulado.where(segmento: 3).where(version: version).order(fecha: :asc)
-  	
-  	@datos_mobile_fijo_acumulado
-  	@mobile_fijo_acumulado = Indicadoresacumulado.where(segmento: 4).where(version: version).order(fecha: :asc)
-
-  	@datos_mobile_pyme_fijo_acumulado
-	@mobile_pyme_fijo_acumulado = Indicadoresacumulado.where(segmento: 5).where(version: version).order(fecha: :asc)	
-
-  	@datos_mobile_pyme_movil_acumulado
-  	@mobile_pyme_movil_acumulado = Indicadoresacumulado.where(segmento: 6).where(version: version).order(fecha: :asc)
-
-  	if @mobile_global_acumulado.length > 0 then
-  		@datos_mobile_global_acumulado = Array.new(@mobile_global_acumulado.length) { Array.new(2,0.0) }
-  		@datos_mobile_contrato_acumulado = Array.new(@mobile_contrato_acumulado.length) { Array.new(2,0.0) }
-  		@datos_mobile_hibrido_acumulado = Array.new(@mobile_hibrido_acumulado.length) { Array.new(2,0.0) }
-  		@datos_mobile_prepago_acumulado = Array.new(@mobile_prepago_acumulado.length) { Array.new(2,0.0) }
-  		@datos_mobile_fijo_acumulado = Array.new(@mobile_fijo_acumulado.length) { Array.new(2,0.0) }
-  		@datos_mobile_pyme_fijo_acumulado = Array.new(@mobile_pyme_fijo_acumulado.length) { Array.new(2,0.0) }
-  		@datos_mobile_pyme_movil_acumulado = Array.new(@mobile_pyme_movil_acumulado.length) { Array.new(2,0.0) }
-	 	for i in 0..@mobile_global_acumulado.length-1
-	 		@datos_mobile_global_acumulado[i][0] = (Time.zone.parse(@mobile_global_acumulado[i].fecha.to_s).utc.to_f*1000).to_f
-	 		@datos_mobile_global_acumulado[i][1] = @mobile_global_acumulado[i].isn.to_f
-
-	 		@datos_mobile_contrato_acumulado[i][0] = (Time.zone.parse(@mobile_contrato_acumulado[i].fecha.to_s).utc.to_f*1000).to_f
-	 		@datos_mobile_contrato_acumulado[i][1] = @mobile_contrato_acumulado[i].isn.to_f
-
-	 		@datos_mobile_hibrido_acumulado[i][0] = (Time.zone.parse(@mobile_hibrido_acumulado[i].fecha.to_s).utc.to_f*1000).to_f
-	 		@datos_mobile_hibrido_acumulado[i][1] = @mobile_hibrido_acumulado[i].isn.to_f
-
-	 		@datos_mobile_prepago_acumulado[i][0] = (Time.zone.parse(@mobile_prepago_acumulado[i].fecha.to_s).utc.to_f*1000).to_f
-	 		@datos_mobile_prepago_acumulado[i][1] = @mobile_prepago_acumulado[i].isn.to_f
-
-	 		@datos_mobile_fijo_acumulado[i][0] = (Time.zone.parse(@mobile_fijo_acumulado[i].fecha.to_s).utc.to_f*1000).to_f
-	 		@datos_mobile_fijo_acumulado[i][1] = @mobile_fijo_acumulado[i].isn.to_f
-
-	 		@datos_mobile_pyme_fijo_acumulado[i][0] = (Time.zone.parse(@mobile_pyme_fijo_acumulado[i].fecha.to_s).utc.to_f*1000).to_f
-	 		@datos_mobile_pyme_fijo_acumulado[i][1] = @mobile_pyme_fijo_acumulado[i].isn.to_f
-
-	 		@datos_mobile_pyme_movil_acumulado[i][0] = (Time.zone.parse(@mobile_pyme_movil_acumulado[i].fecha.to_s).utc.to_f*1000).to_f
-	 		@datos_mobile_pyme_movil_acumulado[i][1] = @mobile_pyme_movil_acumulado[i].isn.to_f
-
-
-	  	end
-	  	@datos_acumulado_mobile = [@datos_mobile_global_acumulado,
-	  		@datos_mobile_contrato_acumulado,
-	  		@datos_mobile_hibrido_acumulado,
-	  		@datos_mobile_prepago_acumulado,
-	  		@datos_mobile_fijo_acumulado,
-	  		@datos_mobile_pyme_fijo_acumulado,
-	  		@datos_mobile_pyme_movil_acumulado
-	  	]
-	else
-		@datos_mobile_global_acumulado = [0,0]
-		@datos_mobile_contrato_acumulado = [0,0]
-		@datos_mobile_hibrido_acumulado = [0,0]
-		@datos_mobile_prepago_acumulado = [0,0]
-		@datos_mobile_fijo_acumulado = [0,0]
-		@datos_mobile_pyme_fijo_acumulado = [0,0]
-		@datos_mobile_pyme_movil_acumulado = [0,0]
-	end #FIN IF
-
-
-
-	#@datitos = obtener_datos(@indicadoresdiarios,2)
-	#AHORA LOS DATOS GLOBALES (PONDERADO DESKTOP-MOBILE) --- version: 3
-	version = 3;
-
-
-
-
+  	#PARA GRÁFICO
+  		#primer argumento: tabla de la cual se quieren sacar los datos
+  		#segundo argumento: version (1:desktop   2:mobile   3:COL)
+	@datos_historico_acumulado_desktop = obtener_datos(Indicadoresacumulado.all,1)
+	@datos_historico_acumulado_mobile = obtener_datos(Indicadoresacumulado.all,2)
+	@datos_historico_acumulado_COL = obtener_datos(Indicadoresacumulado.all,3)
+	@datos_historico_diario_desktop = obtener_datos(Indicadoresdiario.all,1)
+	@datos_historico_diario_mobile = obtener_datos(Indicadoresdiario.all,2)
+	@datos_historico_diario_COL = obtener_datos(Indicadoresdiario.all,3)
   end
 
+  def obtener_datos(tabla, version)
 
+		global = tabla.where(segmento: 7).where(version: version).order(fecha: :asc) 
 
+		contrato = tabla.where(segmento: 1).where(version: version).order(fecha: :asc) 
 
+		hibrido = tabla.where(segmento: 2).where(version: version).order(fecha: :asc) 
 
-  
+		prepago = tabla.where(segmento: 3).where(version: version).order(fecha: :asc) 
+
+		fijo = tabla.where(segmento: 4).where(version: version).order(fecha: :asc) 
+
+		pyme_fijo = tabla.where(segmento: 5).where(version: version).order(fecha: :asc) 
+
+		pyme_movil = tabla.where(segmento: 6).where(version: version).order(fecha: :asc) 
+
+		if global.length > 0 then 
+			datos_global = Array.new(global.length) { Array.new(2,0.0) } 
+			datos_contrato = Array.new(contrato.length) { Array.new(2,0.0) } 
+			datos_hibrido = Array.new(hibrido.length) { Array.new(2,0.0) } 
+			datos_prepago = Array.new(prepago.length) { Array.new(2,0.0) } 
+			datos_fijo = Array.new(fijo.length) { Array.new(2,0.0) } 
+			datos_pyme_fijo = Array.new(pyme_fijo.length) { Array.new(2,0.0) } 
+			datos_pyme_movil = Array.new(pyme_movil.length) { Array.new(2,0.0) } 
+			for i in 0..global.length-1 
+				datos_global[i][0] = (Time.zone.parse(global[i].fecha.to_s).utc.to_f*1000).to_f 
+				datos_global[i][1] = global[i].isn.to_f 
+
+				datos_contrato[i][0] = (Time.zone.parse(contrato[i].fecha.to_s).utc.to_f*1000).to_f 
+				datos_contrato[i][1] = contrato[i].isn.to_f 
+
+				datos_hibrido[i][0] = (Time.zone.parse(hibrido[i].fecha.to_s).utc.to_f*1000).to_f 
+				datos_hibrido[i][1] = hibrido[i].isn.to_f 
+
+				datos_prepago[i][0] = (Time.zone.parse(prepago[i].fecha.to_s).utc.to_f*1000).to_f 
+				datos_prepago[i][1] = prepago[i].isn.to_f 
+
+				datos_fijo[i][0] = (Time.zone.parse(fijo[i].fecha.to_s).utc.to_f*1000).to_f 
+				datos_fijo[i][1] = fijo[i].isn.to_f 
+
+				datos_pyme_fijo[i][0] = (Time.zone.parse(pyme_fijo[i].fecha.to_s).utc.to_f*1000).to_f 
+				datos_pyme_fijo[i][1] = pyme_fijo[i].isn.to_f 
+
+				datos_pyme_movil[i][0] = (Time.zone.parse(pyme_movil[i].fecha.to_s).utc.to_f*1000).to_f 
+				datos_pyme_movil[i][1] = pyme_movil[i].isn.to_f 
+
+			end
+		else
+			datos_global = [0,0] 
+			datos_contrato = [0,0] 
+			datos_hibrido = [0,0] 
+			datos_prepago = [0,0] 
+			datos_fijo = [0,0] 
+			datos_pyme_fijo = [0,0] 
+			datos_pyme_movil = [0,0] 
+		end #FIN IF 
+		datos = [datos_contrato, datos_hibrido, datos_prepago, datos_fijo, datos_pyme_fijo, datos_pyme_movil, datos_global]; 
+	end 
 end

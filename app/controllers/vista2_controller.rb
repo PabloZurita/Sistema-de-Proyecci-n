@@ -60,60 +60,44 @@ class Vista2Controller < ApplicationController
     else
       @color_barra_acumulado = 'progress-bar progress-bar-danger'
     end
-    #@indicadoresacumulados = Indicadoresacumulado.find(Indicadoresacumulado.where(fecha: Time.parse(Time.now.to_s).strftime("%Y-%m-01")..Time.now).where(segmento: id_segmento).ids)
 
-    #se supone que esta y la de más arriba da los ids del mes actual, pero no sé como acceder al isn
-    isn_diario_mes = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:isn)
-    fechas_isn_diario = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:fecha)
+
+
+
+
+    #GRAFICO!!!
+    #LO SIGUIENTE DEBERIA SER COL (tercer argumento version = 3)
+    @datos_grafico_diario_desktop = obtener_valores(Indicadoresdiario.all, 7, 1)
+    @datos_grafico_acumulado_desktop = obtener_valores(Indicadoresacumulado.all, 7, 1)
+
+  end
+
+
+
+  def obtener_valores(tabla, segmento, version)
+    isn_mes = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:isn)
+    fechas_isn = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:fecha)
     
-    resolu_diario_mes = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:resolutividad) 
-    fechas_resolu_diario = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:fecha) 
+    resolu_mes = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:resolutividad) 
+    fechas_resolu = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:fecha) 
     
-    resp12_diario_mes = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:resp_1_2) 
-    fechas_resp12_diario = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:fecha) 
+    resp12_mes = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:resp_1_2) 
+    fechas_resp12 = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:fecha) 
 
-    resp45_diario_mes = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:resp_4_5) 
-    fechas_resp45_diario = @indicadoresdiarios.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:fecha) 
+    resp45_mes = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:resp_4_5) 
+    fechas_resp45 = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:fecha) 
 
-    @isn_dia_mes = Array.new(isn_diario_mes.length) { Array.new(2,0.0) }
-    @resolu_dia_mes = Array.new(resolu_diario_mes.length) { Array.new(2,0.0) }
-    @resp12_dia_mes = Array.new(resp12_diario_mes.length) { Array.new(2,0.0) }
-    @resp45_dia_mes = Array.new(resp45_diario_mes.length) { Array.new(2,0.0) }
-    for i in 0..isn_diario_mes.length-1
-      @isn_dia_mes[i] = [(Time.zone.parse(fechas_isn_diario[i].to_s).utc.to_f*1000).to_f,*isn_diario_mes[i]]
-      @resolu_dia_mes[i] = [(Time.zone.parse(fechas_resolu_diario[i].to_s).utc.to_f*1000).to_f,resolu_diario_mes[i]]
-      @resp12_dia_mes[i] = [(Time.zone.parse(fechas_resp12_diario[i].to_s).utc.to_f*1000).to_f,-1*resp12_diario_mes[i]]
-      @resp45_dia_mes[i] = [(Time.zone.parse(fechas_resp45_diario[i].to_s).utc.to_f*1000).to_f,resp45_diario_mes[i]]
+    isn = Array.new(isn_mes.length) { Array.new(2,0.0) }
+    resolu = Array.new(resolu_mes.length) { Array.new(2,0.0) }
+    resp12 = Array.new(resp12_mes.length) { Array.new(2,0.0) }
+    resp45 = Array.new(resp45_mes.length) { Array.new(2,0.0) }
+    for i in 0..isn_mes.length-1
+      isn[i] = [(Time.zone.parse(fechas_isn[i].to_s).utc.to_f*1000).to_f,*isn_mes[i]]
+      resolu[i] = [(Time.zone.parse(fechas_resolu[i].to_s).utc.to_f*1000).to_f,resolu_mes[i]]
+      resp12[i] = [(Time.zone.parse(fechas_resp12[i].to_s).utc.to_f*1000).to_f,-1*resp12_mes[i]]
+      resp45[i] = [(Time.zone.parse(fechas_resp45[i].to_s).utc.to_f*1000).to_f,resp45_mes[i]]
     end
 
-
-
-    ######################### AHORA SE PREGUNTAN LOS ACUMULADOS
-
-
-    isn_acumulado_mes = @indicadoresacumulados.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:isn)
-    fechas_isn_acumulado = @indicadoresacumulados.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:fecha)
-    
-    resolu_acumulado_mes = @indicadoresacumulados.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:resolutividad) 
-    fechas_resolu_acumulado = @indicadoresacumulados.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:fecha) 
-    
-    resp12_acumulado_mes = @indicadoresacumulados.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:resp_1_2) 
-    fechas_resp12_acumulado = @indicadoresacumulados.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:fecha) 
-
-    resp45_acumulado_mes = @indicadoresacumulados.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:resp_4_5) 
-    fechas_resp45_acumulado = @indicadoresacumulados.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Time.now.strftime("01/%m/%Y").to_s, Time.now.strftime("%d/%m/%Y").to_s, id_segmento,version).order(fecha: :asc).pluck(:fecha) 
-
-    @isn_acum_mes = Array.new(isn_acumulado_mes.length) { Array.new(2,0.0) }
-    @resolu_acum_mes = Array.new(resolu_acumulado_mes.length) { Array.new(2,0.0) }
-    @resp12_acum_mes = Array.new(resp12_acumulado_mes.length) { Array.new(2,0.0) }
-    @resp45_acum_mes = Array.new(resp45_acumulado_mes.length) { Array.new(2,0.0) }
-    for i in 0..isn_acumulado_mes.length-1
-      @isn_acum_mes[i] = [(Time.zone.parse(fechas_isn_acumulado[i].to_s).utc.to_f*1000).to_f,*isn_acumulado_mes[i]]
-      @resolu_acum_mes[i] = [(Time.zone.parse(fechas_resolu_acumulado[i].to_s).utc.to_f*1000).to_f,resolu_acumulado_mes[i]]
-      @resp12_acum_mes[i] = [(Time.zone.parse(fechas_resp12_acumulado[i].to_s).utc.to_f*1000).to_f,-1*resp12_acumulado_mes[i]]
-      @resp45_acum_mes[i] = [(Time.zone.parse(fechas_resp45_acumulado[i].to_s).utc.to_f*1000).to_f,resp45_acumulado_mes[i]]
-    end
-
-
+    datos = [resp12, resp45, isn, resolu];
   end
 end

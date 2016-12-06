@@ -125,7 +125,7 @@
             //yAxis: 1,
             color: '#FFC000',
             verticalAlign:'top',
-            data: <%=@resp12_acum_mes%>
+            data: <%=@datos_grafico_acumulado_desktop%>[0]
             
         },
         {
@@ -133,14 +133,14 @@
             type: 'column',
             //yAxis: 1,
             color: '#073046',
-            data: <%=@resp45_acum_mes%>           
+            data: <%=@datos_grafico_acumulado_desktop%>[1]          
            
         },
         {
             name: 'ISN',
             type: 'spline',
             color: '#92D050',
-            data: <%=@isn_acum_mes%>,
+            data: <%=@datos_grafico_acumulado_desktop%>[2],
             dataLabels: {
                     enabled: true,
                     borderColor: 'black',
@@ -154,7 +154,7 @@
             name: 'Solución',
             type: 'spline',
             color: '#0095A7',
-            data: <%=@resolu_acum_mes%>,
+            data: <%=@datos_grafico_acumulado_desktop%>[3],
             dataLabels: {
                     enabled: true,
                     borderColor: 'black',
@@ -165,8 +165,28 @@
                 }
            
         }]
-    });
-});
+    }, 
+        function(chart){
+            //chart.series[0].hideDataLabels = false;
+            //chart.series.data[0] = <%=@datos_grafico%>[3];
+            // Add toggler action
+            $('#btn_diario').click(function() {
+                chart.series[0].setData(<%=@datos_grafico_diario_desktop%>[0],false);
+                chart.series[1].setData(<%=@datos_grafico_diario_desktop%>[1],false);
+                chart.series[2].setData(<%=@datos_grafico_diario_desktop%>[2],false);
+                chart.series[3].setData(<%=@datos_grafico_diario_desktop%>[3],false);
+                $('#grafico').highcharts().redraw();
+            });
+
+            $('#btn_acumulado').click(function() {
+                chart.series[0].setData(<%=@datos_grafico_acumulado_desktop%>[0],false);
+                chart.series[1].setData(<%=@datos_grafico_acumulado_desktop%>[1],false);
+                chart.series[2].setData(<%=@datos_grafico_acumulado_desktop%>[2],false);
+                chart.series[3].setData(<%=@datos_grafico_acumulado_desktop%>[3],false);
+                $('#grafico').highcharts().redraw();
+            });
+        });
+  });
 </script>
 
 
@@ -284,6 +304,8 @@
     <div class="col-sm-12">
         <div class="panel panel-white no-radius text-center">
               <div class="panel-body">
+              <button id="btn_acumulado">Ver acumulado</button>
+              <button id="btn_diario">Ver diario</button>
           <div id="grafico" style="height: 400px; margin: auto; min-width: 310px; max-width: 800px"></div>
         </div>
       </div>
