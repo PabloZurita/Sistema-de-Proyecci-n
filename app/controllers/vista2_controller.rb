@@ -5,8 +5,7 @@ class Vista2Controller < ApplicationController
     @indicadoresacumulados = Indicadoresacumulado.all
     id_segmento = 7 #7 contendrá el ISN ponderado
 
-    version = 1; #version para valores actuales
-    version_global = 3; # version 3 --> guarda datos globales
+    version = 1; #version para valores actuales  COL-->  version = 3
     #Indicadores Diarios 
     fecha = Date.today.strftime("%d/%m/%Y");
     if @indicadoresdiarios.where(fecha: fecha).where(segmento: id_segmento).where(version: version).blank? then
@@ -21,10 +20,10 @@ class Vista2Controller < ApplicationController
         @resp_4_5_diario = '-'
         @resolu_diario = '-'
       else
-        @isn_diario = @indicadoresdiarios.where(fecha: fecha).where(segmento: id_segmento).take.isn
-        @resp_1_2_diario = @indicadoresdiarios.where(fecha: fecha).where(segmento: id_segmento).take.resp_1_2
-        @resp_4_5_diario = @indicadoresdiarios.where(fecha: fecha).where(segmento: id_segmento).take.resp_4_5
-        @resolu_diario = @indicadoresdiarios.where(fecha: fecha).where(segmento: id_segmento).take.resolutividad
+        @isn_diario = @indicadoresdiarios.where(fecha: fecha).where(segmento: id_segmento).where(version: version).take.isn
+        @resp_1_2_diario = @indicadoresdiarios.where(fecha: fecha).where(segmento: id_segmento).where(version: version).take.resp_1_2
+        @resp_4_5_diario = @indicadoresdiarios.where(fecha: fecha).where(segmento: id_segmento).where(version: version).take.resp_4_5
+        @resolu_diario = @indicadoresdiarios.where(fecha: fecha).where(segmento: id_segmento).where(version: version).take.resolutividad
       end
     end
 
@@ -49,10 +48,10 @@ class Vista2Controller < ApplicationController
         @resp_4_5_acumulado = '-'
         @resolu_acumulado = '-'
       else
-        @isn_acumulado = @indicadoresacumulados.where(fecha: fecha).where(segmento: id_segmento).take.isn
-        @resp_1_2_acumulado = @indicadoresacumulados.where(fecha: fecha).where(segmento: id_segmento).take.resp_1_2
-        @resp_4_5_acumulado = @indicadoresacumulados.where(fecha: fecha).where(segmento: id_segmento).take.resp_4_5
-        @resolu_acumulado = @indicadoresacumulados.where(fecha: fecha).where(segmento: id_segmento).take.resolutividad
+        @isn_acumulado = @indicadoresacumulados.where(fecha: fecha).where(segmento: id_segmento).where(version: version).take.isn
+        @resp_1_2_acumulado = @indicadoresacumulados.where(fecha: fecha).where(segmento: id_segmento).where(version: version).take.resp_1_2
+        @resp_4_5_acumulado = @indicadoresacumulados.where(fecha: fecha).where(segmento: id_segmento).where(version: version).take.resp_4_5
+        @resolu_acumulado = @indicadoresacumulados.where(fecha: fecha).where(segmento: id_segmento).where(version: version).take.resolutividad
       end
     end
 

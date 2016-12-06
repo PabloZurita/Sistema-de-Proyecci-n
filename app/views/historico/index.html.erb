@@ -23,7 +23,7 @@
   $(function () {
     var seriesOptions = [],
         seriesCounter = 0,
-        names =  ['ISN Contrato','ISN Hibrido','ISN Prepago','ISN Fijo','ISN Pyme Fijo','ISN Pyme Movil','ISN Global Desktop'] ;
+        names =  ['ISN Contrato','ISN Hibrido','ISN Prepago','ISN Fijo','ISN Pyme Fijo','ISN Pyme Movil','ISN Global Desktop','Canal Online'] ;
     Highcharts.setOptions({
           lang:{
               months: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
@@ -100,7 +100,7 @@
         $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=' + name.toLowerCase() + '-c.json&callback=?',    function (data) {
             seriesOptions[i] = {
                name: name,
-                data: <%= @datos_historico_acumulado_desktop %>[i]
+                data: <%= @datos_historico_acumulado_COL %>[i]
             };
             seriesCounter += 1;
             if (seriesCounter === names.length) {
