@@ -1,0 +1,14 @@
+I"
+(function() {
+  jQuery(function() {
+    $("#tabla").dataTable();
+    $(function() {});
+    return $('#clientes-table').dataTable({
+      bProcessing: true,
+      bServerSide: true,
+      sAjaxSource: $('#clientes-table').data('source')
+    });
+  });
+
+}).call(this);
+:ET
