@@ -17,19 +17,19 @@ $("#menu-toggle").click(function(e) {
               <span>Menú Principal</span>
             </div>
             <ul class="main-navigation-menu">
-              <li class="active open">
+              <li class="">
                 <a href=<%= root_path%>>
                   <div class="item-content">
                     <div class="item-media">
                       <i class="ti-home"></i>
                     </div>
                     <div class="item-inner">
-                      <span class="title"> Dashboard </span>
+                      <span class="title"> Dashboard </span><i class="icon-arrow"></i>
                     </div>
                   </div>
                 </a>
               </li>
-              <li>
+              <li class="">
                 <a href=<%= historico_path%>>
                   <div class="item-content">
                     <div class="item-media">
@@ -41,7 +41,7 @@ $("#menu-toggle").click(function(e) {
                   </div>
                 </a>
               </li>
-              <li>
+              <li class="">
                 <a href=<%= graficos_path%>>
                   <div class="item-content">
                     <div class="item-media">
@@ -53,7 +53,7 @@ $("#menu-toggle").click(function(e) {
                   </div>
                 </a>
               </li>
-              <li>
+              <li class="">
                 <a href=<%= ponderacions_path%>>
                   <div class="item-content">
                     <div class="item-media">
@@ -65,6 +65,7 @@ $("#menu-toggle").click(function(e) {
                   </div>
                 </a>
               </li>
+            </ul>
 
             <!-- end: MAIN NAVIGATION MENU -->
           </nav>

@@ -8,7 +8,7 @@ class Vista2Controller < ApplicationController
     version = 1; #version para valores actuales
     version_global = 3; # version 3 --> guarda datos globales
     #Indicadores Diarios 
-    fecha = Date.today.strftime("%m/%d/%Y");
+    fecha = Date.today.strftime("%d/%m/%Y");
     if @indicadoresdiarios.where(fecha: fecha).where(segmento: id_segmento).where(version: version).blank? then
       @isn_diario = 0
       @resp_1_2_diario = 0
@@ -76,17 +76,19 @@ class Vista2Controller < ApplicationController
 
 
   def obtener_valores(tabla, segmento, version)
-    isn_mes = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Date.today.strftime("%m/01/%Y").to_s, Date.today.strftime("%m/%d/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:isn)
-    fechas_isn = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Date.today.strftime("%m/01/%Y").to_s, Date.today.strftime("%m/%d/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:fecha)
+    fecha_2 = Date.today.strftime("01/%m/%Y").to_s;
+    fecha_3 =  Date.today.strftime("%d/%m/%Y").to_s;
+    isn_mes = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",fecha_2,fecha_3, segmento,version).order(fecha: :asc).pluck(:isn)
+    fechas_isn = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",fecha_2, fecha_3, segmento,version).order(fecha: :asc).pluck(:fecha)
     
-    resolu_mes = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Date.today.strftime("%m/01/%Y").to_s, Date.today.strftime("%m/%d/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:resolutividad) 
-    fechas_resolu = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Date.today.strftime("%m/01/%Y").to_s, Date.today.strftime("%m/%d/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:fecha) 
+    resolu_mes = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",fecha_2, fecha_3, segmento,version).order(fecha: :asc).pluck(:resolutividad) 
+    fechas_resolu = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",fecha_2, fecha_3, segmento,version).order(fecha: :asc).pluck(:fecha) 
     
-    resp12_mes = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Date.today.strftime("%m/01/%Y").to_s, Date.today.strftime("%m/%d/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:resp_1_2) 
-    fechas_resp12 = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Date.today.strftime("%m/01/%Y").to_s, Date.today.strftime("%m/%d/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:fecha) 
+    resp12_mes = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",fecha_2, fecha_3, segmento,version).order(fecha: :asc).pluck(:resp_1_2) 
+    fechas_resp12 = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",fecha_2, fecha_3, segmento,version).order(fecha: :asc).pluck(:fecha) 
 
-    resp45_mes = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Date.today.strftime("%m/01/%Y").to_s, Date.today.strftime("%m/%d/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:resp_4_5) 
-    fechas_resp45 = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",Date.today.strftime("%m/01/%Y").to_s, Date.today.strftime("%m/%d/%Y").to_s, segmento,version).order(fecha: :asc).pluck(:fecha) 
+    resp45_mes = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",fecha_2, fecha_3, segmento,version).order(fecha: :asc).pluck(:resp_4_5) 
+    fechas_resp45 = tabla.where("fecha >= ? AND fecha <= ? AND segmento = ? AND version = ?",fecha_2, fecha_3, segmento,version).order(fecha: :asc).pluck(:fecha) 
 
     isn = Array.new(isn_mes.length) { Array.new(2,0.0) }
     resolu = Array.new(resolu_mes.length) { Array.new(2,0.0) }
