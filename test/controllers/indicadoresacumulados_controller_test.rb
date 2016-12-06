@@ -17,7 +17,7 @@ class IndicadoresacumuladosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create indicadoresacumulado" do
     assert_difference('Indicadoresacumulado.count') do
-      post indicadoresacumulados_url, params: { indicadoresacumulado: { fecha: @indicadoresacumulado.fecha, id_ind_acumulado: @indicadoresacumulado.id_ind_acumulado, isn: @indicadoresacumulado.isn, resolutividad: @indicadoresacumulado.resolutividad, resp_1_2: @indicadoresacumulado.resp_1_2, resp_4_5: @indicadoresacumulado.resp_4_5, segmento: @indicadoresacumulado.segmento } }
+      post indicadoresacumulados_url, params: { indicadoresacumulado: { fecha: @indicadoresacumulado.fecha, id_ind_acumulado: @indicadoresacumulado.id_ind_acumulado, isn: @indicadoresacumulado.isn, resolutividad: @indicadoresacumulado.resolutividad, resp_1_2: @indicadoresacumulado.resp_1_2, resp_4_5: @indicadoresacumulado.resp_4_5, segmento: @indicadoresacumulado.segmento, version: @indicadoresacumulado.version } }
     end
 
     assert_redirected_to indicadoresacumulado_url(Indicadoresacumulado.last)
@@ -34,7 +34,7 @@ class IndicadoresacumuladosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update indicadoresacumulado" do
-    patch indicadoresacumulado_url(@indicadoresacumulado), params: { indicadoresacumulado: { fecha: @indicadoresacumulado.fecha, id_ind_acumulado: @indicadoresacumulado.id_ind_acumulado, isn: @indicadoresacumulado.isn, resolutividad: @indicadoresacumulado.resolutividad, resp_1_2: @indicadoresacumulado.resp_1_2, resp_4_5: @indicadoresacumulado.resp_4_5, segmento: @indicadoresacumulado.segmento } }
+    patch indicadoresacumulado_url(@indicadoresacumulado), params: { indicadoresacumulado: { fecha: @indicadoresacumulado.fecha, id_ind_acumulado: @indicadoresacumulado.id_ind_acumulado, isn: @indicadoresacumulado.isn, resolutividad: @indicadoresacumulado.resolutividad, resp_1_2: @indicadoresacumulado.resp_1_2, resp_4_5: @indicadoresacumulado.resp_4_5, segmento: @indicadoresacumulado.segmento, version: @indicadoresacumulado.version } }
     assert_redirected_to indicadoresacumulado_url(@indicadoresacumulado)
   end
 

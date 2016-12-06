@@ -17,7 +17,7 @@ class IndicadoresdiariosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create indicadoresdiario" do
     assert_difference('Indicadoresdiario.count') do
-      post indicadoresdiarios_url, params: { indicadoresdiario: { fecha: @indicadoresdiario.fecha, id_ind_diario: @indicadoresdiario.id_ind_diario, isn: @indicadoresdiario.isn, resolutividad: @indicadoresdiario.resolutividad, resp_1_2: @indicadoresdiario.resp_1_2, resp_4_5: @indicadoresdiario.resp_4_5, segmento: @indicadoresdiario.segmento } }
+      post indicadoresdiarios_url, params: { indicadoresdiario: { fecha: @indicadoresdiario.fecha, id_ind_diario: @indicadoresdiario.id_ind_diario, isn: @indicadoresdiario.isn, resolutividad: @indicadoresdiario.resolutividad, resp_1_2: @indicadoresdiario.resp_1_2, resp_4_5: @indicadoresdiario.resp_4_5, segmento: @indicadoresdiario.segmento, version: @indicadoresdiario.version } }
     end
 
     assert_redirected_to indicadoresdiario_url(Indicadoresdiario.last)
@@ -34,7 +34,7 @@ class IndicadoresdiariosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update indicadoresdiario" do
-    patch indicadoresdiario_url(@indicadoresdiario), params: { indicadoresdiario: { fecha: @indicadoresdiario.fecha, id_ind_diario: @indicadoresdiario.id_ind_diario, isn: @indicadoresdiario.isn, resolutividad: @indicadoresdiario.resolutividad, resp_1_2: @indicadoresdiario.resp_1_2, resp_4_5: @indicadoresdiario.resp_4_5, segmento: @indicadoresdiario.segmento } }
+    patch indicadoresdiario_url(@indicadoresdiario), params: { indicadoresdiario: { fecha: @indicadoresdiario.fecha, id_ind_diario: @indicadoresdiario.id_ind_diario, isn: @indicadoresdiario.isn, resolutividad: @indicadoresdiario.resolutividad, resp_1_2: @indicadoresdiario.resp_1_2, resp_4_5: @indicadoresdiario.resp_4_5, segmento: @indicadoresdiario.segmento, version: @indicadoresdiario.version } }
     assert_redirected_to indicadoresdiario_url(@indicadoresdiario)
   end
 

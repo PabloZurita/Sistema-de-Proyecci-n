@@ -5,5 +5,4 @@ def set_id_cliente
 	last_id_cliente = Cliente.maximum(:id_cliente)
 	self.id_cliente = last_id_cliente.to_i + 1
 end
-
 end

@@ -42,7 +42,7 @@ class PonderacionsController < ApplicationController
   def update
     respond_to do |format|
       if @ponderacion.update(ponderacion_params)
-        format.html { redirect_to @ponderacion, notice: 'La ponderación ha sido correctamente actualizada' }
+        format.html { redirect_to @ponderacion, notice: 'Ponderacion was successfully updated.' }
         format.json { render :show, status: :ok, location: @ponderacion }
       else
         format.html { render :edit }

@@ -1,2 +1,2 @@
-json.extract! indicadoresdiario, :id, :id_ind_diario, :segmento, :isn, :resp_1_2, :resp_4_5, :resolutividad, :fecha, :created_at, :updated_at
+json.extract! indicadoresdiario, :id, :id_ind_diario, :segmento, :isn, :resp_1_2, :resp_4_5, :resolutividad, :version, :fecha, :created_at, :updated_at
 json.url indicadoresdiario_url(indicadoresdiario, format: :json)

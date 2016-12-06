@@ -69,6 +69,6 @@ class AtributosacumuladosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def atributosacumulado_params
-      params.require(:atributosacumulado).permit(:id_atr_acum, :segmento, :valor, :fecha)
+      params.require(:atributosacumulado).permit(:id_atr_acum, :segmento, :pregunta, :valor, :version, :fecha)
     end
 end

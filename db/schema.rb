@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161204051805) do
+ActiveRecord::Schema.define(version: 20161206031240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20161204051805) do
     t.integer  "segmento"
     t.integer  "pregunta"
     t.float    "valor"
+    t.integer  "version"
     t.date     "fecha"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -31,6 +32,7 @@ ActiveRecord::Schema.define(version: 20161204051805) do
     t.integer  "segmento"
     t.integer  "pregunta"
     t.float    "valor"
+    t.integer  "version"
     t.date     "fecha"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -59,6 +61,7 @@ ActiveRecord::Schema.define(version: 20161204051805) do
     t.date     "fecha_creacion_encuesta"
     t.time     "hora_envio_encuesta"
     t.integer  "resuelto_encuesta"
+    t.integer  "version"
     t.integer  "linea_id"
     t.integer  "motivo_id"
     t.datetime "created_at",              null: false
@@ -83,6 +86,7 @@ ActiveRecord::Schema.define(version: 20161204051805) do
     t.float    "resp_1_2"
     t.float    "resp_4_5"
     t.float    "resolutividad"
+    t.integer  "version"
     t.date     "fecha"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
@@ -96,6 +100,7 @@ ActiveRecord::Schema.define(version: 20161204051805) do
     t.float    "resp_1_2"
     t.float    "resp_4_5"
     t.float    "resolutividad"
+    t.integer  "version"
     t.date     "fecha"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false

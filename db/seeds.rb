@@ -40,7 +40,7 @@ end
 
 
 lista_pregunta= [
-  "Satisfación general sucursal virtual",
+    "Satisfación general sucursal virtual",
     "Facilidad acceso con rut y clave",
     "Rapidez despliegue de info",
     "Facilidad de encontrar info",

@@ -69,6 +69,6 @@ class IndicadoresacumuladosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def indicadoresacumulado_params
-      params.require(:indicadoresacumulado).permit(:id_ind_acumulado, :segmento, :isn, :resp_1_2, :resp_4_5, :resolutividad, :fecha)
+      params.require(:indicadoresacumulado).permit(:id_ind_acumulado, :segmento, :isn, :resp_1_2, :resp_4_5, :resolutividad, :version, :fecha)
     end
 end

@@ -5,4 +5,5 @@ def set_id_contrato
 	last_id_contrato = Contrato.maximum(:id_contrato)
 	self.id_contrato = last_id_contrato.to_i + 1
 end
+
 end

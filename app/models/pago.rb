@@ -6,5 +6,4 @@ def set_id_pago
 	last_id_pago = Pago.maximum(:id_pago)
 	self.id_pago = last_id_pago.to_i + 1
 end
-
 end

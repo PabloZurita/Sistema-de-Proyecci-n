@@ -17,7 +17,7 @@ class AtributosdiariosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create atributosdiario" do
     assert_difference('Atributosdiario.count') do
-      post atributosdiarios_url, params: { atributosdiario: { fecha: @atributosdiario.fecha, id_atr_diario: @atributosdiario.id_atr_diario, segmento: @atributosdiario.segmento, valor: @atributosdiario.valor } }
+      post atributosdiarios_url, params: { atributosdiario: { fecha: @atributosdiario.fecha, id_atr_diario: @atributosdiario.id_atr_diario, pregunta: @atributosdiario.pregunta, segmento: @atributosdiario.segmento, valor: @atributosdiario.valor, version: @atributosdiario.version } }
     end
 
     assert_redirected_to atributosdiario_url(Atributosdiario.last)
@@ -34,7 +34,7 @@ class AtributosdiariosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update atributosdiario" do
-    patch atributosdiario_url(@atributosdiario), params: { atributosdiario: { fecha: @atributosdiario.fecha, id_atr_diario: @atributosdiario.id_atr_diario, segmento: @atributosdiario.segmento, valor: @atributosdiario.valor } }
+    patch atributosdiario_url(@atributosdiario), params: { atributosdiario: { fecha: @atributosdiario.fecha, id_atr_diario: @atributosdiario.id_atr_diario, pregunta: @atributosdiario.pregunta, segmento: @atributosdiario.segmento, valor: @atributosdiario.valor, version: @atributosdiario.version } }
     assert_redirected_to atributosdiario_url(@atributosdiario)
   end
 

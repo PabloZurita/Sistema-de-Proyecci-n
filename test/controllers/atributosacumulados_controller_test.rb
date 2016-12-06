@@ -17,7 +17,7 @@ class AtributosacumuladosControllerTest < ActionDispatch::IntegrationTest
 
   test "should create atributosacumulado" do
     assert_difference('Atributosacumulado.count') do
-      post atributosacumulados_url, params: { atributosacumulado: { fecha: @atributosacumulado.fecha, id_atr_acum: @atributosacumulado.id_atr_acum, segmento: @atributosacumulado.segmento, valor: @atributosacumulado.valor } }
+      post atributosacumulados_url, params: { atributosacumulado: { fecha: @atributosacumulado.fecha, id_atr_acum: @atributosacumulado.id_atr_acum, pregunta: @atributosacumulado.pregunta, segmento: @atributosacumulado.segmento, valor: @atributosacumulado.valor, version: @atributosacumulado.version } }
     end
 
     assert_redirected_to atributosacumulado_url(Atributosacumulado.last)
@@ -34,7 +34,7 @@ class AtributosacumuladosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update atributosacumulado" do
-    patch atributosacumulado_url(@atributosacumulado), params: { atributosacumulado: { fecha: @atributosacumulado.fecha, id_atr_acum: @atributosacumulado.id_atr_acum, segmento: @atributosacumulado.segmento, valor: @atributosacumulado.valor } }
+    patch atributosacumulado_url(@atributosacumulado), params: { atributosacumulado: { fecha: @atributosacumulado.fecha, id_atr_acum: @atributosacumulado.id_atr_acum, pregunta: @atributosacumulado.pregunta, segmento: @atributosacumulado.segmento, valor: @atributosacumulado.valor, version: @atributosacumulado.version } }
     assert_redirected_to atributosacumulado_url(@atributosacumulado)
   end
 

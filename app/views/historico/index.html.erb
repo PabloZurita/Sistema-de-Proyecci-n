@@ -46,11 +46,30 @@
           legend: {enabled: true},
 
           title: {
-                text: 'Evolución Histórica ISN diario'
+                text: 'Evolución Histórica ISN acumulado'
             },
 
             rangeSelector: {
-                selected: 1
+              inputDateFormat: '%e/%b/%Y',
+              inputEditDateFormat: '%d/%m/%Y',
+              inputEnabled: true,
+              selected: 1,
+              buttons: [{
+                  count: 1,
+                  type: 'week',
+                  text: '1sem'
+              }, {
+                  count: 1,
+                  type: 'month',
+                  text: '1mes'
+              }, {
+                  count: 6,
+                  type: 'month',
+                  text: '6mes'
+              }, {
+                  type: 'all',
+                  text: 'Todo'
+              }]
             },
 
             // yAxis: {
@@ -90,7 +109,7 @@
 
             seriesOptions[i] = {
                name: name,
-                data: <%= @datos_diario %>[i]
+                data: <%= @datos_acumulado_mobile %>[i]
             };
 
             seriesCounter += 1;

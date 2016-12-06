@@ -4,13 +4,13 @@ class Conexion
 	include HTTParty
 	attr_accessor :encuesta
 
-	def initialize(_username,_contrasenya,_contrasenya_contador,_nif, _campana, _oleada, _centro, _desde, _hasta, _estado)
+	def initialize(_username,_contrasenya,_contrasenya_contador,_nif, _campana, _oleada, _centro, _desde, _hasta, _estado,_version)
 	   respuesta_contador = contar_encuestas_ws(_username,_contrasenya_contador,_nif, _campana, _oleada, _centro, _desde, _hasta, _estado)
 	   #puts respuesta_contador['total_encuestas'].to_s
 
 	   if respuesta_contador['total_encuestas'].to_i > 0 then
 		   respuesta_consulta = consultar_ws(_username,_contrasenya,_nif, _campana, _oleada, _centro, _desde, _hasta, _estado)
-		   asignar_valores(respuesta_consulta, respuesta_contador['total_encuestas'].to_i)
+		   asignar_valores(respuesta_consulta, respuesta_contador['total_encuestas'].to_i,_version)
 		   #puts respuesta_contador['total_encuestas']
 		   #self.encuesta = respuesta_consulta
 		   #puts self.encuesta
@@ -64,7 +64,7 @@ class Conexion
 			:body => _body)#, :format => 'json')
 	end
 
-	def asignar_valores(respuesta_consulta, cantidad_encuestas)
+	def asignar_valores(respuesta_consulta, cantidad_encuestas, version)
 		#self.encuesta = respuesta_consulta
 
 		#puts 'Respuesta: '+respuesta_consulta.to_s
@@ -79,7 +79,8 @@ class Conexion
 					#si ya hay una encuesta en una fecha por una linea, no se agrega nuevamente
 					if Encuestum.where(fecha_creacion_encuesta: Date.parse(response[i]['fecha_creacion']).strftime("%Y/%m/%d").to_s).
 					where(linea: Linea.where(numero_cliente: response[i]['campo_libre_4'].to_i).ids.first.to_i).
-					where(hora_envio_encuesta: Time.parse(response[i]['fecha_creacion']).strftime("%H:%M:%S").to_s).blank? then
+					where(hora_envio_encuesta: Time.parse(response[i]['fecha_creacion']).strftime("%H:%M:%S").to_s).
+					where(version: version).blank? then
 
 						#si la linea no existe se agrega relacionada al cliente
 						if Linea.where(numero_cliente: response[i]['campo_libre_4'].to_i).blank? then
@@ -130,6 +131,7 @@ class Conexion
 						else
 							nueva_encuesta.resuelto_encuesta = 0
 						end
+						nueva_encuesta.version = version
 						nueva_encuesta.save()
 						#if !nueva_encuesta.save() then
 							#puts response[i]['respuesta']['listbox_0']['respuesta_0'].to_s
@@ -182,7 +184,8 @@ class Conexion
 				#si ya hay una encuesta en una fecha por una linea, no se agrega nuevamente
 				if Encuestum.where(fecha_creacion_encuesta: Date.parse(response['fecha_creacion']).strftime("%Y/%m/%d").to_s).
 				where(linea: Linea.where(numero_cliente: response['campo_libre_4'].to_i).ids.first.to_i).
-				where(hora_envio_encuesta: Time.parse(response['fecha_creacion']).strftime("%H:%M:%S").to_s).blank? then
+				where(hora_envio_encuesta: Time.parse(response['fecha_creacion']).strftime("%H:%M:%S").to_s).
+				where(version: version).blank? then
 					
 
 					#si la linea no existe se agrega relacionada al cliente
@@ -223,6 +226,7 @@ class Conexion
 					else
 						nueva_encuesta.resuelto_encuesta = 0
 					end
+					nueva_encuesta.version = version
 					nueva_encuesta.save()
 					
 					#RESPUESTAS

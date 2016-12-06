@@ -69,6 +69,6 @@ class AtributosdiariosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def atributosdiario_params
-      params.require(:atributosdiario).permit(:id_atr_diario, :segmento, :valor, :fecha)
+      params.require(:atributosdiario).permit(:id_atr_diario, :segmento, :pregunta, :valor, :version, :fecha)
     end
 end

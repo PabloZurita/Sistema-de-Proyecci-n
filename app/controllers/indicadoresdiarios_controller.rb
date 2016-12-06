@@ -69,6 +69,6 @@ class IndicadoresdiariosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def indicadoresdiario_params
-      params.require(:indicadoresdiario).permit(:id_ind_diario, :segmento, :isn, :resp_1_2, :resp_4_5, :resolutividad, :fecha)
+      params.require(:indicadoresdiario).permit(:id_ind_diario, :segmento, :isn, :resp_1_2, :resp_4_5, :resolutividad, :version, :fecha)
     end
 end

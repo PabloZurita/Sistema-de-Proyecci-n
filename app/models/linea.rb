@@ -9,5 +9,4 @@ def set_id_linea
 	last_id_linea = Linea.maximum(:id_linea)
 	self.id_linea = last_id_linea.to_i + 1
 end
-
 end

@@ -7,7 +7,8 @@ one:
   resp_1_2: 1.5
   resp_4_5: 1.5
   resolutividad: 1.5
-  fecha: 2016-12-04
+  version: 1
+  fecha: 2016-12-06
 
 two:
   id_ind_diario: 1
@@ -16,4 +17,5 @@ two:
   resp_1_2: 1.5
   resp_4_5: 1.5
   resolutividad: 1.5
-  fecha: 2016-12-04
+  version: 1
+  fecha: 2016-12-06

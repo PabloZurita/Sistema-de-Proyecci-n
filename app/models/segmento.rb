@@ -5,5 +5,4 @@ def set_id_segmento
 	last_id_segmento = Segmento.maximum(:id_segmento)
 	self.id_segmento = last_id_segmento.to_i + 1
 end
-
 end

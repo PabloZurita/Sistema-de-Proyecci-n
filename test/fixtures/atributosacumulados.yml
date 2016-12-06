@@ -3,11 +3,15 @@
 one:
   id_atr_acum: 1
   segmento: 1
+  pregunta: 1
   valor: 1.5
-  fecha: 2016-12-04
+  version: 1
+  fecha: 2016-12-06
 
 two:
   id_atr_acum: 1
   segmento: 1
+  pregunta: 1
   valor: 1.5
-  fecha: 2016-12-04
+  version: 1
+  fecha: 2016-12-06

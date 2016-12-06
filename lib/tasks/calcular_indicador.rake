@@ -30,11 +30,12 @@ namespace :calcular_indicador do
 	 	'2016/11/17','2016/11/18','2016/11/19','2016/11/20','2016/11/21','2016/11/22','2016/11/23','2016/11/24',
 	 	'2016/11/25','2016/11/26','2016/11/27','2016/11/28','2016/11/29','2016/11/30',
 	 	#DICIEMBRE: del 122 al que sea (o mes_completo.length-1)
-	 	'2016/12/01','2016/12/02','2016/12/03','2016/12/04']
+	 	'2016/12/01','2016/12/02','2016/12/03','2016/12/04','2016/12/05','2016/12/06']
 
 
-#for dia in 122..125 #BORRAR
+#for dia in 122..127 #BORRAR
 	#puts fecha = mes_completo[dia]
+for version in 1..1 #FOR DE VERSION --- 1: desktop   2: mobile
 	fecha = Date.today.strftime("%Y/%m/%d");
 	for i in 1..4
 		if i > 1 then
@@ -48,11 +49,11 @@ namespace :calcular_indicador do
 		else
 			id_fijomovil = 1
 		end
-		encuestados_a_la_fecha = Encuestum.where(fecha_creacion_encuesta: fecha).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
+		encuestados_a_la_fecha = Encuestum.where(fecha_creacion_encuesta: fecha).where(version: version).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
 		
 		cantidad = encuestados_a_la_fecha.length()
-		resolucion_positiva = Encuestum.where(fecha_creacion_encuesta: fecha).where(resuelto_encuesta: 1).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
-		resolucion_negativa = Encuestum.where(fecha_creacion_encuesta: fecha).where(resuelto_encuesta: 0).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
+		resolucion_positiva = Encuestum.where(fecha_creacion_encuesta: fecha).where(version: version).where(resuelto_encuesta: 1).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
+		resolucion_negativa = Encuestum.where(fecha_creacion_encuesta: fecha).where(version: version).where(resuelto_encuesta: 0).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
 
 		## 		Calculando preguntas 1 y 2	para segmento	##
 		pre_1 = Respuestum.where(preguntum_id: 1).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
@@ -82,17 +83,18 @@ namespace :calcular_indicador do
 		insatisfechos = (100*(cantidad_pre1.to_f + cantidad_pre2.to_f)/cantidad.to_f).round(1)
 
 		#if !isn.nan? then
-			if Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento).blank? then
+			if Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento).where(version: version).blank? then
 				Indicadoresdiario.create(
 					isn: isn,
 					resolutividad: resolutividad,
 					resp_1_2: insatisfechos,
 					resp_4_5: satisfechos,
 					fecha: fecha,
-					segmento: i
+					segmento: i,
+					version: version
 					)
 			else
-				Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento).update_all(
+				Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento).where(version: version).update_all(
 					isn: isn,
 					resolutividad: resolutividad,
 					resp_1_2: insatisfechos,
@@ -120,15 +122,16 @@ namespace :calcular_indicador do
 
 			valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(1)
 			#if !valor_atri.nan? then
-				if Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).blank? then
+				if Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).where(version: version).blank? then
 					Atributosdiario.create(
 						valor: valor_atri,
 						fecha: fecha,
 						segmento: i,
-						pregunta: nro_pregunta
+						pregunta: nro_pregunta,
+						version: version
 						)
 				else
-					Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).update_all(
+					Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).where(version: version).update_all(
 						valor: valor_atri
 						)
 				end
@@ -136,11 +139,11 @@ namespace :calcular_indicador do
 		end
 		################################# ACUMULADO
 
-		encuestados_a_la_fecha = Encuestum.where(fecha_creacion_encuesta: Time.parse(fecha).strftime("%Y-%m-01")..fecha).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
+		encuestados_a_la_fecha = Encuestum.where(fecha_creacion_encuesta: Time.parse(fecha).strftime("%Y-%m-01")..fecha).where(version: version).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
 		
 		cantidad = encuestados_a_la_fecha.length()
-		resolucion_positiva = Encuestum.where(fecha_creacion_encuesta: Time.parse(fecha).strftime("%Y-%m-01")..fecha).where(resuelto_encuesta: 1).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
-		resolucion_negativa = Encuestum.where(fecha_creacion_encuesta: Time.parse(fecha).strftime("%Y-%m-01")..fecha).where(resuelto_encuesta: 0).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
+		resolucion_positiva = Encuestum.where(fecha_creacion_encuesta: Time.parse(fecha).strftime("%Y-%m-01")..fecha).where(version: version).where(resuelto_encuesta: 1).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
+		resolucion_negativa = Encuestum.where(fecha_creacion_encuesta: Time.parse(fecha).strftime("%Y-%m-01")..fecha).where(version: version).where(resuelto_encuesta: 0).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(contrato_id: id_segmento).where(segmento_id: 1));
 
 		## 		Calculando preguntas 1 y 2	para segmento	##
 		pre_1 = Respuestum.where(preguntum_id: 1).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
@@ -165,17 +168,18 @@ namespace :calcular_indicador do
 		insatisfechos = (100*(cantidad_pre1.to_f + cantidad_pre2.to_f)/cantidad.to_f).round(1)
 
 		#if !isn.nan? then
-			if Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento).blank? then
+			if Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento).where(version: version).blank? then
 				Indicadoresacumulado.create(
 					isn: isn,
 					resolutividad: resolutividad,
 					resp_1_2: insatisfechos,
 					resp_4_5: satisfechos,
 					fecha: fecha,
-					segmento: i
+					segmento: i,
+					version: version
 					)
 			else
-				Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento).update_all(
+				Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento).where(version: version).update_all(
 					isn: isn,
 					resolutividad: resolutividad,
 					resp_1_2: insatisfechos,
@@ -204,15 +208,16 @@ namespace :calcular_indicador do
 			valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(1)
 
 			#if !valor_atri.nan? then
-				if Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).blank? then
+				if Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).where(version: version).blank? then
 					Atributosacumulado.create(
 						valor: valor_atri,
 						fecha: fecha,
 						segmento: i,
-						pregunta: nro_pregunta
+						pregunta: nro_pregunta,
+						version: version
 						)
 				else
-					Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).update_all(
+					Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).where(version: version).update_all(
 						valor: valor_atri
 						)
 				end
@@ -227,11 +232,11 @@ namespace :calcular_indicador do
 		else
 			id_fijomovil = [2,3]
 		end
-		encuestados_a_la_fecha = Encuestum.where(fecha_creacion_encuesta: Time.parse(2.month.ago.to_s).strftime("%Y-%m-01")..fecha).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(segmento_id: 2));
+		encuestados_a_la_fecha = Encuestum.where(fecha_creacion_encuesta: Time.parse(2.month.ago.to_s).strftime("%Y-%m-01")..fecha).where(version: version).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(segmento_id: 2));
 		
 		cantidad = encuestados_a_la_fecha.length()
-		resolucion_positiva = Encuestum.where(fecha_creacion_encuesta: Time.parse(2.month.ago.to_s).strftime("%Y-%m-01")..fecha).where(resuelto_encuesta: 1).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(segmento_id: 2));
-		resolucion_negativa = Encuestum.where(fecha_creacion_encuesta: Time.parse(2.month.ago.to_s).strftime("%Y-%m-01")..fecha).where(resuelto_encuesta: 0).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(segmento_id: 2));
+		resolucion_positiva = Encuestum.where(fecha_creacion_encuesta: Time.parse(2.month.ago.to_s).strftime("%Y-%m-01")..fecha).where(version: version).where(resuelto_encuesta: 1).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(segmento_id: 2));
+		resolucion_negativa = Encuestum.where(fecha_creacion_encuesta: Time.parse(2.month.ago.to_s).strftime("%Y-%m-01")..fecha).where(version: version).where(resuelto_encuesta: 0).where(linea_id: Linea.where(fijomovil_id: id_fijomovil).where(segmento_id: 2));
 
 		## 		Calculando preguntas 1 y 2	para segmento	##
 		pre_1 = Respuestum.where(preguntum_id: 1).where(valor_pregunta: 1).where(encuestum_id: encuestados_a_la_fecha)
@@ -257,17 +262,18 @@ namespace :calcular_indicador do
 		insatisfechos = (100*(cantidad_pre1.to_f + cantidad_pre2.to_f)/cantidad.to_f).round(1)
 
 		#if !isn.nan? then
-			if Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento+4).blank? then
+			if Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento+4).where(version: version).blank? then
 				Indicadoresdiario.create(
 					isn: isn,
 					resolutividad: resolutividad,
 					resp_1_2: insatisfechos,
 					resp_4_5: satisfechos,
 					fecha: fecha,
-					segmento: id_segmento+4
+					segmento: id_segmento+4,
+					version: version
 					)
 			else
-				Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento+4).update_all(
+				Indicadoresdiario.where(fecha: fecha).where(segmento: id_segmento+4).where(version: version).update_all(
 					isn: isn,
 					resolutividad: resolutividad,
 					resp_1_2: insatisfechos,
@@ -277,17 +283,18 @@ namespace :calcular_indicador do
 
 
 
-			if Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento+4).blank? then
+			if Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento+4).where(version: version).blank? then
 				Indicadoresacumulado.create(
 					isn: isn,
 					resolutividad: resolutividad,
 					resp_1_2: insatisfechos,
 					resp_4_5: satisfechos,
 					fecha: fecha,
-					segmento: id_segmento+4
+					segmento: id_segmento+4,
+					version: version
 					)
 			else
-				Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento+4).update_all(
+				Indicadoresacumulado.where(fecha: fecha).where(segmento: id_segmento+4).where(version: version).update_all(
 					isn: isn,
 					resolutividad: resolutividad,
 					resp_1_2: insatisfechos,
@@ -317,28 +324,30 @@ namespace :calcular_indicador do
 			valor_atri = (100*((satis_atri.to_f - insatis_atri.to_f)/cantidad.to_f)).round(1)
 
 			#if !valor_atri.nan? then
-				if Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).blank? then
+				if Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).where(version: version).blank? then
 					Atributosdiario.create(
 						valor: valor_atri,
 						fecha: fecha,
 						segmento: id_segmento+4,
-						pregunta: nro_pregunta
+						pregunta: nro_pregunta,
+						version: version
 						)
 				else
-					Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).update_all(
+					Atributosdiario.where(fecha: fecha).where(segmento: id_segmento).where(pregunta: nro_pregunta).where(version: version).update_all(
 						valor: valor_atri
 						)
 				end
 
-				if Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento+4).where(pregunta: nro_pregunta).blank? then
+				if Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento+4).where(pregunta: nro_pregunta).where(version: version).blank? then
 					Atributosacumulado.create(
 						valor: valor_atri,
 						fecha: fecha,
 						segmento: id_segmento+4,
-						pregunta: nro_pregunta
+						pregunta: nro_pregunta,
+						version: version
 						)
 				else
-					Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento+4).where(pregunta: nro_pregunta).update_all(
+					Atributosacumulado.where(fecha: fecha).where(segmento: id_segmento+4).where(pregunta: nro_pregunta).where(version: version).update_all(
 						valor: valor_atri
 						)
 				end
@@ -357,7 +366,7 @@ namespace :calcular_indicador do
 	ponderacion_pyme_movil = Ponderacion.where(segmento: 6).take.valor#0.091
 
 
-	indicadores_diarios_actuales = Indicadoresdiario.where(fecha: fecha)
+	indicadores_diarios_actuales = Indicadoresdiario.where(fecha: fecha).where(version: version)
 	#if !indicadores_diarios_actuales.blank? then
 		isn_diario_global = (ponderacion_contrato*indicadores_diarios_actuales.where(segmento: 1).take.isn+
 							ponderacion_hibrido*indicadores_diarios_actuales.where(segmento: 2).take.isn+
@@ -384,17 +393,18 @@ namespace :calcular_indicador do
 							ponderacion_pyme_fijo*indicadores_diarios_actuales.where(segmento: 5).take.resp_4_5+
 							ponderacion_pyme_movil*indicadores_diarios_actuales.where(segmento: 6).take.resp_4_5).to_f.round(1);
 	
-		if Indicadoresdiario.where(fecha: fecha).where(segmento: 7).blank? then
+		if Indicadoresdiario.where(fecha: fecha).where(segmento: 7).where(version: version).blank? then
 			Indicadoresdiario.create(
 				isn: isn_diario_global,
 				resolutividad: resolutividad_diario_global,
 				resp_1_2: insatisfechos_diario_global,
 				resp_4_5: satisfechos_4_5_diario_global,
 				fecha: fecha,
-				segmento: 7
+				segmento: 7,
+				version: version
 				)
 		else
-			Indicadoresdiario.where(fecha: fecha).where(segmento: 7).update_all(
+			Indicadoresdiario.where(fecha: fecha).where(segmento: 7).where(version: version).update_all(
 				isn: isn_diario_global,
 				resolutividad: resolutividad_diario_global,
 				resp_1_2: insatisfechos_diario_global,
@@ -404,7 +414,7 @@ namespace :calcular_indicador do
 	#end #END IF INDICADORES DIARIO GLOBAL (PONDERADO)
 
 
-	indicadores_acumulados_actuales = Indicadoresacumulado.where(fecha: fecha)
+	indicadores_acumulados_actuales = Indicadoresacumulado.where(fecha: fecha).where(version: version)
 	#if !indicadores_acumulados_actuales.blank? then
 		isn_acumulado_global = (ponderacion_contrato*indicadores_acumulados_actuales.where(segmento: 1).take.isn+
 							ponderacion_hibrido*indicadores_acumulados_actuales.where(segmento: 2).take.isn+
@@ -431,17 +441,18 @@ namespace :calcular_indicador do
 							ponderacion_pyme_fijo*indicadores_acumulados_actuales.where(segmento: 5).take.resp_4_5+
 							ponderacion_pyme_movil*indicadores_acumulados_actuales.where(segmento: 6).take.resp_4_5).to_f.round(1);
 		
-		if Indicadoresacumulado.where(fecha: fecha).where(segmento: 7).blank? then
+		if Indicadoresacumulado.where(fecha: fecha).where(segmento: 7).where(version: version).blank? then
 			Indicadoresacumulado.create(
 				isn: isn_acumulado_global,
 				resolutividad: resolutividad_acumulado_global,
 				resp_1_2: insatisfechos_acumulado_global,
 				resp_4_5: satisfechos_4_5_acumulado_global,
 				fecha: fecha,
-				segmento: 7
+				segmento: 7,
+				version: version
 				)
 		else
-			Indicadoresacumulado.where(fecha: fecha).where(segmento: 7).update_all(
+			Indicadoresacumulado.where(fecha: fecha).where(segmento: 7).where(version: version).update_all(
 				isn: isn_acumulado_global,
 				resolutividad: resolutividad_acumulado_global,
 				resp_1_2: insatisfechos_acumulado_global,
@@ -449,7 +460,11 @@ namespace :calcular_indicador do
 				)
 		end
 	#end #END IF INDICADORES ACUMULADOS GLOBAL (PONDERADO)
-#end #BORRAR ESTE END
+end #END FOR VERSION MOBILE - DESKTOP
+#end #END DE FOR PARA ARREGLO DE FECHAS
+
+
+	##### AQUI PONER CODIGO para calcular los indicadores ponderados con mobile y desktop
   
 
 

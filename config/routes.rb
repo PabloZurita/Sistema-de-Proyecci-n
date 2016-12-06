@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
 
   
+  resources :ponderacions
   resources :atributosacumulados
   resources :atributosdiarios
   resources :indicadoresacumulados
@@ -21,11 +22,10 @@ Rails.application.routes.draw do
   get '/historico/index' => 'historico#index', as: 'historico'
   get '/graficos/index' => 'graficos#index', as: 'graficos'
   get '/configuraciones/index' => 'configuraciones#index', as: 'configuraciones'
-  get '/ponderacions/index' => 'ponderacions#index', as: 'ponderacions'
+  get '/ponderacions/index' => 'ponderacions#index', as: 'ponderaciones'
   devise_for :users
   resources :payments
   resources	:vista2
-  resources :ponderacions
   root 'vista2#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
