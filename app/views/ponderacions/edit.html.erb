@@ -1,6 +1,24 @@
-<h1>Editing Ponderacion</h1>
+<%= render 'partials/menu' %>
+<h1>Editando Ponderacion</h1>
 
-<%= render 'form', ponderacion: @ponderacion %>
+<div class="bg">
+	<div class="row">
+		<div class="col-sm-2">
 
-<%= link_to 'Show', @ponderacion %> |
-<%= link_to 'Back', ponderacions_path %>
+		</div>
+		<div class="col-sm-8">
+			<div class="panel text-center">
+
+
+				<%= render 'form', ponderacion: @ponderacion %>
+
+				<%= link_to 'Show', @ponderacion %> |
+				<%= link_to 'Back', ponderacions_path %>
+
+			</div>
+		</div>
+		<div class="col-sm-2">
+		</div>
+	</div>
+</div>
+

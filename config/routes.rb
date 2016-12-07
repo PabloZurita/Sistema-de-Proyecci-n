@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
 
   
-  resources :ponderacions
+
   resources :atributosacumulados
   resources :atributosdiarios
   resources :indicadoresacumulados
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get '/graficos/index' => 'graficos#index', as: 'graficos'
   get '/configuraciones/index' => 'configuraciones#index', as: 'configuraciones'
   get '/ponderacions/index' => 'ponderacions#index', as: 'ponderaciones'
+  resources :ponderacions
   devise_for :users
   resources :payments
   resources	:vista2
