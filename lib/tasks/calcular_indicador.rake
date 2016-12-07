@@ -33,8 +33,8 @@ namespace :calcular_indicador do
 	 	'2016/12/01','2016/12/02','2016/12/03','2016/12/04','2016/12/05','2016/12/06']
 
 
-#for dia in 122..127 #BORRAR
-#	puts fecha = mes_completo[dia]
+for dia in 122..127 #BORRAR
+	puts fecha = mes_completo[dia]
 	fecha = Date.today.strftime("%Y/%m/%d");
 for version in 1..2 #FOR DE VERSION --- 1: desktop   2: mobile
 	for i in 1..4
@@ -532,6 +532,6 @@ end #END FOR VERSION MOBILE - DESKTOP
 
 
 
-#end #END DE FOR PARA ARREGLO DE FECHAS
+end #END DE FOR PARA ARREGLO DE FECHAS
   end
 end

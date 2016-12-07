@@ -3,10 +3,26 @@
     <!-- start: LOGIN -->
     <div class="row">
       <div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
-
         <!-- start: LOGIN BOX -->
+
         <div class="box-login">
+        <div class="row">
+          <div class="col-md-2">
+            
+          </div>
+          <div class="col-md-4">
+                <div  style="float: left; width: 50%"%>
+                <%= image_tag "Ingnovo.png", :class => "logo" %>
+               </div>
+          </div>
+          <div class="col-md-4">
+            
+          </div>
+        </div>
+
+
         <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form-signin'}) do |f| %>
+
           <form class="form-login" action="index.html">
             <fieldset>
               <legend>
