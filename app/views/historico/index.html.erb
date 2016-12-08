@@ -1,4 +1,5 @@
 <%= render 'partials/menu' %>
+
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 
@@ -10,16 +11,29 @@
 
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
   
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.3/jszip-2.5.0/pdfmake-0.1.18/dt-1.10.12/af-2.1.2/b-1.2.2/b-colvis-1.2.2/b-flash-1.2.2/b-html5-1.2.2/b-print-1.2.2/cr-1.3.2/fc-3.2.2/fh-3.1.2/kt-2.1.3/r-2.1.0/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.3/jszip-2.5.0/pdfmake-0.1.18/dt-1.10.12/af-2.1.2/b-1.2.2/b-colvis-1.2.2/b-flash-1.2.2/b-html5-1.2.2/b-print-1.2.2/cr-1.3.2/fc-3.2.2/fh-3.1.2/kt-2.1.3/r-2.1.0/datatables.min.js"></script>
+<script>
+/* Custom filtering function which will search data in column four between two values */
 
-
+      $(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+    buttons: [
+        'copy', 'excel', 'pdf'
+    ]
+    } );
+    
+} );
+</script>
 
 
 <script type="text/javascript">
   $(function () {
     var seriesOptions = [],
         seriesCounter = 0,
-        names =  ['ISN Contrato','ISN Hibrido','ISN Prepago','ISN Fijo','ISN Pyme Fijo','ISN Pyme Movil','ISN Global Desktop','Canal Online'] ;
+        names =  ['ISN Contrato','ISN Hibrido','ISN Prepago','ISN Fijo','ISN Pyme Fijo','ISN Pyme Movil','ISN Global Desktop'] ;
     Highcharts.setOptions({
           lang:{
               months: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
@@ -96,7 +110,7 @@
         $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=' + name.toLowerCase() + '-c.json&callback=?',    function (data) {
             seriesOptions[i] = {
                name: name,
-                data: <%= @datos_historico_acumulado_COL %>[i]
+                data: <%= @datos_historico_acumulado_desktop %>[i]
             };
             seriesCounter += 1;
             if (seriesCounter === names.length) {
@@ -148,22 +162,11 @@
 
 
 
-<script>
-    $(document).ready(function() {
-    $('#tabla').DataTable();
-    } );
 
-</script>
 
 
 
 <div class="container-fluid container-fullw bg-white">
-  <button id="btn_diario_desktop" class ="btn btn-default">Ver diario desktop</button>
-<button id="btn_diario_mobile" class ="btn btn-default">Ver diario mobile</button>
-<button id="btn_diario_COL" class ="btn btn-default">Ver diario COL</button>
-<button id="btn_acumulado_desktop" class ="btn btn-default">Ver acumulado desktop</button>
-<button id="btn_acumulado_mobile" class ="btn btn-default">Ver acumulado mobile</button>
-<button id="btn_acumulado_COL" class ="btn btn-default">Ver acumulado COL</button>
   <div class="row">
     <div class="col-sm-12">
         <div class="panel panel-white no-radius text-center">
@@ -176,63 +179,34 @@
 </div>
 
 
-<div class="container-fluid container-fullw bg-white">
-    <div class="row">
-        <div class="col-sm-2">
-            
-        </div>
-        <div class="col-sm-8">
-            <div class="panel panel-white no-radius text-center">
-                <div class="panel-body">
-                    <h2> Elegir Datos para Descargar</h2> 
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <label for="from">Fecha Inicio</label>
-                            <input type="text" id="from" name="from">
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="to">Fecha Final</label>
-                            <input type="text" id="to" name="to">
-                        </div>
-                    </div>                  
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2">
-        </div>
-    </div>
-</div>
 
 
 
- 
 
-
-<div class="container-fluid container-fullw bg-white">
-    <div class="row">
-        <div class="col-sm-2">
-            
-        </div>
-        <div class="col-sm-8">
-            <div class="panel panel-white no-radius text-center">
-                <div class="panel-body">
-
-
-                <table id="tabla" class="display responsive no-wrap">
-                    <thead>
-                      <tr role ="row">
-                        <th>Id ind diario</th>
-                        <th>Segmento</th>
-                        <th>Isn</th>
-                        <th>Resp 1 2</th>
-                        <th>Resp 4 5</th>
-                        <th>Resolutividad</th>
-                        <th>Fecha</th>
-                        <th colspan="3"></th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
+ <table id="example" class="display" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Segmento</th>
+                <th>ISN</th>
+                <th>Resp 1-2</th>
+                <th>Resp 4-5</th>
+                <th>Resolutividad</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>ID</th>
+                <th>Segmento</th>
+                <th>ISN</th>
+                <th>Resp 1-2</th>
+                <th>Resp 4-5</th>
+                <th>Resolutividad</th>
+                <th>Fecha</th>
+            </tr>
+        </tfoot>
+        <tbody>
                       <% @indicadoresdiarios.each do |indicadoresdiario| %>
                       <tr>
                         <td><%= indicadoresdiario.id_ind_diario %></td>
@@ -242,23 +216,7 @@
                         <td><%= indicadoresdiario.resp_4_5 %></td>
                         <td><%= indicadoresdiario.resolutividad %></td>
                         <td><%= indicadoresdiario.fecha %></td>
-                        <td><%= link_to 'Show', indicadoresdiario %></td>
-                        <td><%= link_to 'Edit', edit_indicadoresdiario_path(indicadoresdiario) %></td>
-                        <td><%= link_to 'Destroy', indicadoresdiario, method: :delete, data: { confirm: 'Are you sure?' } %></td>
                       </tr>
                       <% end %>
-                    </tbody>
-                  </table>
-
-
-
-
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-2">
-        </div>
-    </div>
-</div>
-
- 
+        </tbody>
+    </table>

@@ -220,5 +220,7 @@ var TableData = function() {
 			runDataTable_example1();
 			runDataTable_example2();
 		}
+
 	};
+
 }();
